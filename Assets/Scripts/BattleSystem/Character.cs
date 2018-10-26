@@ -24,16 +24,12 @@ public class Character : MonoBehaviour {
 		if(this.name.Length > l && this.name.Substring(0, l).Equals("Character")) {
 			GameLoop.addAllyCharacter(this);
 			int charN = -1;
-			if(int.TryParse(this.name.Substring(l), out charN))
-				transform.position = new Vector3(charN, 0, -10);
-			else
+			if(!int.TryParse(this.name.Substring(l), out charN))
 				Debug.Log("bad name for " + this.name);
 		} else {
 			GameLoop.addEnemyCharacter(this);
 			int enemyN = 1;
-			if(int.TryParse(this.name.Substring("Enemy".Length), out enemyN))
-				transform.position = new Vector3(-enemyN, 0, -10);
-			else
+			if(!int.TryParse(this.name.Substring("Enemy".Length), out enemyN))
 				Debug.Log("bad name for " + this.name);
 		}
 	}
