@@ -10,7 +10,7 @@ public class Character : MonoBehaviour {
 	public int basicAttackDamage;
 
 	[Header("Actions")]
-	public Dictionary<ActionType, bool> actionDict;
+	public List<ActionType> actionList;
 
 	void Awake() {
 		print(this.name + " awake");
@@ -47,10 +47,9 @@ public class Character : MonoBehaviour {
 	}
 
 	private void instantiateOffType(CharacterType type) {
-		actionDict = new Dictionary<ActionType, bool>();
-		actionDict.Add(ActionType.Move, false);
-		actionDict.Add(ActionType.Pass, false);
-		actionDict.Add(ActionType.BasicAttack, false);
+		actionList = new List<ActionType>() {
+			ActionType.Move, ActionType.Pass, ActionType.BasicAttack
+		};
 		switch(type) {
 			case CharacterType.Character1:
 				maxHealth = 200;
@@ -58,19 +57,29 @@ public class Character : MonoBehaviour {
 				basicAttackDamage = 6;
 				GameObject.Find(this.name).AddComponent<MoveAction>();
 				GameObject.Find(this.name).AddComponent<BasicAttackAction>();
-				actionDict.Add(ActionType.Char1Ability1, false);
+				actionList.AddRange(new List<ActionType>() {
+					ActionType.Char1Ability1
+				});
 				break;
 			case CharacterType.Character2:
 				maxHealth = 150;
 				health = maxHealth;
 				basicAttackDamage = 8;
-				actionDict.Add(ActionType.Char2Ability1, false);
+				GameObject.Find(this.name).AddComponent<MoveAction>();
+				GameObject.Find(this.name).AddComponent<BasicAttackAction>();
+				actionList.AddRange(new List<ActionType>() {
+					ActionType.Char2Ability1
+				});
 				break;
 			case CharacterType.Character3:
 				maxHealth = 100;
 				health = maxHealth;
 				basicAttackDamage = 10;
-				actionDict.Add(ActionType.Char3Ability1, false);
+				GameObject.Find(this.name).AddComponent<MoveAction>();
+				GameObject.Find(this.name).AddComponent<BasicAttackAction>();
+				actionList.AddRange(new List<ActionType>() {
+					ActionType.Char1Ability1
+				});
 				break;
 			default:
 				Debug.Log("Instantiation From Invalid CharacterType " + type);
