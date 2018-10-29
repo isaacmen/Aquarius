@@ -7,7 +7,7 @@ public class DialogueManager : MonoBehaviour {
 
     public Text nameText;
     public Text dialogueText;
-
+    int speakerID = 0;
     public Animator animator;
 
     private Queue<string> sentences;
@@ -18,6 +18,16 @@ public class DialogueManager : MonoBehaviour {
 	void Start () {
         sentences = new Queue<string>();
 	}
+    void Update()
+    {
+        /*if (speakerID == 0) {
+            nameText.text = dialogue.name;
+        }
+        else if (speakerID == 1){
+
+        }*/
+        //Debug.Log(sentences.Count);
+    }
 
     public void StartDialogue (Dialogue dialogue)
     {
