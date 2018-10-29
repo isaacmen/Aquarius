@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tile {
+public class Tile : MonoBehaviour {
 	private int width; // width is from the top going down, starting from 0
 	private int depth; // depth is from the left going right, starting from 0
 	private Character onTile;
 
-	public Tile(int w, int d) {
-		width = w;
-		depth = d;
-		onTile = null;
+	void Awake() {
+		//whatever instantiations
 	}
 
 	public Character getCharacter() {

@@ -33,6 +33,7 @@ public class MoveAction : Action {
 			state = MyState.MOVING;
 			dir = MoveDir.UP;
 			start = transform.position;
+			//GameObject.Find("someBattleground").GetComponent<Character>()
 		} else if(Input.GetKey(KeyCode.A)) {
 			state = MyState.MOVING;
 			dir = MoveDir.LEFT;
