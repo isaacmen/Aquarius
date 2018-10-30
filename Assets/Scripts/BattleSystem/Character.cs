@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(MoveAction))]
 public class Character : MonoBehaviour {
 	[Header("Attributes")]
 	public CharacterType type;
