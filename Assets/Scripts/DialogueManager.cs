@@ -26,8 +26,15 @@ public class DialogueManager : MonoBehaviour {
         else if (speakerID == 1){
 
         }*/
-        //Debug.Log(sentences.Count);
+        Debug.Log(sentences.Count);
     }
+
+    /*public void DialogueIndexer(Dialogue dialogue){
+        if (sentences.Count == dialogue.dialogueID){
+
+        }
+
+    }*/
 
     public void StartDialogue (Dialogue dialogue)
     {

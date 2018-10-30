@@ -6,7 +6,7 @@ using UnityEngine;
 public class Dialogue {
 
     public string name;
-    //public string name2;
+    public int dialogueID;
 
     [TextArea(5,15)]
     public string[] sentences;
