@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoveAction : Action {
 	private const float SPEED = 1;
-	private const float GRID = 1;
+	private const float GRID = 2;
 
 	override protected ActionType getType() { return ActionType.Move; }
 	private MyState state;

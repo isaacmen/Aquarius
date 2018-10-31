@@ -6,6 +6,9 @@ public class BasicAttackAction : Action {
 	override protected ActionType getType() { return ActionType.BasicAttack; }
 	private MyState state;
 	private Character target;
+	private Vector3 home;
+
+	private const int SPEED = 1;
 
 	override protected void innerStart() {
 		state = MyState.PROMPT;
@@ -32,10 +35,12 @@ public class BasicAttackAction : Action {
 	private void prompt() {
 		target = GameObject.Find("Enemy1").GetComponent<Character>();
 		state = MyState.MOVE_TO;
+		home = transform.position;
 	}
 
 	private void moveTo() {
 		state = MyState.DAMAGE;
+		Vector3 ds = -SPEED*Time.deltaTime/home.magnitude * home;
 	}
 
 	private void damage() {
