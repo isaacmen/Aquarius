@@ -8,9 +8,9 @@ public class GameLoop : MonoBehaviour {
 	private bool hasPrinted = false;
 
 	void Awake() {
+		Debug.Log("GameLoop awake");
 		yourField = new Field();
 		enemyField = new Field();
-		Debug.Log("GameLoop awake");
 	}
 
 	public static void addAllyCharacter(Character c) {

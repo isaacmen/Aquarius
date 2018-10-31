@@ -52,11 +52,11 @@ public class MoveAction : Action {
 	}
 
 	private void move() {
-		float ds = SPEED * Time.deltaTime;
 		Vector3 pos = transform.position;
 		switch(dir) {
 			case MoveDir.UP:
-				if(pos.y - start.y + ds < GRID) {
+				Vector3 ds = SPEED * Time.deltaTime * new Vector3(0, 1, 0);
+				if(pos - start + ds < GRID) {
 					transform.Translate(0, ds, 0);
 				} else {
 					transform.Translate(0, start.y + GRID - pos.y, 0);

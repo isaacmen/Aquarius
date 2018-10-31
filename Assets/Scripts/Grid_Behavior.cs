@@ -24,7 +24,7 @@ public class Grid_Behavior : MonoBehaviour {
 
     void InitCells() {
         GameObject cellObject = new GameObject();
-		cellObject.AddComponent<Tile>();
+//		cellObject.AddComponent<Tile>();
 
         //creates an empty object and adds a sprite renderer component -> set the sprite to cellSprite
         cellObject.AddComponent<SpriteRenderer>().sprite = cellSprite;
