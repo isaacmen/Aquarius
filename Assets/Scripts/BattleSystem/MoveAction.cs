@@ -7,13 +7,13 @@ public class MoveAction : Action {
 	private const float GRID = 1;
 
 	override protected ActionType getType() { return ActionType.Move; }
-	private Vector3 start;
 	private MyState state;
-	private MoveDir dir;
+	private Vector3 start;
+	private Vector3 dir;
 
 	override protected void innerStart() {
 		state = MyState.PROMPTING;
-		dir = MoveDir.UNDECIDED;
+		dir = new Vector3(0, 0);
 		Debug.Log("WASD to move, C to cancel");
 	}
 
@@ -31,20 +31,20 @@ public class MoveAction : Action {
 	private void prompt() {
 		if(Input.GetKey(KeyCode.W)) {
 			state = MyState.MOVING;
-			dir = MoveDir.UP;
+			dir = new Vector3(0, 1);
 			start = transform.position;
 			//GameObject.Find("someBattleground").GetComponent<Character>()
 		} else if(Input.GetKey(KeyCode.A)) {
 			state = MyState.MOVING;
-			dir = MoveDir.LEFT;
+			dir = new Vector3(-1, 0);
 			start = transform.position;
 		} else if(Input.GetKey(KeyCode.S)) {
 			state = MyState.MOVING;
-			dir = MoveDir.DOWN;
+			dir = new Vector3(0, -1);
 			start = transform.position;
 		} else if(Input.GetKey(KeyCode.D)) {
 			state = MyState.MOVING;
-			dir = MoveDir.RIGHT;
+			dir = new Vector3(1, 0);
 			start = transform.position;
 		} else if(Input.GetKey(KeyCode.C)) {
 			setActive(false);
@@ -53,33 +53,18 @@ public class MoveAction : Action {
 
 	private void move() {
 		Vector3 pos = transform.position;
-		switch(dir) {
-			case MoveDir.UP:
-				Vector3 ds = SPEED * Time.deltaTime * new Vector3(0, 1, 0);
-				if(pos - start + ds < GRID) {
-					transform.Translate(0, ds, 0);
-				} else {
-					transform.Translate(0, start.y + GRID - pos.y, 0);
-					setActive(false);
-				}
-				break;
-			case MoveDir.DOWN:
-				//fix
-				if(pos.y - start.y + ds < GRID) {
-					transform.Translate(0, ds, 0);
-				} else {
-					transform.Translate(0, start.y + GRID - pos.y, 0);
-					setActive(false);
-				}
-				break;
-			case MoveDir.LEFT:
-				break;
-			case MoveDir.RIGHT:
-				break;
-			case MoveDir.UNDECIDED:
-				Debug.Log("MoveAction got to MyState.MOVING and MoveDir.UNDECIDED - FIX");
+		Vector3 ds = SPEED * Time.deltaTime * dir;
+		
+		if(dir.magnitude > 0) {
+			if((pos - start + ds).magnitude < GRID) {
+				transform.Translate(ds);
+			} else {
+				transform.Translate(start + GRID*dir - pos);
 				setActive(false);
-				break;
+			}
+		} else {
+			Debug.Log("Movement cancelled but still got to moving - FIX");
+			setActive(false);
 		}
 	}
 
@@ -87,10 +72,6 @@ public class MoveAction : Action {
 
 	private enum MyState {
 		PROMPTING, MOVING
-	}
-
-	private enum MoveDir {
-		UP, DOWN, LEFT, RIGHT, UNDECIDED
 	}
 }
 
