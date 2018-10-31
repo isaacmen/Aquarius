@@ -33,21 +33,26 @@ public class MoveAction : Action {
 			state = MyState.MOVING;
 			dir = new Vector3(0, 1);
 			start = transform.position;
+			Debug.Log(state + " " + dir + " " + start);
 			//GameObject.Find("someBattleground").GetComponent<Character>()
 		} else if(Input.GetKey(KeyCode.A)) {
 			state = MyState.MOVING;
 			dir = new Vector3(-1, 0);
 			start = transform.position;
+			Debug.Log(state + " " + dir + " " + start);
 		} else if(Input.GetKey(KeyCode.S)) {
 			state = MyState.MOVING;
 			dir = new Vector3(0, -1);
 			start = transform.position;
+			Debug.Log(state + " " + dir + " " + start);
 		} else if(Input.GetKey(KeyCode.D)) {
 			state = MyState.MOVING;
 			dir = new Vector3(1, 0);
 			start = transform.position;
+			Debug.Log(state + " " + dir + " " + start);
 		} else if(Input.GetKey(KeyCode.C)) {
 			setActive(false);
+			Debug.Log("cancel");
 		}
 	}
 
