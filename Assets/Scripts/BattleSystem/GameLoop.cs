@@ -42,4 +42,10 @@ public class GameLoop : MonoBehaviour {
 				Debug.Log("ATTACK");
 		}
 	}
+
+    public void moveCharacter()
+    {
+        if (GameObject.Find("Character1").GetComponent<MoveAction>().setActive(true))
+            Debug.Log("MOVE");
+    }
 }
