@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MoveAction : Action {
-	private const float SPEED = 5; //Sped it up a bit
+
+	public const float SPEED = 5;
+
 	private const float GRID = 2;
 
 	override protected ActionType getType() { return ActionType.Move; }
