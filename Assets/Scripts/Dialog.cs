@@ -22,6 +22,8 @@ public class Dialog : MonoBehaviour {
     public GameObject continueButton;
     public GameObject choiceButton1;
     public GameObject choiceButton2;
+    public GameObject dialogueBackplate;
+    public GameObject choiceBackplate;
     public int choiceNumber;
 
     void Start()
@@ -52,9 +54,11 @@ public class Dialog : MonoBehaviour {
 
     public void choice1(){
         option1 = true;
+        choiceBackplate.SetActive(false);
     }
     public void choice2(){
         option2 = true;
+        choiceBackplate.SetActive(false);
     }
 
     public void NextSentence(){
@@ -79,10 +83,12 @@ public class Dialog : MonoBehaviour {
         } else {
             textDisplay.text = "";
             continueButton.SetActive(false);
+            dialogueBackplate.SetActive(false);
         }
         if (index == choiceNumber){
             choiceButton1.SetActive(true);
             choiceButton2.SetActive(true);
+            choiceBackplate.SetActive(true);
         }
         Debug.Log(index);
     }

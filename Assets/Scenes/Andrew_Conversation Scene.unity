@@ -727,6 +727,8 @@ MonoBehaviour:
   continueButton: {fileID: 1385199823}
   choiceButton1: {fileID: 11707062}
   choiceButton2: {fileID: 1709816709}
+  dialogueBackplate: {fileID: 606761356}
+  choiceBackplate: {fileID: 747459257}
   choiceNumber: 4
 --- !u!4 &361214179
 Transform:
@@ -1392,7 +1394,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &747459258
 RectTransform:
   m_ObjectHideFlags: 0
