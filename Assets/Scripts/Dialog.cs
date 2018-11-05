@@ -10,9 +10,21 @@ public class Dialog : MonoBehaviour {
     [TextArea(5, 15)]
     public string[] sentences;
     private int index;
+    private bool option1 = false;
+    private bool option2 = false;
+    private bool skip = false;
     public float typingSpeed;
+    public int conversationNumberChoice1;
+    public int conversationNumberChoice2;
+    private int conversationNumberChoice = 100;
+    //int textIndex = 0;
 
     public GameObject continueButton;
+    public GameObject choiceButton1;
+    public GameObject choiceButton2;
+    public GameObject dialogueBackplate;
+    public GameObject choiceBackplate;
+    public int choiceNumber;
 
     void Start()
     {
@@ -22,8 +34,13 @@ public class Dialog : MonoBehaviour {
 
     private void Update()
     {
-        if(textDisplay.text == sentences[index]){
+        if(textDisplay.text == sentences[index] && index != choiceNumber){
             continueButton.SetActive(true);
+        }
+        if (option1 == true){
+            conversationNumberChoice = conversationNumberChoice1;
+        } else if (option2 == true) {
+            conversationNumberChoice = conversationNumberChoice2;
         }
     }
 
@@ -35,18 +52,45 @@ public class Dialog : MonoBehaviour {
         }
     }
 
+    public void choice1(){
+        option1 = true;
+        choiceBackplate.SetActive(false);
+    }
+    public void choice2(){
+        option2 = true;
+        choiceBackplate.SetActive(false);
+    }
+
     public void NextSentence(){
 
         continueButton.SetActive(false);
-
-        if (index < sentences.Length - 1){
-            index++;
+        choiceButton1.SetActive(false);
+        choiceButton2.SetActive(false);
+        //index < sentences.Length - 1
+        if (index < conversationNumberChoice){
+            if (option2 == true){
+                index += 2;
+            } else if (option1 == true && skip == true){
+                index += 2;
+            } else if (option1 == true){
+                skip = true;
+                index++;
+            } else {
+                index++;
+            }
             textDisplay.text = "";
             StartCoroutine(Type());
         } else {
             textDisplay.text = "";
             continueButton.SetActive(false);
+            dialogueBackplate.SetActive(false);
         }
+        if (index == choiceNumber){
+            choiceButton1.SetActive(true);
+            choiceButton2.SetActive(true);
+            choiceBackplate.SetActive(true);
+        }
+        Debug.Log(index);
     }
 
 }
