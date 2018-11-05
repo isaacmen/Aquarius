@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveAction : Action {
+public class Move : Action {
 
 	public const float SPEED = 5;
 
 	private const float GRID = 2;
-
-	override protected ActionType getType() { return ActionType.Move; }
+	
 	private MyState state;
 	private Vector3 start;
 	private Vector3 dir;

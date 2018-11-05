@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Action : MonoBehaviour {
-	protected abstract ActionType getType();
 	protected abstract void innerStart();
 	protected abstract void innerLoop();
 	protected abstract void innerEnd();

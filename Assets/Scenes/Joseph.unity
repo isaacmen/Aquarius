@@ -273,7 +273,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1978346257145212, guid: 205917839c4f25642a1e3c576c4688b9, type: 2}
       propertyPath: m_Name
-      value: Character2
+      value: Leo
       objectReference: {fileID: 0}
     - target: {fileID: 4944482869875300, guid: 205917839c4f25642a1e3c576c4688b9, type: 2}
       propertyPath: m_LocalScale.x
@@ -460,6 +460,11 @@ Prefab:
       propertyPath: randomizeTurnOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114514619932044366, guid: 794b842769a35c34ba34d5f4b3b3a699,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 794b842769a35c34ba34d5f4b3b3a699, type: 2}
   m_IsPrefabAsset: 0
@@ -489,6 +494,23 @@ MonoBehaviour:
   enemy1Health: {fileID: 1024279082}
   character1: {fileID: 2023541758}
   enemy1: {fileID: 1594521735}
+--- !u!114 &835699532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 835699527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b2991ea24fe3924b8675f3bd42c4961, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnOrder:
+  - {fileID: 2023541759}
+  - {fileID: 1419285974}
+  - {fileID: 1827868493}
+  - {fileID: 1594521736}
+  randomizeTurnOrder: 1
 --- !u!1001 &1024279081
 Prefab:
   m_ObjectHideFlags: 0
@@ -772,7 +794,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1978346257145212, guid: 205917839c4f25642a1e3c576c4688b9, type: 2}
       propertyPath: m_Name
-      value: Character3
+      value: Scorpio
       objectReference: {fileID: 0}
     - target: {fileID: 4944482869875300, guid: 205917839c4f25642a1e3c576c4688b9, type: 2}
       propertyPath: m_LocalScale.x
@@ -1146,6 +1168,10 @@ Prefab:
         type: 2}
       propertyPath: basicAttackDamage
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1978346257145212, guid: 205917839c4f25642a1e3c576c4688b9, type: 2}
+      propertyPath: m_Name
+      value: Libra
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 205917839c4f25642a1e3c576c4688b9, type: 2}

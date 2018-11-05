@@ -11,7 +11,7 @@ public class Field {
 	private List<Character> characters;
 
 	public Field() {
-		Debug.Log("field created");
+		if(TestGameLoop.DEBUG) Debug.Log("field created");
 		positions = new Tile[WIDTH, DEPTH];
 		for(int d = 0; d < DEPTH; d++)
 			for(int w = 0; w < WIDTH; w++)
@@ -32,7 +32,7 @@ public class Field {
 		}
 	}
 
-	public void print() {
+	public void printField() {
 		string toPrint = "";
 		for(int d = 0; d < DEPTH; d++) {
 			for(int w = 0; w < WIDTH; w++) {

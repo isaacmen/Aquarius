@@ -10,15 +10,15 @@ public class Character : MonoBehaviour {
 	public int basicAttackDamage;
 
 	[Header("Actions")]
-	public List<ActionType> actionList;
+	public List<Action> actionList;
 
 	void Awake() {
-		print(this.name + " awake");
+		if(GameLoop.DEBUG) print(this.name + " awake");
 		instantiateOffType(type);
 	}
 
 	void Start() {
-		print(this.name + " start");
+		if(GameLoop.DEBUG) print(this.name + " start");
 		int l = "Character".Length;
 		if(this.name.Length > l && this.name.Substring(0, l).Equals("Character"))
 			GameLoop.addAllyCharacter(this);
@@ -35,33 +35,34 @@ public class Character : MonoBehaviour {
 	}
 
 	private void instantiateOffType(CharacterType type) {
-		actionList = new List<ActionType>() {
-			ActionType.Move, ActionType.Pass, ActionType.BasicAttack
-		};
+		actionList = new List<Action>();
 		switch(type) {
 			case CharacterType.Libra:
-				GameObject.Find(this.name).AddComponent<MoveAction>();
-				GameObject.Find(this.name).AddComponent<BasicAttackAction>();
-				actionList.AddRange(new List<ActionType>() {
-					ActionType.Char1Ability1
-				});
+				actionList.Add(GameObject.Find(this.name).AddComponent<Move>());
+				actionList.Add(GameObject.Find(this.name).AddComponent<BasicAttack>());
+
+				actionList.Add(GameObject.Find(this.name).AddComponent<LayOnHands>());
+
 				break;
 			case CharacterType.Leo:
-				GameObject.Find(this.name).AddComponent<MoveAction>();
-				GameObject.Find(this.name).AddComponent<BasicAttackAction>();
-				actionList.AddRange(new List<ActionType>() {
-					ActionType.Char2Ability1
-				});
+				actionList.Add(GameObject.Find(this.name).AddComponent<Move>());
+				actionList.Add(GameObject.Find(this.name).AddComponent<BasicAttack>());
+
+				actionList.Add(GameObject.Find(this.name).AddComponent<Unload>());
+
 				break;
 			case CharacterType.Scorpio:
-				GameObject.Find(this.name).AddComponent<MoveAction>();
-				GameObject.Find(this.name).AddComponent<BasicAttackAction>();
-				actionList.AddRange(new List<ActionType>() {
-					ActionType.Char1Ability1
-				});
+				actionList.Add(GameObject.Find(this.name).AddComponent<Move>());
+				actionList.Add(GameObject.Find(this.name).AddComponent<BasicAttack>());
+
+				actionList.Add(GameObject.Find(this.name).AddComponent<Fireball>());
+
 				break;
-			default:
-				Debug.Log("Instantiation From Invalid CharacterType " + type);
+			case CharacterType.Enemy:
+				actionList.Add(GameObject.Find(this.name).AddComponent<Move>());
+
+				//
+
 				break;
 		}
 	}
@@ -72,6 +73,6 @@ public class Character : MonoBehaviour {
 }
 
 public enum CharacterType {
-	Unknown,
+	Enemy,
 	Libra, Leo, Scorpio
 }

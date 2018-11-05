@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicAttackAction : Action {
-	override protected ActionType getType() { return ActionType.BasicAttack; }
+public class BasicAttack : Action {
 	private MyState state;
 	private Character target;
 	private Vector3 home;
@@ -34,13 +33,15 @@ public class BasicAttackAction : Action {
 
 	private void prompt() {
 		target = GameObject.Find("Enemy1").GetComponent<Character>();
-		state = MyState.MOVE_TO;
 		home = transform.position;
+
+		state = MyState.MOVE_TO;
 	}
 
 	private void moveTo() {
+//		Vector3 ds = -SPEED*Time.deltaTime/home.magnitude * home;
+
 		state = MyState.DAMAGE;
-		Vector3 ds = -SPEED*Time.deltaTime/home.magnitude * home;
 	}
 
 	private void damage() {

@@ -2,13 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameLoop : MonoBehaviour {
-	private State state = State.START_TURN;
-	public Character turn = null;
-	public List<Action> turnActions = null;
-	public bool hasMoved = false;
-	public bool hasActed = false;
-
+public class TestGameLoop : MonoBehaviour {
 	private static Field yourField;
 	private static Field enemyField;
 	private bool hasPrinted = false;
@@ -67,50 +61,39 @@ public class GameLoop : MonoBehaviour {
 	public static void addEnemyCharacter(Character c) {
 		enemyField.addCharacter(c);
 	}
-	
+
+	// Use this for initialization
 	void Start() {
 		
 	}
 	
+	// Update is called once per frame
 	void Update() {
-		switch(state) {
-			case State.START_TURN:
-				turn = getCharacterTurn();
-				turnActions = turn.actionList;
-
-				Debug.Log(turn + "'s Turn");
-				for(int i = 0; i < turnActions.Count; i++) {
-					Debug.Log((i+1) + ": " + turnActions[i].GetType());
-				}
-				
-				hasMoved = false;
-				hasActed = false;
-				
-				state = State.WAIT_INPUT;
-
-				break;
-			case State.WAIT_INPUT:
-
-				break;
+		if(!hasPrinted) {
+			if(TestGameLoop.DEBUG) yourField.printField();
+			hasPrinted = true;
+		}
+		if(Input.GetKey(KeyCode.M)) {
+			moveTest();
+		} else if(Input.GetKey(KeyCode.N)) {
+			attackTest();
+		} else if(Input.GetKey(KeyCode.B)) {
+			nextTurnTest();
 		}
 	}
 
-    public void turnMove() {
-        if(turn.GetComponent<Move>().setActive(true))
-            Debug.Log("TURN MOVE");
+    public void moveTest() {
+        if(GameObject.Find("Character1").GetComponent<Move>().setActive(true))
+            Debug.Log("MOVE");
     }
 
-	public void turnAttack() {
-		if(GameObject.Find("Libra").GetComponent<BasicAttack>().setActive(true))
-			Debug.Log("TURN ATTACK");
+	public void attackTest() {
+		if(GameObject.Find("Character1").GetComponent<BasicAttack>().setActive(true))
+			Debug.Log("ATTACK");
 	}
 
 	public void nextTurnTest() {
 		nextTurn();
 		Debug.Log("NEXT TURN");
-	}
-
-	private enum State {
-		START_TURN, WAIT_INPUT, 
 	}
 }
