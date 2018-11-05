@@ -721,7 +721,7 @@ MonoBehaviour:
   - 'LIBRA: Alright. Now you must die. <3'
   - 'LEO: K'
   - 'LEO: No u'
-  typingSpeed: 0.02
+  typingSpeed: 0.01
   conversationNumberChoice1: 5
   conversationNumberChoice2: 6
   continueButton: {fileID: 1385199823}
@@ -1180,7 +1180,7 @@ GameObject:
   - component: {fileID: 606761359}
   - component: {fileID: 606761358}
   m_Layer: 5
-  m_Name: Image (6)
+  m_Name: Dialogue Backplate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1387,7 +1387,7 @@ GameObject:
   - component: {fileID: 747459260}
   - component: {fileID: 747459259}
   m_Layer: 5
-  m_Name: Image (7)
+  m_Name: Choice Backplate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
