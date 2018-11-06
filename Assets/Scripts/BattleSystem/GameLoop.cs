@@ -60,12 +60,12 @@ public class GameLoop : MonoBehaviour {
 	}
 
 	public static void addAllyCharacter(Character c) {
-		yourField.addCharacter(c);
+		//yourField.addCharacter(c);
 //		GameObject.Find(c.name).AddComponent<Character>();
 	}
 
 	public static void addEnemyCharacter(Character c) {
-		enemyField.addCharacter(c);
+		//enemyField.addCharacter(c);
 	}
 	
 	void Start() {
