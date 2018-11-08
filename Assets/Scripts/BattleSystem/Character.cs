@@ -10,20 +10,24 @@ public class Character : MonoBehaviour {
 	public int basicAttackDamage;
 
 	[Header("Actions")]
-	public List<Action> actionList;
+	private List<Action> actionList;
 
 	void Awake() {
-		if(GameLoop.DEBUG) print(this.name + " awake");
-		instantiateOffType(type);
+		if(GameLoop.DEBUG_LOG) print(this.name + " awake");
+		instantiateActionsFor(type);
 	}
 
 	void Start() {
-		if(GameLoop.DEBUG) print(this.name + " start");
+		if(GameLoop.DEBUG_LOG) print(this.name + " start");
 		int l = "Character".Length;
 		if(this.name.Length > l && this.name.Substring(0, l).Equals("Character"))
 			GameLoop.addAllyCharacter(this);
 		else
 			GameLoop.addEnemyCharacter(this);
+	}
+
+	public List<Action> getActions() {
+		return new List<Action>(actionList);
 	}
 
 	public void takeDamage(int d) {
@@ -34,8 +38,9 @@ public class Character : MonoBehaviour {
 		
 	}
 
-	private void instantiateOffType(CharacterType type) {
+	private void instantiateActionsFor(CharacterType type) {
 		actionList = new List<Action>();
+		actionList.Add(GameObject.Find(this.name).AddComponent<Pass>());
 		switch(type) {
 			case CharacterType.Libra:
 				actionList.Add(GameObject.Find(this.name).AddComponent<Move>());

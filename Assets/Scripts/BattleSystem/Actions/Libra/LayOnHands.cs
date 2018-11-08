@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LayOnHands : Action {
 	override protected void innerStart() {
-
+		setInactiveWithCompletion(true);
 	}
 
 	override protected void innerLoop() {

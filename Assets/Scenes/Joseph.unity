@@ -465,7 +465,8 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114514619932044366, guid: 794b842769a35c34ba34d5f4b3b3a699, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 794b842769a35c34ba34d5f4b3b3a699, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &835699527 stripped
@@ -473,12 +474,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1814050809293972, guid: 794b842769a35c34ba34d5f4b3b3a699,
     type: 2}
   m_PrefabInternal: {fileID: 835699526}
---- !u!114 &835699528 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114514619932044366, guid: 794b842769a35c34ba34d5f4b3b3a699,
-    type: 2}
-  m_PrefabInternal: {fileID: 835699526}
-  m_Script: {fileID: 11500000, guid: e3763879cbd883b4e81f953dcdfe8b7f, type: 3}
 --- !u!114 &835699529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -617,7 +612,7 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 835699528}
+      objectReference: {fileID: 0}
     - target: {fileID: 224710194261417004, guid: 642e859a1f83c3240a8e444b907b1bb6,
         type: 2}
       propertyPath: m_AnchorMax.x

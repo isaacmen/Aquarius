@@ -5,7 +5,7 @@ using UnityEngine;
 public class BasicAttack : Action {
 	private MyState state;
 	private Character target;
-	private Vector3 home;
+//	private Vector3 home;
 
 	private const int SPEED = 1;
 
@@ -33,7 +33,7 @@ public class BasicAttack : Action {
 
 	private void prompt() {
 		target = GameObject.Find("Enemy1").GetComponent<Character>();
-		home = transform.position;
+//		home = transform.position;
 
 		state = MyState.MOVE_TO;
 	}
@@ -54,7 +54,7 @@ public class BasicAttack : Action {
 	}
 
 	private void moveBack() {
-		setActive(false);
+		setInactiveWithCompletion(true);
 	}
 
 	override protected void innerEnd() {}
