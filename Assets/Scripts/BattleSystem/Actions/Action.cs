@@ -6,6 +6,7 @@ public abstract class Action : MonoBehaviour {
 	protected abstract void innerStart();
 	protected abstract void innerLoop();
 	protected abstract void innerEnd();
+	public abstract ActionType getActionType();
 
 	private bool active;
 	private bool lastActive;
@@ -52,4 +53,8 @@ public abstract class Action : MonoBehaviour {
 		if(active)
 			innerLoop();
 	}
+}
+
+public enum ActionType {
+	PASS, MOVE, ABILITY
 }

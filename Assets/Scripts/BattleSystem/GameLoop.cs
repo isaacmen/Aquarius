@@ -11,8 +11,7 @@ public class GameLoop : MonoBehaviour {
 	private Character turn = null;
 	private List<Action> turnActions = null;
 	private Action activeAction = null;
-	private bool hasMoved = false;
-	private bool hasActed = false;
+	private List<ActionType> actionTypesPerTurn = null;
 
 	private static Field yourField;
 	private static Field enemyField;
@@ -105,31 +104,40 @@ public class GameLoop : MonoBehaviour {
 				if(!activeAction.isActive()) {
 					if(DEBUG_LOG) Debug.Log("GameLoop detects action inactive");
 
-					// updates hasMoved and hasActed if the action was fully completed and executed
+					// updates actionTypesPerTurn if the previously
+					// active action was fully completed and executed
 					if(activeAction.getCompletion())
-						if(activeAction.GetType() == typeof(Move)) {
-							hasMoved = true;
-						} else if(activeAction.GetType() == typeof(Pass)) {
-							hasMoved = true;
-							hasActed = true;
+						if(activeAction.getActionType() == ActionType.MOVE) {
+							actionTypesPerTurn.Remove(ActionType.MOVE);
+						} else if(activeAction.getActionType() == ActionType.PASS) {
+							actionTypesPerTurn.Clear();
 						} else {
-							hasActed = true;
+							actionTypesPerTurn.Remove(ActionType.ABILITY);
 						}
 
-					// updates turnActions based off hasMoved and hasActed
-					if(hasMoved) {
-						turnActions.Remove(turn.GetComponent<Move>());
-					}
-					if(hasActed) {
+					// if there are no more moves in the turn, remove
+					// all actions with ActionType.MOVE from turnActions
+					if(actionTypesPerTurn.IndexOf(ActionType.MOVE) == -1) {
 						for(int i = 0; i < turnActions.Count; i++) {
-							if(turnActions[i].GetType() != typeof(Move) && turnActions[i].GetType() != typeof(Pass)) {
+							if(turnActions[i].getActionType() == ActionType.MOVE) {
 								turnActions.Remove(turnActions[i]);
 								i--;
 							}
 						}
 					}
 
-					// checks if turn is over
+					// if there are no more abilities in the turn, remove
+					// all actions with ActionType.ABILITY from turnActions
+					if(actionTypesPerTurn.IndexOf(ActionType.ABILITY) == -1) {
+						for(int i = 0; i < turnActions.Count; i++) {
+							if(turnActions[i].getActionType() == ActionType.ABILITY) {
+								turnActions.Remove(turnActions[i]);
+								i--;
+							}
+						}
+					}
+
+					// checks if turn is over to move to the appropriate next state
 					if(turnOver()) {
 						nextTurn();
 						setState(GameState.START_TURN);
@@ -143,13 +151,13 @@ public class GameLoop : MonoBehaviour {
 	}
 
 	private bool turnOver() {
-		return	(hasMoved && hasActed) ||
+		return  actionTypesPerTurn.Count == 0 ||
 				(turnActions.Count == 0) ||
-				(turnActions.Count == 1 && turnActions[0].GetType() == typeof(Pass));
+				(turnActions.Count == 1 && turnActions[0].getActionType() == ActionType.PASS);
 	}
 
 	public void setState(GameState newState) {
-		// things to be done when exiting a state (nothing so far or maybe won't be needed)
+		// things to be done when exiting a state (nothing so far; maybe won't be needed)
 		switch(state) {
 			case GameState.START_TURN:		break;
 			case GameState.WAIT_INPUT:		break;
@@ -165,9 +173,7 @@ public class GameLoop : MonoBehaviour {
 				// resets variables for each turn
 				turn = getCharacterTurn();
 				turnActions = turn.getActions();
-
-				hasMoved = false;
-				hasActed = false;
+				actionTypesPerTurn = turn.getActionTypesPerTurn();
 
 				Debug.Log(turn + "'s Turn");
 
@@ -175,13 +181,18 @@ public class GameLoop : MonoBehaviour {
 
 				break;
 			case GameState.WAIT_INPUT:
-				// prints moves and waits for the user to select one - to be partially overridden by implemention with gui
+				// prints possible actions then waits for the user to select one
+				// to be partially overridden by implemention with gui
 				string turnMoveStr = "What should " + turn + " do? (press # to act)\n";
 				for(int i = 0; i < turnActions.Count; i++) {
 					turnMoveStr += (i + 1) + ": " + turnActions[i].GetType() + ((i < turnActions.Count-1) ? " / " : "");
 				}
 				Debug.Log(turnMoveStr);
-				if(DEBUG_LOG) Debug.Log("hasMoved " + hasMoved + ", hasActed " + hasActed);
+				string s = "";
+				foreach(ActionType at in actionTypesPerTurn) {
+					s += at + " ";
+				}
+				Debug.Log(s);
 				break;
 			case GameState.ACTION_ACTIVE:
 				break;

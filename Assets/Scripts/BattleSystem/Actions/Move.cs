@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Move : Action {
-
 	public const float SPEED = 5;
 
 	private const float GRID = 2;
@@ -11,6 +10,10 @@ public class Move : Action {
 	private MyState state;
 	private Vector3 start;
 	private Vector3 dir;
+
+	override public ActionType getActionType() {
+		return ActionType.MOVE;
+	}
 
 	override protected void innerStart() {
 		state = MyState.PROMPTING;

@@ -9,6 +9,10 @@ public class BasicAttack : Action {
 
 	private const int SPEED = 1;
 
+	override public ActionType getActionType() {
+		return ActionType.ABILITY;
+	}
+
 	override protected void innerStart() {
 		state = MyState.PROMPT;
 		target = null;

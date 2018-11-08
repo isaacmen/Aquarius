@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Pass : Action {
+	override public ActionType getActionType() {
+		return ActionType.PASS;
+	}
+
 	override protected void innerStart() {
 		setInactiveWithCompletion(true);
 	}

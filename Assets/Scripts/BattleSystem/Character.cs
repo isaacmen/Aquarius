@@ -9,8 +9,9 @@ public class Character : MonoBehaviour {
 	public int health;
 	public int basicAttackDamage;
 
-	[Header("Actions")]
+//	[Header("Actions")]
 	private List<Action> actionList;
+	private List<ActionType> actionTypesPerTurn;
 
 	void Awake() {
 		if(GameLoop.DEBUG_LOG) print(this.name + " awake");
@@ -30,6 +31,10 @@ public class Character : MonoBehaviour {
 		return new List<Action>(actionList);
 	}
 
+	public List<ActionType> getActionTypesPerTurn() {
+		return new List<ActionType>(actionTypesPerTurn);
+	}
+
 	public void takeDamage(int d) {
 		health -= d;
 	}
@@ -41,6 +46,9 @@ public class Character : MonoBehaviour {
 	private void instantiateActionsFor(CharacterType type) {
 		actionList = new List<Action>();
 		actionList.Add(GameObject.Find(this.name).AddComponent<Pass>());
+
+		actionTypesPerTurn = new List<ActionType>() { ActionType.ABILITY, ActionType.MOVE };
+
 		switch(type) {
 			case CharacterType.Libra:
 				actionList.Add(GameObject.Find(this.name).AddComponent<Move>());

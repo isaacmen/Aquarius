@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ActionTemplate : Action {
+	override public ActionType getActionType() {
+		throw new System.NotImplementedException();
+	}
+
 	override protected void innerStart() {
 
 	}
