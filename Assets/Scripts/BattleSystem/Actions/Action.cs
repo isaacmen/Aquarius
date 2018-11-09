@@ -9,7 +9,6 @@ public abstract class Action : MonoBehaviour {
 	public abstract ActionType getActionType();
 
 	private bool active;
-	private bool lastActive;
 	private bool complete;
 
 	public bool isActive() {
@@ -21,7 +20,7 @@ public abstract class Action : MonoBehaviour {
 			active = true;
 			innerStart();
 		} else {
-			Debug.Log(this.GetType() + " set active when already inactive.");
+			Debug.Log(this.GetType() + " set active when already active.");
 		}
 	}
 
@@ -32,7 +31,7 @@ public abstract class Action : MonoBehaviour {
 			complete = c;
 			innerEnd();
 		} else {
-			Debug.Log(this.GetType() + " set inactive when already active.");
+			Debug.Log(this.GetType() + " set inactive when already inactive.");
 		}
 	}
 
@@ -42,16 +41,11 @@ public abstract class Action : MonoBehaviour {
 
 	protected virtual void Start() {
 		active = false;
-		lastActive = false;
 		complete = false;
 	}
 
 	protected virtual void Update() {
-		if(active != lastActive)
-			lastActive = active;
-
-		if(active)
-			innerLoop();
+		if(active) innerLoop();
 	}
 }
 
