@@ -454,7 +454,7 @@ Prefab:
         type: 2}
       propertyPath: turnOrder.Array.data[3]
       value: 
-      objectReference: {fileID: 1594521736}
+      objectReference: {fileID: 0}
     - target: {fileID: 114514619932044366, guid: 794b842769a35c34ba34d5f4b3b3a699,
         type: 2}
       propertyPath: randomizeTurnOrder
@@ -504,7 +504,6 @@ MonoBehaviour:
   - {fileID: 2023541759}
   - {fileID: 1419285974}
   - {fileID: 1827868493}
-  - {fileID: 1594521736}
   randomizeTurnOrder: 1
 --- !u!1001 &1024279081
 Prefab:
@@ -692,7 +691,7 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1594521736}
+      objectReference: {fileID: 0}
     - target: {fileID: 114774043388177922, guid: 642e859a1f83c3240a8e444b907b1bb6,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -806,7 +805,7 @@ Prefab:
     - target: {fileID: 114520810573966346, guid: 205917839c4f25642a1e3c576c4688b9,
         type: 2}
       propertyPath: type
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114520810573966346, guid: 205917839c4f25642a1e3c576c4688b9,
         type: 2}
@@ -1021,7 +1020,8 @@ Prefab:
       propertyPath: health
       value: 5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114870503227549900, guid: 5b1f98fc9391df148b883cdde1f5837c, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 5b1f98fc9391df148b883cdde1f5837c, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &1594521735 stripped
@@ -1029,12 +1029,20 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1320607967073232, guid: 5b1f98fc9391df148b883cdde1f5837c,
     type: 2}
   m_PrefabInternal: {fileID: 1594521734}
---- !u!114 &1594521736 stripped
+--- !u!114 &1594521736
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114870503227549900, guid: 5b1f98fc9391df148b883cdde1f5837c,
-    type: 2}
-  m_PrefabInternal: {fileID: 1594521734}
-  m_Script: {fileID: 11500000, guid: 1c7c4de2b4323d84da0a05a640b9ebc4, type: 3}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1594521735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5d4cecdbc94e0c458d68f8ecb6e5cf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  health: 100
+  basicAttackDamage: 10
 --- !u!212 &1594521737
 SpriteRenderer:
   m_ObjectHideFlags: 0

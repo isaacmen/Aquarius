@@ -8,20 +8,24 @@ public class GameLoop : MonoBehaviour {
 	// OTHERWISE THINGS AREN'T UPDATED AND STUFF BREAKS
 	private GameState state = GameState.INIT;
 
-	private Character turn = null;
+	private List<AllyCharacter> turnOrder;
+	private AllyCharacter turn = null;
 	private List<Action> turnActions = null;
 	private Action activeAction = null;
 	private List<ActionType> actionTypesPerTurn = null;
 
-	private static Field yourField;
-	private static Field enemyField;
+	private Field yourField;
+	private Field enemyField;
 
 	[Header("Turn")]
-	public List<Character> turnOrder;
-	public bool randomizeTurnOrder;
+	public bool randomizeTurnOrder = true;
 
 	[Header("Constants")]
 	public static bool DEBUG_LOG = false;
+
+	public static GameLoop getInstance() {
+		return GameObject.Find("GameLoop").GetComponent<GameLoop>();
+	}
 
 	void Awake() {
 		if(DEBUG_LOG) Debug.Log("GameLoop awake");
@@ -30,61 +34,64 @@ public class GameLoop : MonoBehaviour {
 		yourField = new Field();
 		enemyField = new Field();
 
-		// can randomize turn order
-			// still need to implement automatic finding of characters
-			// probably will add to GameLoop.addAllyCharacter(Character c)
-		if(randomizeTurnOrder) {
-			List<Character> newTurnOrder = new List<Character>();
-			List<float> randList = new List<float>();
-			for(int i = 0; i < turnOrder.Count; i++)
-				randList.Add(Random.Range(0.0f, 1.0f));
-
-			for(int i = 0; i < turnOrder.Count; i++) {
-				int maxIdx = randList.IndexOf(Mathf.Max(randList.ToArray()));
-				newTurnOrder.Add(turnOrder[maxIdx]);
-				randList[maxIdx] = 0;
-			}
-
-			turnOrder = newTurnOrder;
-		}
+		turnOrder = new List<AllyCharacter>();
 	}
 
 	// could also notify gui
 	public void nextTurn() {
-		Character turn = turnOrder[0];
+		AllyCharacter turn = turnOrder[0];
 		turnOrder.Remove(turn);
 		turnOrder.Add(turn);
 	}
 
 	// may be unnecessary
-	public Character getCharacterTurn() {
+	public AllyCharacter getCharacterTurn() {
 		return turnOrder[0];
 	}
 
 	private void printTurnOrder() {
 		string toPrint = "";
-		foreach(Character c in turnOrder) {
+		foreach(AllyCharacter c in turnOrder) {
 			toPrint += c.ToString() + " ";
 		}
 		Debug.Log(toPrint);
 	}
 
 	// to be implemented with real fields
-	public static void addAllyCharacter(Character c) {
+	public void addAllyCharacter(AllyCharacter c) {
+		turnOrder.Add(c);
 		yourField.addCharacter(c);
 	}
 
 	// to be implemented with real fields
-	public static void addEnemyCharacter(Character c) {
+	public void addEnemyCharacter(EnemyCharacter c) {
 		enemyField.addCharacter(c);
 	}
 	
 	void Start() {
-		setState(GameState.START_TURN);
+		
 	}
 	
 	void Update() {
 		switch(state) {
+			case GameState.INIT:
+				// can randomize turn order
+				if(randomizeTurnOrder) {
+					List<AllyCharacter> newTurnOrder = new List<AllyCharacter>();
+					List<float> randList = new List<float>();
+					for(int i = 0; i < turnOrder.Count; i++)
+						randList.Add(Random.Range(0.0f, 1.0f));
+
+					for(int i = 0; i < turnOrder.Count; i++) {
+						int maxIdx = randList.IndexOf(Mathf.Max(randList.ToArray()));
+						newTurnOrder.Add(turnOrder[maxIdx]);
+						randList[maxIdx] = 0;
+					}
+
+					turnOrder = newTurnOrder;
+				}
+				setState(GameState.START_TURN);
+				break;
 			case GameState.START_TURN:
 				break;
 			case GameState.WAIT_INPUT:
@@ -188,11 +195,15 @@ public class GameLoop : MonoBehaviour {
 					turnMoveStr += (i + 1) + ": " + turnActions[i].GetType() + ((i < turnActions.Count-1) ? " / " : "");
 				}
 				Debug.Log(turnMoveStr);
-				string s = "";
-				foreach(ActionType at in actionTypesPerTurn) {
-					s += at + " ";
+
+				if(DEBUG_LOG) {
+					string s = "";
+					foreach(ActionType at in actionTypesPerTurn) {
+						s += at + " ";
+					}
+					Debug.Log("ActionType's left: " + s);
 				}
-				Debug.Log(s);
+
 				break;
 			case GameState.ACTION_ACTIVE:
 				break;
