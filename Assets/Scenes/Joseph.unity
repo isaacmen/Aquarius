@@ -500,10 +500,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b2991ea24fe3924b8675f3bd42c4961, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnOrder:
-  - {fileID: 2023541759}
-  - {fileID: 1419285974}
-  - {fileID: 1827868493}
   randomizeTurnOrder: 1
 --- !u!1001 &1024279081
 Prefab:
@@ -1020,6 +1016,10 @@ Prefab:
       propertyPath: health
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1320607967073232, guid: 5b1f98fc9391df148b883cdde1f5837c, type: 2}
+      propertyPath: m_Name
+      value: InsertBossNameHere
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114870503227549900, guid: 5b1f98fc9391df148b883cdde1f5837c, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 5b1f98fc9391df148b883cdde1f5837c, type: 2}
@@ -1043,6 +1043,7 @@ MonoBehaviour:
   maxHealth: 100
   health: 100
   basicAttackDamage: 10
+  type: 0
 --- !u!212 &1594521737
 SpriteRenderer:
   m_ObjectHideFlags: 0

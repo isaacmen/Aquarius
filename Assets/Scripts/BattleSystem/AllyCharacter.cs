@@ -5,8 +5,7 @@ using UnityEngine;
 public class AllyCharacter : Character {
 	[Header("Attributes")]
 	public AllyCharacterType type;
-
-//	[Header("Actions")]
+	
 	private List<Action> actionList;
 	private List<ActionType> actionTypesPerTurn;
 

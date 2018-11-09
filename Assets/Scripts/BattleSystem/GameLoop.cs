@@ -8,8 +8,8 @@ public class GameLoop : MonoBehaviour {
 	// OTHERWISE THINGS AREN'T UPDATED AND STUFF BREAKS
 	private GameState state = GameState.INIT;
 
-	private List<AllyCharacter> turnOrder;
-	private AllyCharacter turn = null;
+	private List<Character> turnOrder;
+	private Character turn = null;
 	private List<Action> turnActions = null;
 	private Action activeAction = null;
 	private List<ActionType> actionTypesPerTurn = null;
@@ -34,18 +34,19 @@ public class GameLoop : MonoBehaviour {
 		yourField = new Field();
 		enemyField = new Field();
 
-		turnOrder = new List<AllyCharacter>();
+		turnOrder = new List<Character>();
 	}
 
 	// could also notify gui
 	public void nextTurn() {
-		AllyCharacter turn = turnOrder[0];
-		turnOrder.Remove(turn);
-		turnOrder.Add(turn);
+		Character turnDone = turnOrder[0];
+		turnOrder.Remove(turnDone);
+		turnOrder.Add(turnDone);
+		setState(GameState.START_TURN);
 	}
 
 	// may be unnecessary
-	public AllyCharacter getCharacterTurn() {
+	public Character getCharacterTurn() {
 		return turnOrder[0];
 	}
 
@@ -65,6 +66,7 @@ public class GameLoop : MonoBehaviour {
 
 	// to be implemented with real fields
 	public void addEnemyCharacter(EnemyCharacter c) {
+		turnOrder.Add(c);
 		enemyField.addCharacter(c);
 	}
 	
@@ -77,7 +79,7 @@ public class GameLoop : MonoBehaviour {
 			case GameState.INIT:
 				// can randomize turn order
 				if(randomizeTurnOrder) {
-					List<AllyCharacter> newTurnOrder = new List<AllyCharacter>();
+					List<Character> newTurnOrder = new List<Character>();
 					List<float> randList = new List<float>();
 					for(int i = 0; i < turnOrder.Count; i++)
 						randList.Add(Random.Range(0.0f, 1.0f));
@@ -94,19 +96,23 @@ public class GameLoop : MonoBehaviour {
 				break;
 			case GameState.START_TURN:
 				break;
-			case GameState.WAIT_INPUT:
+			case GameState.ALLY_WAIT_INPUT:
 				// keeps checking for keyboard input; eventually to be overwritten with gui
-				for(int i = 1; i < turnActions.Count+1; i++) {
-					if(Input.GetKeyDown(keyCodeFromInt(i)) && !turnActions[i-1].isActive()) {
+				for(int i = 1; i < turnActions.Count + 1; i++) {
+					if(Input.GetKeyDown(keyCodeFromInt(i)) && !turnActions[i - 1].isActive()) {
 						activeAction = turnActions[i-1];
+						if(turnActions[i-1].GetType() == typeof(Pass))
+							Debug.Log(turn + " passed.");
+						else if(turnActions[i-1].GetType() == typeof(Move))
+							Debug.Log(turn + " moved.");
+						else
+							Debug.Log(turn + " used " + turnActions[i-1].GetType() + "!");
 						activeAction.setActive();
-						if(DEBUG_LOG) Debug.Log("activating " + turnActions[i-1].GetType());
-						setState(GameState.ACTION_ACTIVE);
+						setState(GameState.ALLY_ACTION_ACTIVE);
 					}
-						
 				}
 				break;
-			case GameState.ACTION_ACTIVE:
+			case GameState.ALLY_ACTION_ACTIVE:
 				// keeps checking for action to not be active
 				if(!activeAction.isActive()) {
 					if(DEBUG_LOG) Debug.Log("GameLoop detects action inactive");
@@ -147,12 +153,15 @@ public class GameLoop : MonoBehaviour {
 					// checks if turn is over to move to the appropriate next state
 					if(turnOver()) {
 						nextTurn();
-						setState(GameState.START_TURN);
 					} else {
-						setState(GameState.WAIT_INPUT);
+						setState(GameState.ALLY_WAIT_INPUT);
 					}
 					activeAction = null;
 				}
+				break;
+			case GameState.ENEMY_STATE:
+				Debug.Log("GameLoop Update() in ENEMY_STATE for " + turn);
+				nextTurn();
 				break;
 		}
 	}
@@ -166,9 +175,10 @@ public class GameLoop : MonoBehaviour {
 	public void setState(GameState newState) {
 		// things to be done when exiting a state (nothing so far; maybe won't be needed)
 		switch(state) {
-			case GameState.START_TURN:		break;
-			case GameState.WAIT_INPUT:		break;
-			case GameState.ACTION_ACTIVE:	break;
+			case GameState.START_TURN:			break;
+			case GameState.ALLY_WAIT_INPUT:		break;
+			case GameState.ALLY_ACTION_ACTIVE:	break;
+			case GameState.ENEMY_STATE:			break;
 		}
 
 		// update state
@@ -179,20 +189,31 @@ public class GameLoop : MonoBehaviour {
 			case GameState.START_TURN:
 				// resets variables for each turn
 				turn = getCharacterTurn();
-				turnActions = turn.getActions();
-				actionTypesPerTurn = turn.getActionTypesPerTurn();
+				Debug.Log(turn.name + "'s Turn!");
 
-				Debug.Log(turn + "'s Turn");
+				if(turn.GetType() == typeof(AllyCharacter)) {
+					turnActions = ((AllyCharacter)turn).getActions();
+					actionTypesPerTurn = ((AllyCharacter)turn).getActionTypesPerTurn();
 
-				setState(GameState.WAIT_INPUT);
+					// enemy stuff null
+
+					setState(GameState.ALLY_WAIT_INPUT);
+				} else {
+					// init enemy stuff
+
+					turnActions = null;
+					actionTypesPerTurn = null;
+
+					setState(GameState.ENEMY_STATE);
+				}
 
 				break;
-			case GameState.WAIT_INPUT:
+			case GameState.ALLY_WAIT_INPUT:
 				// prints possible actions then waits for the user to select one
 				// to be partially overridden by implemention with gui
 				string turnMoveStr = "What should " + turn + " do? (press # to act)\n";
 				for(int i = 0; i < turnActions.Count; i++) {
-					turnMoveStr += (i + 1) + ": " + turnActions[i].GetType() + ((i < turnActions.Count-1) ? " / " : "");
+					turnMoveStr += (i + 1) + ": " + turnActions[i].GetType() + ((i < turnActions.Count - 1) ? " / " : "");
 				}
 				Debug.Log(turnMoveStr);
 
@@ -205,7 +226,10 @@ public class GameLoop : MonoBehaviour {
 				}
 
 				break;
-			case GameState.ACTION_ACTIVE:
+			case GameState.ALLY_ACTION_ACTIVE:
+				break;
+			case GameState.ENEMY_STATE:
+				Debug.Log("GameLoop entered ENEMY_STATE for " + turn);
 				break;
 		}
 	}
@@ -217,6 +241,7 @@ public class GameLoop : MonoBehaviour {
 			case 2: return KeyCode.Alpha2;
 			case 3: return KeyCode.Alpha3;
 			case 4: return KeyCode.Alpha4;
+			case 5: return KeyCode.Alpha5;
 			default:
 				Debug.Log("number " + n + " not implemented yet");
 				return KeyCode.Alpha0;
@@ -224,6 +249,8 @@ public class GameLoop : MonoBehaviour {
 	}
 
 	public enum GameState {
-		INIT, START_TURN, WAIT_INPUT, ACTION_ACTIVE
+		INIT, START_TURN,						// general states
+		ALLY_WAIT_INPUT, ALLY_ACTION_ACTIVE,	// ally turn states
+		ENEMY_STATE								// enemy turn states
 	}
 }

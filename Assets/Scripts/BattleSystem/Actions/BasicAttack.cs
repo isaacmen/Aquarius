@@ -36,7 +36,7 @@ public class BasicAttack : Action {
 	}
 
 	private void prompt() {
-		target = GameObject.Find("Enemy1").GetComponent<Character>();
+		target = GameObject.Find("InsertBossNameHere").GetComponent<Character>();
 //		home = transform.position;
 
 		state = MyState.MOVE_TO;

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyCharacter : Character {
-	
+	[Header("Attributes")]
+	public EnemyCharacterType type;
+
 	void Start() {
 		GameLoop.getInstance().addEnemyCharacter(this);
 	}
@@ -11,4 +13,8 @@ public class EnemyCharacter : Character {
 	void Update() {
 		
 	}
+}
+
+public enum EnemyCharacterType {
+	BOSS, MINION
 }
