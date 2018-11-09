@@ -5,9 +5,13 @@ using UnityEngine;
 public class BasicAttack : Action {
 	private MyState state;
 	private Character target;
-	private Vector3 home;
+//	private Vector3 home;
 
 	private const int SPEED = 1;
+
+	override public ActionType getActionType() {
+		return ActionType.ABILITY;
+	}
 
 	override protected void innerStart() {
 		state = MyState.PROMPT;
@@ -32,8 +36,8 @@ public class BasicAttack : Action {
 	}
 
 	private void prompt() {
-		target = GameObject.Find("Enemy1").GetComponent<Character>();
-		home = transform.position;
+		target = GameObject.Find("Aquarius").GetComponent<Character>();
+//		home = transform.position;
 
 		state = MyState.MOVE_TO;
 	}
@@ -54,7 +58,7 @@ public class BasicAttack : Action {
 	}
 
 	private void moveBack() {
-		setActive(false);
+		setInactiveWithCompletion(true);
 	}
 
 	override protected void innerEnd() {}

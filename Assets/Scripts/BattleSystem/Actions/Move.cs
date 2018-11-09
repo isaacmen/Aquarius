@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Move : Action {
-
 	public const float SPEED = 5;
 
 	private const float GRID = 2;
@@ -11,6 +10,10 @@ public class Move : Action {
 	private MyState state;
 	private Vector3 start;
 	private Vector3 dir;
+
+	override public ActionType getActionType() {
+		return ActionType.MOVE;
+	}
 
 	override protected void innerStart() {
 		state = MyState.PROMPTING;
@@ -34,26 +37,26 @@ public class Move : Action {
 			state = MyState.MOVING;
 			dir = new Vector3(0, 1);
 			start = transform.position;
-			Debug.Log(state + " " + dir + " " + start);
+			if(GameLoop.DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
 			//GameObject.Find("someBattleground").GetComponent<Character>()
 		} else if(Input.GetKey(KeyCode.A)) {
 			state = MyState.MOVING;
 			dir = new Vector3(-1, 0);
 			start = transform.position;
-			Debug.Log(state + " " + dir + " " + start);
+			if(GameLoop.DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
 		} else if(Input.GetKey(KeyCode.S)) {
 			state = MyState.MOVING;
 			dir = new Vector3(0, -1);
 			start = transform.position;
-			Debug.Log(state + " " + dir + " " + start);
+			if(GameLoop.DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
 		} else if(Input.GetKey(KeyCode.D)) {
 			state = MyState.MOVING;
 			dir = new Vector3(1, 0);
 			start = transform.position;
-			Debug.Log(state + " " + dir + " " + start);
+			if(GameLoop.DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
 		} else if(Input.GetKey(KeyCode.C)) {
-			setActive(false);
-			Debug.Log("cancel");
+			setInactiveWithCompletion(false);
+			if(GameLoop.DEBUG_LOG) Debug.Log("cancel move");
 		}
 	}
 
@@ -66,11 +69,11 @@ public class Move : Action {
 				transform.Translate(ds);
 			} else {
 				transform.Translate(start + GRID*dir - pos);
-				setActive(false);
+				setInactiveWithCompletion(true);
 			}
 		} else {
 			Debug.Log("Movement cancelled but still got to moving - FIX");
-			setActive(false);
+			setInactiveWithCompletion(false);
 		}
 	}
 

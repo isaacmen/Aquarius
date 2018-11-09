@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Fireball : Action {
-	override protected void innerStart() {
+	override public ActionType getActionType() {
+		return ActionType.ABILITY;
+	}
 
+	override protected void innerStart() {
+		setInactiveWithCompletion(true);
 	}
 
 	override protected void innerLoop() {

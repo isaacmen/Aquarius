@@ -4,75 +4,19 @@ using UnityEngine;
 
 public class Character : MonoBehaviour {
 	[Header("Attributes")]
-	public CharacterType type;
 	public int maxHealth;
 	public int health;
 	public int basicAttackDamage;
-
-	[Header("Actions")]
-	public List<Action> actionList;
-
-	void Awake() {
-		if(GameLoop.DEBUG) print(this.name + " awake");
-		instantiateOffType(type);
-	}
-
+	
 	void Start() {
-		if(GameLoop.DEBUG) print(this.name + " start");
-		int l = "Character".Length;
-		if(this.name.Length > l && this.name.Substring(0, l).Equals("Character"))
-			GameLoop.addAllyCharacter(this);
-		else
-			GameLoop.addEnemyCharacter(this);
-	}
-
-	public void takeDamage(int d) {
-		health -= d;
+		
 	}
 	
 	void Update() {
 		
 	}
 
-	private void instantiateOffType(CharacterType type) {
-		actionList = new List<Action>();
-		switch(type) {
-			case CharacterType.Libra:
-				actionList.Add(GameObject.Find(this.name).AddComponent<Move>());
-				actionList.Add(GameObject.Find(this.name).AddComponent<BasicAttack>());
-
-				actionList.Add(GameObject.Find(this.name).AddComponent<LayOnHands>());
-
-				break;
-			case CharacterType.Leo:
-				actionList.Add(GameObject.Find(this.name).AddComponent<Move>());
-				actionList.Add(GameObject.Find(this.name).AddComponent<BasicAttack>());
-
-				actionList.Add(GameObject.Find(this.name).AddComponent<Unload>());
-
-				break;
-			case CharacterType.Scorpio:
-				actionList.Add(GameObject.Find(this.name).AddComponent<Move>());
-				actionList.Add(GameObject.Find(this.name).AddComponent<BasicAttack>());
-
-				actionList.Add(GameObject.Find(this.name).AddComponent<Fireball>());
-
-				break;
-			case CharacterType.Enemy:
-				actionList.Add(GameObject.Find(this.name).AddComponent<Move>());
-
-				//
-
-				break;
-		}
+	public void takeDamage(int d) {
+		health -= d;
 	}
-
-	public override string ToString() {
-		return this.name;
-	}
-}
-
-public enum CharacterType {
-	Enemy,
-	Libra, Leo, Scorpio
 }
