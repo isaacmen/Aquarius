@@ -18,10 +18,10 @@ public class GameLoop : MonoBehaviour {
 	private Field enemyField;
 
 	[Header("Turn")]
-	public bool randomizeTurnOrder = true;
+	public bool randomizeTurnOrder;
 
 	[Header("Constants")]
-	public static bool DEBUG_LOG = false;
+	public static bool DEBUG_LOG;
 
 	public static GameLoop getInstance() {
 		return GameObject.Find("GameLoop").GetComponent<GameLoop>();
@@ -37,7 +37,7 @@ public class GameLoop : MonoBehaviour {
 		turnOrder = new List<Character>();
 	}
 
-	// could also notify gui
+	// could also notify ui
 	public void nextTurn() {
 		Character turnDone = turnOrder[0];
 		turnOrder.Remove(turnDone);
@@ -97,7 +97,7 @@ public class GameLoop : MonoBehaviour {
 			case GameState.START_TURN:
 				break;
 			case GameState.ALLY_WAIT_INPUT:
-				// keeps checking for keyboard input; eventually to be overwritten with gui
+				// keeps checking for keyboard input; eventually to be overwritten with ui
 				for(int i = 1; i < turnActions.Count + 1; i++) {
 					if(Input.GetKeyDown(keyCodeFromInt(i)) && !turnActions[i - 1].isActive()) {
 						activeAction = turnActions[i-1];
@@ -210,7 +210,7 @@ public class GameLoop : MonoBehaviour {
 				break;
 			case GameState.ALLY_WAIT_INPUT:
 				// prints possible actions then waits for the user to select one
-				// to be partially overridden by implemention with gui
+				// to be partially overridden by implemention with ui
 				string turnMoveStr = "What should " + turn + " do? (press # to act)\n";
 				for(int i = 0; i < turnActions.Count; i++) {
 					turnMoveStr += (i + 1) + ": " + turnActions[i].GetType() + ((i < turnActions.Count - 1) ? " / " : "");

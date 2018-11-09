@@ -16,5 +16,6 @@ public class EnemyCharacter : Character {
 }
 
 public enum EnemyCharacterType {
-	BOSS, MINION
+	AQUARIUS,
+	MINION
 }
