@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Unload : Action {
+	override public ActionType getActionType() {
+		return ActionType.ABILITY;
+	}
+
 	override protected void innerStart() {
 		setInactiveWithCompletion(true);
 	}

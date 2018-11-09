@@ -100,13 +100,13 @@ public class GameLoop : MonoBehaviour {
 				// keeps checking for keyboard input; eventually to be overwritten with ui
 				for(int i = 1; i < turnActions.Count + 1; i++) {
 					if(Input.GetKeyDown(keyCodeFromInt(i)) && !turnActions[i - 1].isActive()) {
-						activeAction = turnActions[i - 1];
-						if(turnActions[i - 1].GetType() == typeof(Pass))
+						activeAction = turnActions[i-1];
+						if(turnActions[i-1].GetType() == typeof(Pass))
 							Debug.Log(turn + " passed.");
-						else if(turnActions[i - 1].GetType() == typeof(Move))
+						else if(turnActions[i-1].GetType() == typeof(Move))
 							Debug.Log(turn + " moved.");
 						else
-							Debug.Log(turn + " used " + turnActions[i - 1].GetType() + "!");
+							Debug.Log(turn + " used " + turnActions[i-1].GetType() + "!");
 						activeAction.setActive();
 						setState(GameState.ALLY_ACTION_ACTIVE);
 					}
@@ -167,7 +167,7 @@ public class GameLoop : MonoBehaviour {
 	}
 
 	private bool turnOver() {
-		return actionTypesPerTurn.Count == 0 ||
+		return  actionTypesPerTurn.Count == 0 ||
 				(turnActions.Count == 0) ||
 				(turnActions.Count == 1 && turnActions[0].getActionType() == ActionType.PASS);
 	}
@@ -175,10 +175,10 @@ public class GameLoop : MonoBehaviour {
 	public void setState(GameState newState) {
 		// things to be done when exiting a state (nothing so far; maybe won't be needed)
 		switch(state) {
-			case GameState.START_TURN: break;
-			case GameState.ALLY_WAIT_INPUT: break;
-			case GameState.ALLY_ACTION_ACTIVE: break;
-			case GameState.ENEMY_STATE: break;
+			case GameState.START_TURN:			break;
+			case GameState.ALLY_WAIT_INPUT:		break;
+			case GameState.ALLY_ACTION_ACTIVE:	break;
+			case GameState.ENEMY_STATE:			break;
 		}
 
 		// update state
@@ -203,7 +203,7 @@ public class GameLoop : MonoBehaviour {
 
 					turnActions = null;
 					actionTypesPerTurn = null;
-
+					
 					setState(GameState.ENEMY_STATE);
 				}
 

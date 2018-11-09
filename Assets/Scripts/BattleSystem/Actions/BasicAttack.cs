@@ -9,6 +9,10 @@ public class BasicAttack : Action {
 
 	private const int SPEED = 1;
 
+	override public ActionType getActionType() {
+		return ActionType.ABILITY;
+	}
+
 	override protected void innerStart() {
 		state = MyState.PROMPT;
 		target = null;
@@ -32,7 +36,7 @@ public class BasicAttack : Action {
 	}
 
 	private void prompt() {
-		target = GameObject.Find("Enemy1").GetComponent<Character>();
+		target = GameObject.Find("Aquarius").GetComponent<Character>();
 //		home = transform.position;
 
 		state = MyState.MOVE_TO;
