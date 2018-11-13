@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LeoAnimations : MonoBehaviour {
+public class ScorpioAnimations : MonoBehaviour {
 
     Animator m_Animator;
 
