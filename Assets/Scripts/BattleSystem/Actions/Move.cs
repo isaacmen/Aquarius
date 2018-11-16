@@ -51,11 +51,13 @@ public class Move : Action {
 			dir = new Vector3(0, 2);
 			start = transform.position;
 			end = start + dir;
-			Debug.Log(end);
 			if(AttemptMove(start,end) == true){
 				state = MyState.MOVING;
+			} else {
+				Debug.Log("invalid direction");
+				setInactiveWithCompletion(false);
 			}
-			if(GameLoop.DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
+			if(GameLoop.getInstance().DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
 			//GameObject.Find("someBattleground").GetComponent<Character>()
 		} else if(Input.GetKey(KeyCode.A)) {
 			end = start + dir;
@@ -63,27 +65,36 @@ public class Move : Action {
 			start = transform.position;
 			if(AttemptMove(start,end) == true){
 				state = MyState.MOVING;
+			} else {
+				Debug.Log("invalid direction");
+				setInactiveWithCompletion(false);
 			}
-			if(GameLoop.DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
+			if(GameLoop.getInstance().DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
 		} else if(Input.GetKey(KeyCode.S)) {
 			end = start + dir;
 			dir = new Vector3(0, -2);
 			start = transform.position;
 			if(AttemptMove(start,end) == true){
 				state = MyState.MOVING;
+			} else {
+				Debug.Log("invalid direction");
+				setInactiveWithCompletion(false);
 			}
-			if(GameLoop.DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
+			if(GameLoop.getInstance().DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
 		} else if(Input.GetKey(KeyCode.D)) {
 			end = start + dir;
 			dir = new Vector3(2, 0);
 			start = transform.position;
 			if(AttemptMove(start,end) == true){
 				state = MyState.MOVING;
+			} else {
+				Debug.Log("invalid direction");
+				setInactiveWithCompletion(false);
 			}
-			if(GameLoop.DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
+			if(GameLoop.getInstance().DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
 		} else if(Input.GetKey(KeyCode.C)) {
 			setInactiveWithCompletion(false);
-			if(GameLoop.DEBUG_LOG) Debug.Log("cancel move");
+			if(GameLoop.getInstance().DEBUG_LOG) Debug.Log("cancel move");
 		}
 	}
 

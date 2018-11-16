@@ -10,12 +10,12 @@ public class AllyCharacter : Character {
 	private List<ActionType> actionTypesPerTurn;
 
 	void Awake() {
-		if(GameLoop.DEBUG_LOG) print(this.name + " awake");
+		if(GameLoop.getInstance().DEBUG_LOG) print(this.name + " awake");
 		instantiateActionsFor(type);
 	}
 
 	void Start() {
-		if(GameLoop.DEBUG_LOG) print(this.name + " start");
+		if(GameLoop.getInstance().DEBUG_LOG) print(this.name + " start");
 		GameLoop.getInstance().addAllyCharacter(this);
 	}
 

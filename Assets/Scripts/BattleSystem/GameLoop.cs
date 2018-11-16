@@ -6,7 +6,7 @@ public class GameLoop : MonoBehaviour {
 	// DO NOT CHANGE state WITH "state = GameState.X"
 	// INSTEAD, CHANGE state WITH "setState(GameState.X)"
 	// OTHERWISE THINGS AREN'T UPDATED AND STUFF BREAKS
-	private GameState state = GameState.INIT;
+	public GameState state = GameState.INIT;
 
 	private List<Character> turnOrder;
 	private Character turn = null;
@@ -21,7 +21,7 @@ public class GameLoop : MonoBehaviour {
 	public bool randomizeTurnOrder;
 
 	[Header("Constants")]
-	public static bool DEBUG_LOG;
+	public bool DEBUG_LOG;
 
 	public static GameLoop getInstance() {
 		return GameObject.Find("GameLoop").GetComponent<GameLoop>();
@@ -99,12 +99,12 @@ public class GameLoop : MonoBehaviour {
 			case GameState.ALLY_WAIT_INPUT:
 				// keeps checking for keyboard input; eventually to be overwritten with ui
 				for(int i = 1; i < turnActions.Count + 1; i++) {
-					if(Input.GetKeyDown(keyCodeFromInt(i)) && !turnActions[i - 1].isActive()) {
+					if(Input.GetKeyDown(keyCodeFromInt(i)) && !turnActions[i - 1].isActive()) {;
 						activeAction = turnActions[i-1];
 						if(turnActions[i-1].GetType() == typeof(Pass))
 							Debug.Log(turn + " passed.");
 						else if(turnActions[i-1].GetType() == typeof(Move))
-							Debug.Log(turn + " moved.");
+							Debug.Log(turn + " beginning move.");
 						else
 							Debug.Log(turn + " used " + turnActions[i-1].GetType() + "!");
 						activeAction.setActive();
