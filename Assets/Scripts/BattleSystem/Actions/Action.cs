@@ -24,7 +24,8 @@ public abstract class Action : MonoBehaviour {
 		}
 	}
 
-	// parameter indicates if the action was completed
+	// parameter indicates if the action was completed (as in fully executed)
+	// put false if the user cancels the action or the action target is invalid
 	public void setInactiveWithCompletion(bool c) {
 		if(active) {
 			active = false;

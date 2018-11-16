@@ -14,8 +14,7 @@ public class Constants : MonoBehaviour {
 	public static int unload_maxRange;
 
 	[Header("Scorpio")]
-	public static int fireball_centerDamage;
-	public static int fireball_edgeDamage;
+	public static int fireball_damage;
 	public static int fireball_minRange;
 	public static int fireball_maxRange;
 }
