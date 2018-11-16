@@ -1,0 +1,246 @@
+fileFormatVersion: 2
+guid: 631bdc4994c5040b2a37cdddfaacdbf1
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: ScorpioAttackSpriteSheet_0
+    21300002: ScorpioAttackSpriteSheet_1
+    21300004: ScorpioAttackSpriteSheet_2
+    21300006: ScorpioAttackSpriteSheet_3
+    21300008: ScorpioAttackSpriteSheet_4
+    21300010: ScorpioAttackSpriteSheet_5
+    21300012: ScorpioAttackSpriteSheet_6
+  externalObjects: {}
+  serializedVersion: 7
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ScorpioAttackSpriteSheet_0
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 1
+        width: 46
+        height: 62
+      alignment: 9
+      pivot: {x: 0.8162821, y: 0.008644675}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5083a1b7913ba41a69a91769ca07a2ca
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScorpioAttackSpriteSheet_1
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 1
+        width: 34
+        height: 62
+      alignment: 9
+      pivot: {x: 0.74989253, y: 0.007399942}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53d3f59a0a68d45c19509a9e758f06bf
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScorpioAttackSpriteSheet_2
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 1
+        width: 34
+        height: 63
+      alignment: 9
+      pivot: {x: 0.75115967, y: 0.006310817}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eeae831f893fe432ab3c74d23ed6542c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScorpioAttackSpriteSheet_3
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 1
+        width: 55
+        height: 62
+      alignment: 9
+      pivot: {x: 0.93729943, y: 0.008457018}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b052547fc58144f9b700673b20cc93c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScorpioAttackSpriteSheet_4
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 1
+        width: 55
+        height: 62
+      alignment: 9
+      pivot: {x: 0.9369196, y: 0.0061881985}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b482bff5a6d842ab9807fbaec317f9b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScorpioAttackSpriteSheet_5
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 1
+        width: 53
+        height: 62
+      alignment: 9
+      pivot: {x: 0.97215414, y: 0.0049723983}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8c60413e225d455a924539a851a3b50
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScorpioAttackSpriteSheet_6
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 1
+        width: 46
+        height: 62
+      alignment: 9
+      pivot: {x: 0.90225416, y: 0.008356523}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf959cf32bafd45199e2c3daed774f6c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5b705dba92248499f8ac2e00d73c83fb
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
