@@ -17,7 +17,7 @@ public class GameLoop : MonoBehaviour {
 	private Field yourField;
 	private Field enemyField;
 
-	[Header("Turn")]
+	[Header("Turn")]	
 	public bool randomizeTurnOrder;
 
 	[Header("Constants")]

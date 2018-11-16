@@ -17,8 +17,9 @@ public class Grid_Behavior : MonoBehaviour {
     private Sprite cellSprite;
     private Vector2 cellSize;
     private Vector2 cellScale;
+    public List<Vector3> gridPositions = new List<Vector3>();
 
-    void Start () {
+    void Awake () {
         InitCells(); //Initialize all cells
 	}
 
@@ -55,9 +56,11 @@ public class Grid_Behavior : MonoBehaviour {
 
                 //instantiate the game object, at position pos, with rotation set to identity
                 GameObject cO = Instantiate(cellObject, pos, Quaternion.identity) as GameObject;
+                gridPositions.Add(new Vector3(cO.transform.position.x, cO.transform.position.y, -3.0f));
 
                 //set the parent of the cell to GRID so you can move the cells together with the grid;
                 cO.transform.parent = transform;
+                
             }
         }
 
