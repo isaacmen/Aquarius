@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Move : Action {
-	public const float SPEED = 5;
+	public const float SPEED = 2;
 
 	private const float GRID = 2;
 	
 	private MyState state;
 	private Vector3 start;
 	private Vector3 dir;
+	private Vector3 end;
 
 	override public ActionType getActionType() {
 		return ActionType.MOVE;
@@ -31,28 +32,54 @@ public class Move : Action {
 				break;
 		}
 	}
+	public bool AttemptMove(Vector3 start, Vector3 end){
+		// print("end " + end);
+		// foreach(Vector3 pos in GameObject.Find("Enemy_battleGround").GetComponent<Grid_Behavior>().gridPositions) {
+		// 	print(pos);
+		// }
+
+		if(GameObject.Find("Enemy_battleGround").GetComponent<Grid_Behavior>().gridPositions.Contains(end)){
+			return true;
+		}
+		return false;
+
+	}
 
 	private void prompt() {
 		if(Input.GetKey(KeyCode.W)) {
-			state = MyState.MOVING;
-			dir = new Vector3(0, 1);
+
+			dir = new Vector3(0, 2);
 			start = transform.position;
+			end = start + dir;
+			Debug.Log(end);
+			if(AttemptMove(start,end) == true){
+				state = MyState.MOVING;
+			}
 			if(GameLoop.DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
 			//GameObject.Find("someBattleground").GetComponent<Character>()
 		} else if(Input.GetKey(KeyCode.A)) {
-			state = MyState.MOVING;
-			dir = new Vector3(-1, 0);
+			end = start + dir;
+			dir = new Vector3(-2, 0);
 			start = transform.position;
+			if(AttemptMove(start,end) == true){
+				state = MyState.MOVING;
+			}
 			if(GameLoop.DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
 		} else if(Input.GetKey(KeyCode.S)) {
-			state = MyState.MOVING;
-			dir = new Vector3(0, -1);
+			end = start + dir;
+			dir = new Vector3(0, -2);
 			start = transform.position;
+			if(AttemptMove(start,end) == true){
+				state = MyState.MOVING;
+			}
 			if(GameLoop.DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
 		} else if(Input.GetKey(KeyCode.D)) {
-			state = MyState.MOVING;
-			dir = new Vector3(1, 0);
+			end = start + dir;
+			dir = new Vector3(2, 0);
 			start = transform.position;
+			if(AttemptMove(start,end) == true){
+				state = MyState.MOVING;
+			}
 			if(GameLoop.DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
 		} else if(Input.GetKey(KeyCode.C)) {
 			setInactiveWithCompletion(false);
@@ -63,12 +90,11 @@ public class Move : Action {
 	private void move() {
 		Vector3 pos = transform.position;
 		Vector3 ds = SPEED * Time.deltaTime * dir;
-		
 		if(dir.magnitude > 0) {
 			if((pos - start + ds).magnitude < GRID) {
 				transform.Translate(ds);
 			} else {
-				transform.Translate(start + GRID*dir - pos);
+				transform.Translate(start + GRID/2*dir - pos);
 				setInactiveWithCompletion(true);
 			}
 		} else {
@@ -76,7 +102,7 @@ public class Move : Action {
 			setInactiveWithCompletion(false);
 		}
 	}
-
+ 
 	override protected void innerEnd() {}
 
 	private enum MyState {

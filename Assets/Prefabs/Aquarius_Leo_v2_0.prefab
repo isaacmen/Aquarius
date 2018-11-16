@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4509419129503532}
   - component: {fileID: 212907515656905992}
+  - component: {fileID: 114464387032398668}
   m_Layer: 0
   m_Name: Aquarius_Leo_v2_0
   m_TagString: Untagged
@@ -35,11 +36,26 @@ Transform:
   m_GameObject: {fileID: 1498942153004604}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114464387032398668
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1498942153004604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd4e26a63f3a37946a5eef64451d2e00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 0
+  health: 0
+  basicAttackDamage: 0
+  gridPosition: 3
 --- !u!212 &212907515656905992
 SpriteRenderer:
   m_ObjectHideFlags: 1
