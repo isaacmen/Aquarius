@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Libra
 public class LayOnHands : Action {
 	override public ActionType getActionType() {
 		return ActionType.ABILITY;

@@ -500,7 +500,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b2991ea24fe3924b8675f3bd42c4961, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: 0
   randomizeTurnOrder: 1
+  DEBUG_LOG: 0
 --- !u!1 &874798706 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1978346257145212, guid: 205917839c4f25642a1e3c576c4688b9,
@@ -812,6 +814,7 @@ MonoBehaviour:
   maxHealth: 100
   health: 100
   basicAttackDamage: 10
+  gridPosition: 0
   type: 0
 --- !u!212 &1594521737
 SpriteRenderer:
