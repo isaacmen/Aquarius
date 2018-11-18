@@ -385,7 +385,7 @@ public class GameLoop : MonoBehaviour {
             if (turnActions[i - 1].GetType() != typeof(Move))
                 continue;
 
-            Debug.Log("Moving " + direction);
+            //Debug.Log("Moving " + direction);
             activeAction.setActive();
             Move moveAction = (Move)activeAction;
             moveAction.moveDirection(direction);

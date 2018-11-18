@@ -46,6 +46,71 @@ public class Move : Action {
 
 	}
 
+    private void prompt() {
+		if(Input.GetKey(KeyCode.W)) {
+
+			dir = new Vector3(0, 2);
+			start = transform.position;
+			end = start + dir;
+			Debug.Log(end);
+			if(AttemptMove(start,end) == true){
+				state = MyState.MOVING;
+			}
+			if(GameLoop.DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
+			//GameObject.Find("someBattleground").GetComponent<Character>()
+		} else if(Input.GetKey(KeyCode.A)) {
+			end = start + dir;
+			dir = new Vector3(-2, 0);
+			start = transform.position;
+			if(AttemptMove(start,end) == true){
+				state = MyState.MOVING;
+			}
+			if(GameLoop.DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
+		} else if(Input.GetKey(KeyCode.S)) {
+			end = start + dir;
+			dir = new Vector3(0, -2);
+			start = transform.position;
+			if(AttemptMove(start,end) == true){
+				state = MyState.MOVING;
+			}
+			if(GameLoop.DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
+		} else if(Input.GetKey(KeyCode.D)) {
+			end = start + dir;
+			dir = new Vector3(2, 0);
+			start = transform.position;
+			if(AttemptMove(start,end) == true){
+				state = MyState.MOVING;
+			}
+			if(GameLoop.DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
+		} else if(Input.GetKey(KeyCode.C)) {
+			setInactiveWithCompletion(false);
+			if(GameLoop.DEBUG_LOG) Debug.Log("cancel move");
+		}
+	}
+
+	private void move() {
+		Vector3 pos = transform.position;
+		Vector3 ds = SPEED * Time.deltaTime * dir;
+		if(dir.magnitude > 0) {
+			if((pos - start + ds).magnitude < GRID) {
+				transform.Translate(ds);
+			} else {
+				transform.Translate(start + GRID/2*dir - pos);
+				setInactiveWithCompletion(true);
+			}
+		} else {
+			Debug.Log("Movement cancelled but still got to moving - FIX");
+			setInactiveWithCompletion(false);
+		}
+	}
+ 
+	override protected void innerEnd() {}
+
+	private enum MyState {
+		PROMPTING, MOVING
+	}
+
+    #region Direction-based Movement
     public void moveDirection(string direction)
     {
         direction = direction.ToLower();
@@ -124,70 +189,6 @@ public class Move : Action {
         setInactiveWithCompletion(false);
         if (GameLoop.DEBUG_LOG) Debug.Log("cancel move");
     }
-
-
-    private void prompt() {
-		if(Input.GetKey(KeyCode.W)) {
-
-			dir = new Vector3(0, 2);
-			start = transform.position;
-			end = start + dir;
-			Debug.Log(end);
-			if(AttemptMove(start,end) == true){
-				state = MyState.MOVING;
-			}
-			if(GameLoop.DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
-			//GameObject.Find("someBattleground").GetComponent<Character>()
-		} else if(Input.GetKey(KeyCode.A)) {
-			end = start + dir;
-			dir = new Vector3(-2, 0);
-			start = transform.position;
-			if(AttemptMove(start,end) == true){
-				state = MyState.MOVING;
-			}
-			if(GameLoop.DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
-		} else if(Input.GetKey(KeyCode.S)) {
-			end = start + dir;
-			dir = new Vector3(0, -2);
-			start = transform.position;
-			if(AttemptMove(start,end) == true){
-				state = MyState.MOVING;
-			}
-			if(GameLoop.DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
-		} else if(Input.GetKey(KeyCode.D)) {
-			end = start + dir;
-			dir = new Vector3(2, 0);
-			start = transform.position;
-			if(AttemptMove(start,end) == true){
-				state = MyState.MOVING;
-			}
-			if(GameLoop.DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
-		} else if(Input.GetKey(KeyCode.C)) {
-			setInactiveWithCompletion(false);
-			if(GameLoop.DEBUG_LOG) Debug.Log("cancel move");
-		}
-	}
-
-	private void move() {
-		Vector3 pos = transform.position;
-		Vector3 ds = SPEED * Time.deltaTime * dir;
-		if(dir.magnitude > 0) {
-			if((pos - start + ds).magnitude < GRID) {
-				transform.Translate(ds);
-			} else {
-				transform.Translate(start + GRID/2*dir - pos);
-				setInactiveWithCompletion(true);
-			}
-		} else {
-			Debug.Log("Movement cancelled but still got to moving - FIX");
-			setInactiveWithCompletion(false);
-		}
-	}
- 
-	override protected void innerEnd() {}
-
-	private enum MyState {
-		PROMPTING, MOVING
-	}
+    #endregion
 }
 

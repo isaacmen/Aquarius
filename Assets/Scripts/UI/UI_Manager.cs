@@ -34,7 +34,6 @@ public class UI_Manager : MonoBehaviour {
 
     public void updateHealthBars()
     {
-        Debug.Log("Updating Health Bars");
         character1Health.value = character1.GetComponent<Character>().health;
         enemy1Health.value = enemy1.GetComponent<Character>().health;
     }
