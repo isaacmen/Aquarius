@@ -17,12 +17,13 @@ public class Move : Action {
 	}
 
 	override protected void innerStart() {
-		state = MyState.PROMPTING;
+        state = MyState.MOVING;//MyState.PROMPTING;
 		dir = new Vector3(0, 0);
 		Debug.Log("WASD to move, C to cancel");
 	}
 
 	override protected void innerLoop() {
+        Debug.Log("Moving State: " + state);
 		switch(state) {
 			case MyState.PROMPTING:
 				prompt();
@@ -45,7 +46,87 @@ public class Move : Action {
 
 	}
 
-	private void prompt() {
+    public void moveDirection(string direction)
+    {
+        direction = direction.ToLower();
+        switch (direction)
+        {
+            case "up":
+                moveUp();
+                break;
+            case "down":
+                moveDown();
+                break;
+            case "right":
+                moveRight();
+                break;
+            case "left":
+                moveLeft();
+                break;
+            default:
+                cancelMovement();
+                break;
+        }
+    }
+
+    private void moveUp()
+    {
+        dir = new Vector3(0, 2);
+        start = transform.position;
+        end = start + dir;
+        Debug.Log(end);
+        if (AttemptMove(start, end) == true)
+        {
+            state = MyState.MOVING;
+        }
+        if (GameLoop.DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
+        //GameObject.Find("someBattleground").GetComponent<Character>()
+    }
+
+    private void moveDown()
+    {
+        end = start + dir;
+        dir = new Vector3(0, -2);
+        start = transform.position;
+        if (AttemptMove(start, end) == true)
+        {
+            state = MyState.MOVING;
+        }
+        if (GameLoop.DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
+    }
+
+    private void moveLeft()
+    {
+        end = start + dir;
+        dir = new Vector3(-2, 0);
+        start = transform.position;
+        if (AttemptMove(start, end) == true)
+        {
+            state = MyState.MOVING;
+        }
+        if (GameLoop.DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
+    }
+
+    private void moveRight()
+    {
+        end = start + dir;
+        dir = new Vector3(2, 0);
+        start = transform.position;
+        if (AttemptMove(start, end) == true)
+        {
+            state = MyState.MOVING;
+        }
+        if (GameLoop.DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
+    }
+
+    private void cancelMovement()
+    {
+        setInactiveWithCompletion(false);
+        if (GameLoop.DEBUG_LOG) Debug.Log("cancel move");
+    }
+
+
+    private void prompt() {
 		if(Input.GetKey(KeyCode.W)) {
 
 			dir = new Vector3(0, 2);
