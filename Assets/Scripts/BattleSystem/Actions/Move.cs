@@ -29,8 +29,9 @@ public class Move : Action { //PromptingAction {
 		dir = new Vector3(0, 0);
 		Debug.Log("WASD to move, C to cancel");
 	}
-
+	
 	override protected void innerLoop() { //innerInnerLoop() {
+        Debug.Log("Moving State: " + state);
 		switch(state) {
 			case MyState.PROMPTING:
 				prompt();
@@ -73,7 +74,7 @@ public class Move : Action { //PromptingAction {
 		if((inputs[0] || inputs[1] || inputs[2] || inputs[3]) && !Input.GetKey(KeyCode.C)) {
 			start = transform.position;
 			end = start + GRID*dir;
-			if(AttemptMove(start, end)) {
+			if(AttemptMove(start, end) == true) {
 				state = MyState.MOVING;
 			} else {
 				Debug.Log("invalid direction");
@@ -104,5 +105,102 @@ public class Move : Action { //PromptingAction {
 	private enum MyState {
 		PROMPTING, MOVING
 	}
+
+    #region Direction-based Movement
+    public void moveDirection(string direction)
+    {
+        direction = direction.ToLower();
+        switch (direction)
+        {
+            case "up":
+                moveUp();
+                break;
+            case "down":
+                moveDown();
+                break;
+            case "right":
+                moveRight();
+                break;
+            case "left":
+                moveLeft();
+                break;
+            default:
+                cancelMovement();
+                break;
+        }
+    }
+
+    private void moveUp()
+    {
+        dir = new Vector3(0, 1);
+        start = transform.position;
+        end = start + dir;
+        Debug.Log(end);
+        if (AttemptMove(start, end) == true)
+        {
+            state = MyState.MOVING;
+        }
+        if (GameLoop.getInstance().DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
+        //GameObject.Find("someBattleground").GetComponent<Character>()
+    }
+
+    private void moveDown()
+    {
+        end = start + dir;
+        dir = new Vector3(0, -1);
+        start = transform.position;
+        if (AttemptMove(start, end) == true)
+        {
+            state = MyState.MOVING;
+        }
+        if (GameLoop.getInstance().DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
+    }
+
+    private void moveLeft()
+    {
+        end = start + dir;
+        dir = new Vector3(-1, 0);
+        start = transform.position;
+        if (AttemptMove(start, end) == true)
+        {
+            state = MyState.MOVING;
+        }
+        if (GameLoop.getInstance().DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
+    }
+
+    private void moveRight()
+    {
+        end = start + dir;
+        dir = new Vector3(1, 0);
+        start = transform.position;
+        if (AttemptMove(start, end) == true)
+        {
+            state = MyState.MOVING;
+        }
+        if (GameLoop.getInstance().DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
+    }
+
+    private void cancelMovement()
+    {
+        setInactiveWithCompletion(false);
+        if (GameLoop.getInstance().DEBUG_LOG) Debug.Log("cancel move");
+    }
+
+    private void moveDir(Vector3 dir)
+    {
+        start = transform.position;
+        end = start + GRID * dir;
+        if (AttemptMove(start, end))
+        {
+            state = MyState.MOVING;
+        }
+        else
+        {
+            Debug.Log("invalid direction");
+            setInactiveWithCompletion(false);
+        }
+        if (GameLoop.getInstance().DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
+    }
+    #endregion
 }
 

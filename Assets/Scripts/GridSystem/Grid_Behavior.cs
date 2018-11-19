@@ -18,11 +18,19 @@ public class Grid_Behavior : MonoBehaviour {
     private Vector2 cellSize;
     private Vector2 cellScale;
     public List<Vector3> gridPositions = new List<Vector3>();
+    //public List <Vector3> playerPositions = new List<Vector3>();
+   // private GameObject [] players = GameObject.FindGameObjectsWithTag("Player");
 
     void Awake () {
         InitCells(); //Initialize all cells
 	}
-
+  /*  void update(){
+        playerPositions.Clear();
+        for (int i = 0 ; i < players.Length; i++){
+            playerPositions.Add(players[i].transform.position);
+        }
+    }
+*/
     void InitCells() {
         GameObject cellObject = new GameObject();
 //		cellObject.AddComponent<Tile>();

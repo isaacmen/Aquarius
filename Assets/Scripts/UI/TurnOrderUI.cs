@@ -41,4 +41,16 @@ public class TurnOrderUI : MonoBehaviour {
         }
         currentTurn++;
     }
+
+    public void addNewTurn()
+    {
+        /* Ideas for messing w/ turn order:
+         *   - have each character script have a "public image portrait;"
+         *   - (assuming only 6 characters allowed at a time) have positions/scales
+         *     of all character portraits ready
+         *     only show the first few and have them go onto those
+         *   - basically, we'll rewrite, but save this for later 
+         *     when we can better test
+         */
+    }
 }
