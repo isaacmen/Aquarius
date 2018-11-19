@@ -23,11 +23,12 @@ public class Fireball : Action {
 		switch(state) {
 			case MyState.PROMPTING:
 				// if(tile picked) {
-//					state = MyState.ACTING;
-//					target = getTileFromInput(inputCode);
-//				} else {
-//					setInactiveWithCompletion(false);
-//				}
+				//					state = MyState.ACTING;
+				//					target = getTileFromInput(inputCode);
+				//				} else {
+				//					setInactiveWithCompletion(false);
+				//				}
+				state = MyState.ACTING;
 				break;
 			case MyState.ACTING:
 

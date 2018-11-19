@@ -37,6 +37,10 @@ public class GameLoop : MonoBehaviour {
 		turnOrder = new List<Character>();
 	}
 
+	public Field getAllyField() {
+		return yourField;
+	}
+
 	// could also notify ui
 	public void nextTurn() {
 		Character turnDone = turnOrder[0];
@@ -99,7 +103,7 @@ public class GameLoop : MonoBehaviour {
 			case GameState.ALLY_WAIT_INPUT:
 				// keeps checking for keyboard input; eventually to be overwritten with ui
 				for(int i = 1; i < turnActions.Count + 1; i++) {
-					if(Input.GetKeyDown(keyCodeFromInt(i)) && !turnActions[i - 1].isActive()) {;
+					if(Input.GetKeyDown(GameLoop.keyCodeFromInt(i)) && !turnActions[i - 1].isActive()) {
 						activeAction = turnActions[i-1];
 						if(turnActions[i-1].GetType() == typeof(Pass))
 							Debug.Log(turn + " passed.");
@@ -235,13 +239,17 @@ public class GameLoop : MonoBehaviour {
 	}
 
 	// is there a better way to do this than to hard-code?
-	private KeyCode keyCodeFromInt(int n) {
+	private static KeyCode keyCodeFromInt(int n) {
 		switch(n) {
 			case 1: return KeyCode.Alpha1;
 			case 2: return KeyCode.Alpha2;
 			case 3: return KeyCode.Alpha3;
 			case 4: return KeyCode.Alpha4;
 			case 5: return KeyCode.Alpha5;
+			case 6: return KeyCode.Alpha6;
+			case 7: return KeyCode.Alpha7;
+			case 8: return KeyCode.Alpha8;
+			case 9: return KeyCode.Alpha9;
 			default:
 				Debug.Log("number " + n + " not implemented yet");
 				return KeyCode.Alpha0;

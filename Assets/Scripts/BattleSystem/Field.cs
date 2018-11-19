@@ -32,6 +32,10 @@ public class Field {
 		}
 	}
 
+	public List<Tile> getInRange(Character c, int minRange, int maxRange) {
+		return null;
+	}
+
 	public void printField() {
 		string toPrint = "";
 		for(int d = 0; d < DEPTH; d++) {

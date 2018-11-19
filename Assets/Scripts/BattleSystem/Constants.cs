@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class Constants : MonoBehaviour {
 	[Header("Libra")]
-	public static int layOnHands_healValue;
-	public static int layOnHands_minRange;
-	public static int layOnHands_maxRange;
+	public int layOnHands_healValue;
+	public int layOnHands_minRange;
+	public int layOnHands_maxRange;
 
 	[Header("Leo")]
-	public static int unload_damage;
-	public static int unload_minRange;
-	public static int unload_maxRange;
+	public int unload_damage;
+	public int unload_minRange;
+	public int unload_maxRange;
 
 	[Header("Scorpio")]
-	public static int fireball_damage;
-	public static int fireball_minRange;
-	public static int fireball_maxRange;
+	public int fireball_damage;
+	public int fireball_minRange;
+	public int fireball_maxRange;
+
+	public static Constants getInstance() {
+		return GameObject.Find("Constants").GetComponent<Constants>();
+	}
 }

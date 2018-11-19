@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Move : Action {
+public class Move : Action { //PromptingAction {
 	public const float SPEED = 5;
 
 	private const float GRID = 2;
@@ -16,13 +16,21 @@ public class Move : Action {
 		return ActionType.MOVE;
 	}
 
-	override protected void innerStart() {
+//	override protected int minRange() {
+//		return 1;
+//	}
+//
+//	override protected int maxRange() {
+//		return 1;
+//	}
+
+	override protected void innerStart() { //innerInnerStart() {
 		state = MyState.PROMPTING;
 		dir = new Vector3(0, 0);
 		Debug.Log("WASD to move, C to cancel");
 	}
 
-	override protected void innerLoop() {
+	override protected void innerLoop() { //innerInnerLoop() {
 		switch(state) {
 			case MyState.PROMPTING:
 				prompt();
@@ -90,8 +98,8 @@ public class Move : Action {
 			setInactiveWithCompletion(false);
 		}
 	}
- 
-	override protected void innerEnd() {}
+
+	override protected void innerEnd() {} // innerInnerEnd() {}
 
 	private enum MyState {
 		PROMPTING, MOVING
