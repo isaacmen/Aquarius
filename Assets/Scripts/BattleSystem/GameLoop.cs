@@ -8,7 +8,6 @@ public class GameLoop : MonoBehaviour {
 	// OTHERWISE THINGS AREN'T UPDATED AND STUFF BREAKS
 	public GameState state = GameState.INIT;
 
-	private List<Character> turnOrder;
 	private Character turn = null;
 	private List<Action> turnActions = null;
 	private Action activeAction = null;
@@ -17,8 +16,10 @@ public class GameLoop : MonoBehaviour {
 	private Field yourField;
 	private Field enemyField;
 
-	[Header("Turn")]	
-	public bool randomizeTurnOrder;
+	[Header("Turn")]
+    public List<Character> turnOrder;
+    public bool randomizeTurnOrder;
+
 
 	[Header("Constants")]
 	public bool DEBUG_LOG;
@@ -34,7 +35,7 @@ public class GameLoop : MonoBehaviour {
 		yourField = new Field();
 		enemyField = new Field();
 
-		turnOrder = new List<Character>();
+		//turnOrder = new List<Character>();
 	}
 
 	// could also notify ui
@@ -61,13 +62,13 @@ public class GameLoop : MonoBehaviour {
 
 	// to be implemented with real fields
 	public void addAllyCharacter(AllyCharacter c) {
-		turnOrder.Add(c);
+		//turnOrder.Add(c);
 		yourField.addCharacter(c);
 	}
 
 	// to be implemented with real fields
 	public void addEnemyCharacter(EnemyCharacter c) {
-		turnOrder.Add(c);
+		//turnOrder.Add(c);
 		enemyField.addCharacter(c);
 	}
 

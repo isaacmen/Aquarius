@@ -124,7 +124,7 @@ public class Move : Action {
 
     private void moveUp()
     {
-        dir = new Vector3(0, 2);
+        dir = new Vector3(0, 1);
         start = transform.position;
         end = start + dir;
         Debug.Log(end);
@@ -132,50 +132,66 @@ public class Move : Action {
         {
             state = MyState.MOVING;
         }
-        if (GameLoop.DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
+        if (GameLoop.getInstance().DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
         //GameObject.Find("someBattleground").GetComponent<Character>()
     }
 
     private void moveDown()
     {
         end = start + dir;
-        dir = new Vector3(0, -2);
+        dir = new Vector3(0, -1);
         start = transform.position;
         if (AttemptMove(start, end) == true)
         {
             state = MyState.MOVING;
         }
-        if (GameLoop.DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
+        if (GameLoop.getInstance().DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
     }
 
     private void moveLeft()
     {
         end = start + dir;
-        dir = new Vector3(-2, 0);
+        dir = new Vector3(-1, 0);
         start = transform.position;
         if (AttemptMove(start, end) == true)
         {
             state = MyState.MOVING;
         }
-        if (GameLoop.DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
+        if (GameLoop.getInstance().DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
     }
 
     private void moveRight()
     {
         end = start + dir;
-        dir = new Vector3(2, 0);
+        dir = new Vector3(1, 0);
         start = transform.position;
         if (AttemptMove(start, end) == true)
         {
             state = MyState.MOVING;
         }
-        if (GameLoop.DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
+        if (GameLoop.getInstance().DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
     }
 
     private void cancelMovement()
     {
         setInactiveWithCompletion(false);
-        if (GameLoop.DEBUG_LOG) Debug.Log("cancel move");
+        if (GameLoop.getInstance().DEBUG_LOG) Debug.Log("cancel move");
+    }
+
+    private void moveDir(Vector3 dir)
+    {
+        start = transform.position;
+        end = start + GRID * dir;
+        if (AttemptMove(start, end))
+        {
+            state = MyState.MOVING;
+        }
+        else
+        {
+            Debug.Log("invalid direction");
+            setInactiveWithCompletion(false);
+        }
+        if (GameLoop.getInstance().DEBUG_LOG) Debug.Log(state + " " + dir + " " + start);
     }
     #endregion
 }

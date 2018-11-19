@@ -18,8 +18,8 @@ public class UI_Manager : MonoBehaviour {
 
     [Header("Menus")]
     public GameObject availableActions;
-    public GameObject actions;
-    public GameObject moves;
+    //public GameObject actions;
+    //public GameObject moves;
 
     private void Start()
     {
@@ -54,5 +54,4 @@ public class UI_Manager : MonoBehaviour {
             child.SetActive(true);
         }
     }
-
 }
