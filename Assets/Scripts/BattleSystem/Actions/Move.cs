@@ -66,7 +66,7 @@ public class Move : Action {
 		if((inputs[0] || inputs[1] || inputs[2] || inputs[3]) && !Input.GetKey(KeyCode.C)) {
 			start = transform.position;
 			end = start + GRID*dir;
-			if(AttemptMove(start, end)) {
+			if(AttemptMove(start, end) == true) {
 				state = MyState.MOVING;
 			} else {
 				Debug.Log("invalid direction");

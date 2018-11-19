@@ -100,7 +100,7 @@ public class GameLoop : MonoBehaviour {
 				break;
 			case GameState.ALLY_WAIT_INPUT:
                 // keeps checking for keyboard input; eventually to be overwritten with ui
-                /*
+                
                 for (int i = 1; i < turnActions.Count + 1; i++) {
 					if(Input.GetKeyDown(keyCodeFromInt(i)) && !turnActions[i - 1].isActive()) {
 						activeAction = turnActions[i-1];
@@ -114,7 +114,7 @@ public class GameLoop : MonoBehaviour {
 						setState(GameState.ALLY_ACTION_ACTIVE);
 					}
 				}
-                */
+                
 				break;
 			case GameState.ALLY_ACTION_ACTIVE:
 				// keeps checking for action to not be active

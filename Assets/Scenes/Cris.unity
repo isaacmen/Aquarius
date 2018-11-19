@@ -113,11 +113,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &95641762 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1917362280410356, guid: 033c93452962a524f8a752ad31ce0e50,
-    type: 2}
-  m_PrefabInternal: {fileID: 1863939002}
 --- !u!1001 &362483596
 Prefab:
   m_ObjectHideFlags: 0
@@ -175,11 +170,6 @@ Prefab:
     - {fileID: 114031591541258250, guid: 64d268c2a26f8f54680b5fcb2f7ff68f, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 64d268c2a26f8f54680b5fcb2f7ff68f, type: 2}
   m_IsPrefabAsset: 0
---- !u!1 &391610614 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1648986234462050, guid: 033c93452962a524f8a752ad31ce0e50,
-    type: 2}
-  m_PrefabInternal: {fileID: 1863939002}
 --- !u!224 &433551107 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 224951079269080200, guid: 033c93452962a524f8a752ad31ce0e50,
@@ -561,7 +551,7 @@ GameObject:
   - component: {fileID: 980479915}
   m_Layer: 0
   m_Name: Player Characters
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -898,6 +888,11 @@ Prefab:
       propertyPath: type
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114520810573966346, guid: 205917839c4f25642a1e3c576c4688b9,
+        type: 2}
+      propertyPath: gridPosition
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 205917839c4f25642a1e3c576c4688b9, type: 2}
   m_IsPrefabAsset: 0
@@ -948,8 +943,6 @@ MonoBehaviour:
   enemy1: {fileID: 1801873932}
   turnOrder: {fileID: 1473729944}
   availableActions: {fileID: 566304081}
-  actions: {fileID: 391610614}
-  moves: {fileID: 95641762}
 --- !u!212 &1400511935
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1672,7 +1665,7 @@ GameObject:
   - component: {fileID: 2106776147}
   m_Layer: 0
   m_Name: Enemies
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1770,7 +1763,7 @@ Prefab:
     - target: {fileID: 114520810573966346, guid: 205917839c4f25642a1e3c576c4688b9,
         type: 2}
       propertyPath: gridPosition
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114520810573966346, guid: 205917839c4f25642a1e3c576c4688b9,
         type: 2}
