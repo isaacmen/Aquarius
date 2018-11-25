@@ -13,6 +13,10 @@ public class BasicAttack : Action {
 		return ActionType.ABILITY;
 	}
 
+	override public int maxUses() {
+		return 9999999;
+	}
+
 	override protected void innerStart() {
 		state = MyState.PROMPT;
 		target = null;

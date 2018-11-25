@@ -20,7 +20,11 @@ public class AllyCharacter : Character {
 	}
 
 	public List<Action> getActions() {
-		return new List<Action>(actionList);
+		List<Action> actionsWithUses = new List<Action>();
+		foreach(Action a in actionList)
+			if(a.usesLeft() > 0)
+				actionsWithUses.Add(a);
+		return actionsWithUses;
 	}
 
 	public List<ActionType> getActionTypesPerTurn() {

@@ -205,12 +205,15 @@ MonoBehaviour:
   layOnHands_healValue: 10
   layOnHands_minRange: 1
   layOnHands_maxRange: 1
+  layOnHands_maxUses: 3
   unload_damage: 20
   unload_minRange: 1
   unload_maxRange: 3
+  unload_maxUses: 2
   fireball_damage: 10
   fireball_minRange: 2
   fireball_maxRange: 4
+  fireball_maxUses: 4
 --- !u!4 &136673556
 Transform:
   m_ObjectHideFlags: 0
@@ -328,6 +331,11 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bcda121c93fb5ea4eb445fe5d28b902c, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &389518945 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1870322179713644, guid: 033c93452962a524f8a752ad31ce0e50,
+    type: 2}
+  m_PrefabInternal: {fileID: 2080246841}
 --- !u!1 &725275684
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,6 +413,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &741063037 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1094797254261978, guid: 033c93452962a524f8a752ad31ce0e50,
+    type: 2}
+  m_PrefabInternal: {fileID: 2080246841}
 --- !u!1001 &835699526
 Prefab:
   m_ObjectHideFlags: 0
@@ -507,6 +520,8 @@ MonoBehaviour:
   enemy1Health: {fileID: 1671975128}
   character1: {fileID: 2023541758}
   enemy1: {fileID: 1594521735}
+  turnOrder: {fileID: 741063037}
+  availableActions: {fileID: 389518945}
 --- !u!114 &835699532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -519,6 +534,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  turnOrder: []
   randomizeTurnOrder: 1
   DEBUG_LOG: 0
 --- !u!1 &874798706 stripped
@@ -1016,6 +1032,10 @@ Prefab:
       propertyPath: character
       value: 
       objectReference: {fileID: 1594521735}
+    - target: {fileID: 1505446504694018, guid: 033c93452962a524f8a752ad31ce0e50, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 033c93452962a524f8a752ad31ce0e50, type: 2}
   m_IsPrefabAsset: 0

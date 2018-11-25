@@ -7,6 +7,10 @@ public class Pass : Action {
 		return ActionType.PASS;
 	}
 
+	public override int maxUses() {
+		return 9999999;
+	}
+
 	override protected void innerStart() {
 		setInactiveWithCompletion(true);
 	}

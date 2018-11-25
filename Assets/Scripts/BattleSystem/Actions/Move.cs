@@ -16,13 +16,17 @@ public class Move : Action { //PromptingAction {
 		return ActionType.MOVE;
 	}
 
-//	override protected int minRange() {
-//		return 1;
-//	}
-//
-//	override protected int maxRange() {
-//		return 1;
-//	}
+	override public int maxUses() {
+		return 9999999;
+	}
+
+	//	override protected int minRange() {
+	//		return 1;
+	//	}
+	//
+	//	override protected int maxRange() {
+	//		return 1;
+	//	}
 
 	override protected void innerStart() { //innerInnerStart() {
 		state = MyState.PROMPTING;
@@ -31,7 +35,7 @@ public class Move : Action { //PromptingAction {
 	}
 	
 	override protected void innerLoop() { //innerInnerLoop() {
-        Debug.Log("Moving State: " + state);
+//        Debug.Log("Moving State: " + state);
 		switch(state) {
 			case MyState.PROMPTING:
 				prompt();

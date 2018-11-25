@@ -6,10 +6,12 @@ public abstract class Action : MonoBehaviour {
 	protected abstract void innerStart();
 	protected abstract void innerLoop();
 	protected abstract void innerEnd();
+	public abstract int maxUses();
 	public abstract ActionType getActionType();
 
 	private bool active;
 	private bool complete;
+	private int remainingUses;
 
 	public bool isActive() {
 		return active;
@@ -30,6 +32,8 @@ public abstract class Action : MonoBehaviour {
 		if(active) {
 			active = false;
 			complete = c;
+			if(complete)
+				remainingUses -= 1;
 			innerEnd();
 		} else {
 			Debug.Log(this.GetType() + " set inactive when already inactive.");
@@ -40,9 +44,14 @@ public abstract class Action : MonoBehaviour {
 		return complete;
 	}
 
+	public int usesLeft() {
+		return remainingUses;
+	}
+
 	protected virtual void Start() {
 		active = false;
 		complete = false;
+		remainingUses = maxUses();
 	}
 
 	protected virtual void Update() {

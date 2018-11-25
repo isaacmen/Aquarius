@@ -14,6 +14,10 @@ public class Fireball : Action {
 		return ActionType.ABILITY;
 	}
 
+	public override int maxUses() {
+		return Constants.getInstance().fireball_maxUses;
+	}
+
 	override protected void innerStart() {
 		state = MyState.PROMPTING;
 		// print to pick a tile

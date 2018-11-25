@@ -8,6 +8,10 @@ public class LayOnHands : Action {
 		return ActionType.ABILITY;
 	}
 
+	public override int maxUses() {
+		return Constants.getInstance().layOnHands_maxUses;
+	}
+
 	override protected void innerStart() {
 		setInactiveWithCompletion(true);
 	}

@@ -7,6 +7,10 @@ public class ActionTemplate : Action {
 		throw new System.NotImplementedException();
 	}
 
+	override public int maxUses() {
+		throw new System.NotImplementedException();
+	}
+
 	override protected void innerStart() {
 
 	}

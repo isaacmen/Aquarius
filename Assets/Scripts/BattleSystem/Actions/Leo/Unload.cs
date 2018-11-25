@@ -8,6 +8,10 @@ public class Unload : Action {
 		return ActionType.ABILITY;
 	}
 
+	public override int maxUses() {
+		return Constants.getInstance().unload_maxUses;
+	}
+
 	override protected void innerStart() {
 		setInactiveWithCompletion(true);
 	}

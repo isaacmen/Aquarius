@@ -52,7 +52,7 @@ public class GameLoop : MonoBehaviour {
 
 	// may be unnecessary
 	public Character getCharacterTurn() {
-		return turnOrder[0];
+		return (turnOrder.Count > 0) ? turnOrder[0] : null;
 	}
 
 	private void printTurnOrder() {
@@ -65,13 +65,13 @@ public class GameLoop : MonoBehaviour {
 
 	// to be implemented with real fields
 	public void addAllyCharacter(AllyCharacter c) {
-		//turnOrder.Add(c);
+		turnOrder.Add(c);
 		yourField.addCharacter(c);
 	}
 
 	// to be implemented with real fields
 	public void addEnemyCharacter(EnemyCharacter c) {
-		//turnOrder.Add(c);
+		turnOrder.Add(c);
 		enemyField.addCharacter(c);
 	}
 
@@ -232,7 +232,7 @@ public class GameLoop : MonoBehaviour {
                 string turnMoveStr = "What should " + turn + " do? (press # to act)\n";
                 for (int i = 0; i < turnActions.Count; i++)
                 {
-                    turnMoveStr += (i + 1) + ": " + turnActions[i].GetType() + ((i < turnActions.Count - 1) ? " / " : "");
+                    turnMoveStr += (i + 1) + ": " + turnActions[i].GetType() + ((turnActions[i].usesLeft() > 999999) ? "" : " (" + turnActions[i].usesLeft()+")") + ((i < turnActions.Count - 1) ? " / " : "");
                 }
                 Debug.Log(turnMoveStr);
 
@@ -296,7 +296,7 @@ public class GameLoop : MonoBehaviour {
 				// to be partially overridden by implemention with ui
 				string turnMoveStr = "What should " + turn + " do? (press # to act)\n";
 				for(int i = 0; i < turnActions.Count; i++) {
-					turnMoveStr += (i + 1) + ": " + turnActions[i].GetType() + ((i < turnActions.Count - 1) ? " / " : "");
+					turnMoveStr += (i + 1) + ": " + turnActions[i].GetType() + ((turnActions[i].usesLeft() > 999999) ? "" : " (" + turnActions[i].usesLeft() + ")") + ((i < turnActions.Count - 1) ? " / " : "");
 				}
 				Debug.Log(turnMoveStr);
 
