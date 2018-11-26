@@ -12,39 +12,51 @@ public class Grid_Behavior : MonoBehaviour {
     [SerializeField]
     private Vector2 gridOffset;
 
-    //about cells
+    
     [SerializeField]
     private Sprite cellSprite;
     private Vector2 cellSize;
     private Vector2 cellScale;
+
 	public Tile[,] gridPositions;
 
-	private List<Character> characters;
-	//   private GameObject [] players = GameObject.FindGameObjectsWithTag("Player");
-
 	void Awake() {
-		characters = new List<Character>();
 		gridPositions = new Tile[3, 3];
 		InitCells(); //Initialize all cells
 	}
-
+	
 	public bool addCharacter(Character c) {
+		/*
 		if(characters.Contains(c)) {
 			return false;
 		} else {
 			characters.Add(c);
-			/*for(int i = 0; i < 3; i++)
+			for(int i = 0; i < 3; i++)
 				if(positions[WIDTH / 2, i].placeCharacter(c))
-					break;*/
+					break;
 
 			return true;
-		}
+		}*/
+		return false;
 	}
+	
+	/*void update(){
+        playerPositions.Clear();
+        GameObject [] players =  new GameObject[4]; 
+        players = GameObject.FindGameObjectsWithTag("Player");
+        for (int i = 0 ; i < players.Length; i++){
+            playerPositions.Add(players[i].transform.position);
+        }
+    }
+    public List<Vector3> getPlayerPositions(){
+        return playerPositions;
+    }
+    public List<Vector3> getGridPositions(){
+        return gridPositions;
+    }*/
 
-	void InitCells() {
+    void InitCells() {
         GameObject cellObject = new GameObject();
-
-
         
         cellObject.AddComponent<SpriteRenderer>().sprite = cellSprite;
 
@@ -65,13 +77,12 @@ public class Grid_Behavior : MonoBehaviour {
         
         gridOffset.x = -(gridSize.x / 2) + cellSize.x / 2;
         gridOffset.y = -(gridSize.y / 2) + cellSize.y / 2;
-
-		//fill the grid with cells by using Instantiate
-		for (int row = 0; row < rows; row++) {
+		
+        for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-                //add the cell size so that no two cells will have the same x and y position
+                
                 Vector2 pos = new Vector2(col * cellSize.x + gridOffset.x + transform.position.x, row * cellSize.y + gridOffset.y + transform.position.y);
-
+				
 				//instantiate the game object, at position pos, with rotation set to identity
                 GameObject c0 = Instantiate(cellObject, pos, Quaternion.identity) as GameObject;
 				Tile t = c0.AddComponent<Tile>();
@@ -83,11 +94,11 @@ public class Grid_Behavior : MonoBehaviour {
             }
         }
 
-        //destroy the object used to instantiate the cells
+        
         Destroy(cellObject);
     }
 
-    //so you can see the width and height of the grid on editor
+    
     void OnDrawGizmos() {
         Gizmos.DrawWireCube(transform.position, gridSize);
     }
