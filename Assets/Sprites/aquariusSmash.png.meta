@@ -1,0 +1,393 @@
+fileFormatVersion: 2
+guid: 3908873e1b0574488afb7833095e2862
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: aquariusSmash_0
+    21300002: aquariusSmash_1
+    21300004: aquariusSmash_2
+    21300006: aquariusSmash_3
+    21300008: aquariusSmash_4
+    21300010: aquariusSmash_5
+    21300012: aquariusSmash_6
+    21300014: aquariusSmash_7
+    21300016: aquariusSmash_8
+    21300018: aquariusSmash_9
+    21300020: aquariusSmash_10
+    21300022: aquariusSmash_11
+    21300024: aquariusSmash_12
+    21300026: aquariusSmash_13
+  externalObjects: {}
+  serializedVersion: 7
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: aquariusSmash_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 2
+        width: 60
+        height: 60
+      alignment: 9
+      pivot: {x: 0.583, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f68c9c3da3e6242f2a21d60d736953af
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aquariusSmash_1
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 2
+        width: 63
+        height: 60
+      alignment: 9
+      pivot: {x: 0.571, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 490976a0a80754d4c94b450b35ed4bfc
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aquariusSmash_2
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 53
+        width: 6
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a3f9afd29f394700825d9f3ab597493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aquariusSmash_3
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 2
+        width: 62
+        height: 61
+      alignment: 9
+      pivot: {x: 0.563, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f2fec0dc4954487897fbc939f9ebaeb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aquariusSmash_4
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 54
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65b3566d8c3ff4cb7befeeaeff5add5e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aquariusSmash_5
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 2
+        width: 62
+        height: 61
+      alignment: 9
+      pivot: {x: 0.564, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddc05a0849306486596aa7b9534a2045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aquariusSmash_6
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 2
+        width: 61
+        height: 61
+      alignment: 9
+      pivot: {x: 0.5898, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d0148424523f473b8ee4a8589331b2d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aquariusSmash_7
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 2
+        width: 61
+        height: 62
+      alignment: 9
+      pivot: {x: 0.59, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 149a4b6c7f72f467d9c2db5e702f31e5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aquariusSmash_8
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 2
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.58, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9900c96f2e8274570822105a8c272a78
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aquariusSmash_9
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 0
+        width: 61
+        height: 62
+      alignment: 9
+      pivot: {x: 0.59, y: 0.0325}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aec500ff074634235b2094d802947ac5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aquariusSmash_10
+      rect:
+        serializedVersion: 2
+        x: 513
+        y: 0
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.58, y: 0.0325}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45069bff70d6f49aa958737e0ea8ead0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aquariusSmash_11
+      rect:
+        serializedVersion: 2
+        x: 577
+        y: 2
+        width: 62
+        height: 61
+      alignment: 9
+      pivot: {x: 0.58, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17534b4b1c1664459b13e939727eebc9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aquariusSmash_12
+      rect:
+        serializedVersion: 2
+        x: 504
+        y: 0
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53588c458945341dc82d4e994514be5c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aquariusSmash_13
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 0
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.5805, y: 0.0325}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db447e50808e04856adcd6668cc9cf44
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: ba4fdff297f904573900e77fd6e3a014
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
