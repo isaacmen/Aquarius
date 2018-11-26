@@ -17,21 +17,31 @@ public class Grid_Behavior : MonoBehaviour {
     private Sprite cellSprite;
     private Vector2 cellSize;
     private Vector2 cellScale;
-    public List<Vector3> gridPositions = new List<Vector3>();
-    public List <Vector3> playerPositions = new List<Vector3>();
-    private GameObject [] players = GameObject.FindGameObjectsWithTag("Player");
+	public Tile[,] gridPositions;
 
-    void Awake () {
-        InitCells(); //Initialize all cells
+	private List<Character> characters;
+	//   private GameObject [] players = GameObject.FindGameObjectsWithTag("Player");
+
+	void Awake() {
+		characters = new List<Character>();
+		gridPositions = new Tile[3, 3];
+		InitCells(); //Initialize all cells
 	}
-  /*  void update(){
-        playerPositions.Clear();
-        for (int i = 0 ; i < players.Length; i++){
-            playerPositions.Add(players[i].transform.position);
-        }
-    }
-*/
-    void InitCells() {
+
+	public bool addCharacter(Character c) {
+		if(characters.Contains(c)) {
+			return false;
+		} else {
+			characters.Add(c);
+			/*for(int i = 0; i < 3; i++)
+				if(positions[WIDTH / 2, i].placeCharacter(c))
+					break;*/
+
+			return true;
+		}
+	}
+
+	void InitCells() {
         GameObject cellObject = new GameObject();
 
 
@@ -56,18 +66,19 @@ public class Grid_Behavior : MonoBehaviour {
         gridOffset.x = -(gridSize.x / 2) + cellSize.x / 2;
         gridOffset.y = -(gridSize.y / 2) + cellSize.y / 2;
 
-        //fill the grid with cells by using Instantiate
-        for (int row = 0; row < rows; row++) {
+		//fill the grid with cells by using Instantiate
+		for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
                 //add the cell size so that no two cells will have the same x and y position
                 Vector2 pos = new Vector2(col * cellSize.x + gridOffset.x + transform.position.x, row * cellSize.y + gridOffset.y + transform.position.y);
 
-                //instantiate the game object, at position pos, with rotation set to identity
-                GameObject cO = Instantiate(cellObject, pos, Quaternion.identity) as GameObject;
-                gridPositions.Add(new Vector3(cO.transform.position.x, cO.transform.position.y, -3.0f));
+				//instantiate the game object, at position pos, with rotation set to identity
+                GameObject c0 = Instantiate(cellObject, pos, Quaternion.identity) as GameObject;
+				Tile t = c0.AddComponent<Tile>();
+				gridPositions[row, col] = t;// new Vector3(c0.transform.position.x, c0.transform.position.y, -3.0f));
 
                 //set the parent of the cell to GRID so you can move the cells together with the grid;
-                cO.transform.parent = transform;
+                c0.transform.parent = transform;
                 
             }
         }

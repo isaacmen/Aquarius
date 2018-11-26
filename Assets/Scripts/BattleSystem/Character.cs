@@ -10,7 +10,7 @@ public class Character : MonoBehaviour {
 	public int gridPosition;
 	
 	void Start() {
-		gameObject.transform.position = GameObject.Find("Enemy_battleGround").GetComponent<Grid_Behavior>().gridPositions[gridPosition];
+//		gameObject.transform.position = GameObject.Find("Enemy_battleGround").GetComponent<Grid_Behavior>().gridPositions[gridPosition];
 
 	}
 	

@@ -13,8 +13,8 @@ public class GameLoop : MonoBehaviour {
 	private Action activeAction = null;
 	private List<ActionType> actionTypesPerTurn = null;
 
-	private Field yourField;
-	private Field enemyField;
+	private Grid_Behavior yourField;
+	private Grid_Behavior enemyField;
 
 	[Header("Turn")]
     public List<Character> turnOrder;
@@ -30,14 +30,20 @@ public class GameLoop : MonoBehaviour {
 	void Awake() {
 		if(DEBUG_LOG) Debug.Log("GameLoop awake");
 
-		// to be implemented to be set to real fields from GameObject.Find(nameOfField)
-		yourField = new Field();
-		enemyField = new Field();
+		Grid_Behavior[] grids = GameObject.FindObjectsOfType<Grid_Behavior>();
+
+		if(grids[0].name == "Player_battleGround") {
+			yourField = grids[0];
+			enemyField = grids[1];
+		} else {
+			yourField = grids[1];
+			enemyField = grids[0];
+		}
 
 		//turnOrder = new List<Character>();
 	}
 
-	public Field getAllyField() {
+	public Grid_Behavior getAllyField() {
 		return yourField;
 	}
 

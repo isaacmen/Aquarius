@@ -50,10 +50,10 @@ public class Move : Action { //PromptingAction {
 		// foreach(Vector3 pos in GameObject.Find("Enemy_battleGround").GetComponent<Grid_Behavior>().gridPositions) {
 		// 	print(pos);
 		// }
-
-		if(GameObject.Find("Enemy_battleGround").GetComponent<Grid_Behavior>().gridPositions.Contains(end)){
-			return true;
-		}
+		foreach(Tile t in GameObject.Find("Enemy_battleGround").GetComponent<Grid_Behavior>().gridPositions)
+			if(t.transform.position == end)
+				return true;
+		
 		return false;
 
 	}
