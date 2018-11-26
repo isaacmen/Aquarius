@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Tile : MonoBehaviour {
-	private List<Vector3> Tiles;
-	private bool onTile;
+	[Header("Character")]
+	public Character onTile;
 
 	void Awake() {
-//		this.Tiles = surroundingTiles();
-//		this.onTile = isCharacterOnTile();
+		onTile = null;
+	}
+
+	public void placeCharacter(Character c) {
+		onTile = c;
 	}
 /*
 	//returns whether a character is on the tile

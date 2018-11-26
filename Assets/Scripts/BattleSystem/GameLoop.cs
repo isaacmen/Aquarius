@@ -72,13 +72,13 @@ public class GameLoop : MonoBehaviour {
 	// to be implemented with real fields
 	public void addAllyCharacter(AllyCharacter c) {
 		turnOrder.Add(c);
-		yourField.addCharacter(c);
+		yourField.initAddCharacter(c);
 	}
 
 	// to be implemented with real fields
 	public void addEnemyCharacter(EnemyCharacter c) {
 		turnOrder.Add(c);
-		enemyField.addCharacter(c);
+		enemyField.initAddCharacter(c);
 	}
 
 	void Start() {

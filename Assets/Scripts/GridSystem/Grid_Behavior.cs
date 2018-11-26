@@ -25,18 +25,13 @@ public class Grid_Behavior : MonoBehaviour {
 		InitCells(); //Initialize all cells
 	}
 	
-	public bool addCharacter(Character c) {
-		/*
-		if(characters.Contains(c)) {
-			return false;
-		} else {
-			characters.Add(c);
-			for(int i = 0; i < 3; i++)
-				if(positions[WIDTH / 2, i].placeCharacter(c))
-					break;
-
-			return true;
-		}*/
+	public bool initAddCharacter(Character c) {
+		foreach(Tile t in gridPositions) {
+			if(t.transform.position.x == c.transform.position.x && t.transform.position.x == c.transform.position.x) {
+				t.placeCharacter(c);
+				return true;
+			}
+		}
 		return false;
 	}
 	
