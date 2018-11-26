@@ -51,7 +51,7 @@ public class Move : Action { //PromptingAction {
 		// 	print(pos);
 		// }
 		foreach(Tile t in GameObject.Find("Enemy_battleGround").GetComponent<Grid_Behavior>().gridPositions)
-			if(t.transform.position == end)
+			if(t.transform.position.x == end.x && t.transform.position.y == end.y)
 				return true;
 		
 		return false;
