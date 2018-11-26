@@ -18,8 +18,8 @@ public class Grid_Behavior : MonoBehaviour {
     private Vector2 cellSize;
     private Vector2 cellScale;
     public List<Vector3> gridPositions = new List<Vector3>();
-    //public List <Vector3> playerPositions = new List<Vector3>();
-   // private GameObject [] players = GameObject.FindGameObjectsWithTag("Player");
+    public List <Vector3> playerPositions = new List<Vector3>();
+    private GameObject [] players = GameObject.FindGameObjectsWithTag("Player");
 
     void Awake () {
         InitCells(); //Initialize all cells
@@ -33,26 +33,26 @@ public class Grid_Behavior : MonoBehaviour {
 */
     void InitCells() {
         GameObject cellObject = new GameObject();
-//		cellObject.AddComponent<Tile>();
 
-        //creates an empty object and adds a sprite renderer component -> set the sprite to cellSprite
+
+        
         cellObject.AddComponent<SpriteRenderer>().sprite = cellSprite;
 
-        //catch the size of the sprite
+        
         cellSize = cellSprite.bounds.size;
 
-        //get the new cell size -> adjust the size of the cells to fit the size of the grid
+        
         Vector2 newCellSize = new Vector2(gridSize.x / (float)cols, gridSize.y / (float)rows);
 
-        //Get the scales so you can scale the cells and change their size to fit the grid
+        
         cellScale.x = newCellSize.x / cellSize.x;
         cellScale.y = newCellSize.y / cellSize.y;
 
-        cellSize = newCellSize; //the size will be replaced by the new computed size, we just used cellSize for computing the scale
+        cellSize = newCellSize; 
 
         cellObject.transform.localScale = new Vector2(cellScale.x, cellScale.y);
 
-        //fix the cells to the grid by getting the half of the grid and cells add and minus experiment
+        
         gridOffset.x = -(gridSize.x / 2) + cellSize.x / 2;
         gridOffset.y = -(gridSize.y / 2) + cellSize.y / 2;
 
