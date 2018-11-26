@@ -8,6 +8,7 @@ public class Move : Action { //PromptingAction {
 	private const float GRID = 2;
 	
 	private MyState state;
+
 	private Vector3 start;
 	private Vector3 dir;
 	private Vector3 end;
@@ -35,7 +36,7 @@ public class Move : Action { //PromptingAction {
 	}
 	
 	override protected void innerLoop() { //innerInnerLoop() {
-//        Debug.Log("Moving State: " + state);
+//      Debug.Log("Moving State: " + state);
 		switch(state) {
 			case MyState.PROMPTING:
 				prompt();
@@ -45,17 +46,9 @@ public class Move : Action { //PromptingAction {
 				break;
 		}
 	}
-	public bool AttemptMove(Vector3 start, Vector3 end){
-		// print("end " + end);
-		// foreach(Vector3 pos in GameObject.Find("Enemy_battleGround").GetComponent<Grid_Behavior>().gridPositions) {
-		// 	print(pos);
-		// }
-		foreach(Tile t in GameObject.Find("Enemy_battleGround").GetComponent<Grid_Behavior>().gridPositions)
-			if(t.transform.position.x == end.x && t.transform.position.y == end.y)
-				return true;
-		
-		return false;
-
+	public bool isValidMovement(Vector3 end) {
+		Tile t = GetComponentInParent<Character>().getField().getTileAt(end);
+		return t != null && t.getCharacter() == null;
 	}
 
 	private void prompt() {
@@ -78,7 +71,7 @@ public class Move : Action { //PromptingAction {
 		if((inputs[0] || inputs[1] || inputs[2] || inputs[3]) && !Input.GetKey(KeyCode.C)) {
 			start = transform.position;
 			end = start + GRID*dir;
-			if(AttemptMove(start, end) == true) {
+			if(isValidMovement(end)) {
 				state = MyState.MOVING;
 			} else {
 				Debug.Log("invalid direction");
@@ -96,6 +89,7 @@ public class Move : Action { //PromptingAction {
 				transform.Translate(ds);
 			} else {
 				transform.Translate(start + GRID*dir - pos);
+				GetComponentInParent<Character>().moveGrid(start, end);
 				setInactiveWithCompletion(true);
 			}
 		} else {
@@ -140,7 +134,7 @@ public class Move : Action { //PromptingAction {
         start = transform.position;
         end = start + dir;
         Debug.Log(end);
-        if (AttemptMove(start, end) == true)
+        if (isValidMovement(end))
         {
             state = MyState.MOVING;
         }
@@ -153,7 +147,7 @@ public class Move : Action { //PromptingAction {
         end = start + dir;
         dir = new Vector3(0, -1);
         start = transform.position;
-        if (AttemptMove(start, end) == true)
+        if (isValidMovement(end) == true)
         {
             state = MyState.MOVING;
         }
@@ -165,7 +159,7 @@ public class Move : Action { //PromptingAction {
         end = start + dir;
         dir = new Vector3(-1, 0);
         start = transform.position;
-        if (AttemptMove(start, end) == true)
+        if (isValidMovement(end))
         {
             state = MyState.MOVING;
         }
@@ -177,7 +171,7 @@ public class Move : Action { //PromptingAction {
         end = start + dir;
         dir = new Vector3(1, 0);
         start = transform.position;
-        if (AttemptMove(start, end) == true)
+        if (isValidMovement(end))
         {
             state = MyState.MOVING;
         }
@@ -194,7 +188,7 @@ public class Move : Action { //PromptingAction {
     {
         start = transform.position;
         end = start + GRID * dir;
-        if (AttemptMove(start, end))
+        if (isValidMovement(end))
         {
             state = MyState.MOVING;
         }

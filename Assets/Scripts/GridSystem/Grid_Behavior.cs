@@ -26,13 +26,21 @@ public class Grid_Behavior : MonoBehaviour {
 	}
 	
 	public bool initAddCharacter(Character c) {
+		c.setField(this);
 		foreach(Tile t in gridPositions) {
-			if(t.transform.position.x == c.transform.position.x && t.transform.position.x == c.transform.position.x) {
+			if(t.transform.position.x == c.transform.position.x && t.transform.position.y == c.transform.position.y) {
 				t.placeCharacter(c);
 				return true;
 			}
 		}
 		return false;
+	}
+
+	public Tile getTileAt(Vector3 pos) {
+		foreach(Tile t in gridPositions)
+			if(t.transform.position.x == pos.x && t.transform.position.y == pos.y)
+				return t;
+		return null;
 	}
 	
 	/*void update(){
@@ -81,6 +89,7 @@ public class Grid_Behavior : MonoBehaviour {
 				//instantiate the game object, at position pos, with rotation set to identity
                 GameObject c0 = Instantiate(cellObject, pos, Quaternion.identity) as GameObject;
 				Tile t = c0.AddComponent<Tile>();
+				t.setField(this);
 				gridPositions[row, col] = t;// new Vector3(c0.transform.position.x, c0.transform.position.y, -3.0f));
 
                 //set the parent of the cell to GRID so you can move the cells together with the grid;
