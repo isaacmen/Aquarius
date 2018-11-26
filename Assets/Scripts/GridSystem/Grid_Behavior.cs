@@ -12,29 +12,36 @@ public class Grid_Behavior : MonoBehaviour {
     [SerializeField]
     private Vector2 gridOffset;
 
-    //about cells
+    
     [SerializeField]
     private Sprite cellSprite;
     private Vector2 cellSize;
     private Vector2 cellScale;
     public List<Vector3> gridPositions = new List<Vector3>();
-    public List <Vector3> playerPositions = new List<Vector3>();
-    private GameObject [] players = GameObject.FindGameObjectsWithTag("Player");
+    public List<Vector3> playerPositions = new List<Vector3>();
+    
+    private List<Tile> tiles = new List<Tile>();
 
     void Awake () {
         InitCells(); //Initialize all cells
 	}
-  /*  void update(){
+  void update(){
         playerPositions.Clear();
+        GameObject [] players =  new GameObject[4]; 
+        players = GameObject.FindGameObjectsWithTag("Player");
         for (int i = 0 ; i < players.Length; i++){
             playerPositions.Add(players[i].transform.position);
         }
     }
-*/
+    public List<Vector3> getPlayerPositions(){
+        return playerPositions;
+    }
+    public List<Vector3> getGridPositions(){
+        return gridPositions;
+    }
+
     void InitCells() {
         GameObject cellObject = new GameObject();
-
-
         
         cellObject.AddComponent<SpriteRenderer>().sprite = cellSprite;
 
@@ -56,27 +63,29 @@ public class Grid_Behavior : MonoBehaviour {
         gridOffset.x = -(gridSize.x / 2) + cellSize.x / 2;
         gridOffset.y = -(gridSize.y / 2) + cellSize.y / 2;
 
-        //fill the grid with cells by using Instantiate
+        
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-                //add the cell size so that no two cells will have the same x and y position
+                
                 Vector2 pos = new Vector2(col * cellSize.x + gridOffset.x + transform.position.x, row * cellSize.y + gridOffset.y + transform.position.y);
 
-                //instantiate the game object, at position pos, with rotation set to identity
+                
                 GameObject cO = Instantiate(cellObject, pos, Quaternion.identity) as GameObject;
                 gridPositions.Add(new Vector3(cO.transform.position.x, cO.transform.position.y, -3.0f));
+                Tile tile = new Tile(cO.transform.position);
+                tiles.Add(tile);
 
-                //set the parent of the cell to GRID so you can move the cells together with the grid;
+                
                 cO.transform.parent = transform;
                 
             }
         }
 
-        //destroy the object used to instantiate the cells
+        
         Destroy(cellObject);
     }
 
-    //so you can see the width and height of the grid on editor
+    
     void OnDrawGizmos() {
         Gizmos.DrawWireCube(transform.position, gridSize);
     }
