@@ -25,9 +25,11 @@ public abstract class PromptingAction : Action {
 
 	protected abstract int minRange();
 	protected abstract int maxRange();
-	protected abstract void innerInnerStart();
-	protected abstract void innerInnerLoop();
-	protected abstract void innerInnerEnd();
+	protected abstract void postPromptStart();
+	protected abstract void postPromptLoop();
+	protected abstract void postPromptEnd();
 
-	override protected void innerEnd() { }
+	override protected void innerEnd() {
+		postPromptEnd();
+	}
 }

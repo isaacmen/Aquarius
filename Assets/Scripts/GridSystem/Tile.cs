@@ -31,14 +31,4 @@ public class Tile : MonoBehaviour {
 	public Character getCharacter() {
 		return onTile;
 	}
-/*
-	// creates a list of neighboring tiles
-	public List<Vector3> surroundingTiles(){
-		List<Vector3> Tiles = new List<Vector3>();
-		Tiles.Add(positon + new Vector3(0,2,0));
-		Tiles.Add(positon + new Vector3(0,-2,0));
-		Tiles.Add(positon + new Vector3(2,0,0));
-		Tiles.Add(positon + new Vector3(-2,0,0));
-		return Tiles;
-	}*/
 }

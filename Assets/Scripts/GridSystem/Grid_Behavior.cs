@@ -43,20 +43,7 @@ public class Grid_Behavior : MonoBehaviour {
 		return null;
 	}
 	
-	/*void update(){
-        playerPositions.Clear();
-        GameObject [] players =  new GameObject[4]; 
-        players = GameObject.FindGameObjectsWithTag("Player");
-        for (int i = 0 ; i < players.Length; i++){
-            playerPositions.Add(players[i].transform.position);
-        }
-    }
-    public List<Vector3> getPlayerPositions(){
-        return playerPositions;
-    }
-    public List<Vector3> getGridPositions(){
-        return gridPositions;
-    }*/
+
 
     void InitCells() {
         GameObject cellObject = new GameObject();
