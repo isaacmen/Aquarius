@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   layOnHands_healValue: 10
-  layOnHands_minRange: 1
+  layOnHands_minRange: 0
   layOnHands_maxRange: 1
   layOnHands_maxUses: 3
   unload_damage: 20

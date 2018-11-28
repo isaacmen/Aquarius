@@ -13,8 +13,8 @@ public class GameLoop : MonoBehaviour {
 	private Action activeAction = null;
 	private List<ActionType> actionTypesPerTurn = null;
 
-	private Grid_Behavior yourField;
-	private Grid_Behavior enemyField;
+	private Field yourField;
+	private Field enemyField;
 
 	[Header("Turn")]
     public List<Character> turnOrder;
@@ -30,7 +30,7 @@ public class GameLoop : MonoBehaviour {
 	void Awake() {
 		if(DEBUG_LOG) Debug.Log("GameLoop awake");
 
-		Grid_Behavior[] grids = GameObject.FindObjectsOfType<Grid_Behavior>();
+		Field[] grids = GameObject.FindObjectsOfType<Field>();
 
 		if(grids[0].name == "Player_battleGround") {
 			yourField = grids[0];
@@ -43,8 +43,12 @@ public class GameLoop : MonoBehaviour {
 		//turnOrder = new List<Character>();
 	}
 
-	public Grid_Behavior getAllyField() {
+	public Field getAllyField() {
 		return yourField;
+	}
+
+	public Field getEnemyField() {
+		return enemyField;
 	}
 
 	// could also notify ui
@@ -82,7 +86,7 @@ public class GameLoop : MonoBehaviour {
 	}
 
 	void Start() {
-
+		
 	}
 
 	void Update() {

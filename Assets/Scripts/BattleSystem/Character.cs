@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Character : MonoBehaviour {
-	private Grid_Behavior field;
+	private Field field;
 
 	[Header("Attributes")]
 	public int maxHealth;
 	public int health;
 	public int basicAttackDamage;
 	
-	public void setField(Grid_Behavior f) {
+	public void setField(Field f) {
 		field = f;
 	}
 
-	public Grid_Behavior getField() {
+	public Field getField() {
 		return field;
 	}
 

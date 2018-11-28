@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grid_Behavior : MonoBehaviour {
+public class Field : MonoBehaviour {
 [SerializeField]
     private int rows;
     [SerializeField]
@@ -36,13 +36,74 @@ public class Grid_Behavior : MonoBehaviour {
 		return false;
 	}
 
+	public Tile getTileAtYX(int y, int x) {
+		print(this.name + " " + y + " " + x);
+		return gridPositions[y, x];
+	}
+
 	public Tile getTileAt(Vector3 pos) {
 		foreach(Tile t in gridPositions)
 			if(t.transform.position.x == pos.x && t.transform.position.y == pos.y)
 				return t;
 		return null;
 	}
-	
+
+	public int[] getTileArrayCoordsYX(Tile t) {
+		for(int y = 0; y < gridPositions.GetLength(0); y++) {
+			for(int x = 0; x < gridPositions.GetLength(1); x++) {
+				if(gridPositions[y, x] == t)
+					return new int[] { y, x };
+			}
+		}
+		return null;
+	}
+
+	public static Tile getTileForCharacter(Character c) {
+		foreach(Tile t in GameLoop.getInstance().getAllyField().gridPositions)
+			if(t.getCharacter() == c)
+				return t;
+		foreach(Tile t in GameLoop.getInstance().getEnemyField().gridPositions)
+			if(t.getCharacter() == c)
+				return t;
+		return null;
+	}
+
+	public static List<Tile> tilesInCharacterRange(Character c, int low, int high, bool sameField) {
+		Tile charTile = getTileForCharacter(c);
+		List<Tile> inRange = new List<Tile>();
+
+		if(sameField) {
+			foreach(Tile t in charTile.getField().gridPositions)
+				if(low <= Field.rangeBetween(charTile, t) && Field.rangeBetween(charTile, t) <= high)
+					inRange.Add(t);
+		} else {
+			foreach(Tile t in (charTile.getField() == GameLoop.getInstance().getAllyField() ? GameLoop.getInstance().getEnemyField() : GameLoop.getInstance().getAllyField()).gridPositions)
+				if(low <= Field.rangeBetween(charTile, t) && Field.rangeBetween(charTile, t) <= high)
+					inRange.Add(t);
+		}
+		return inRange;
+	}
+
+	public static int rangeBetween(Tile t1, Tile t2) {
+		if(t1.getField() == t2.getField()) {
+			int[] t1YX = t1.getTileArrayCoords();
+			int[] t2YX = t2.getTileArrayCoords();
+
+			if(t1YX == null || t2YX == null)
+				return -1;
+
+			return Mathf.Abs(t1YX[0] - t2YX[0]) + Mathf.Abs(t1YX[1] - t2YX[1]);
+		} else {
+			Tile right = (t1.transform.position.x - t2.transform.position.x > 0) ? t1 : t2 ;
+			int[] leftYX = (right == t1) ? t2.getTileArrayCoords() : t1.getTileArrayCoords();
+			int[] rightYX = right.getTileArrayCoords();
+
+			if(leftYX == null || rightYX == null)
+				return -1;
+
+			return Mathf.Abs(rightYX[0]-leftYX[0]) + 3 + rightYX[1]-leftYX[1];
+		}
+	}
 
 
     void InitCells() {

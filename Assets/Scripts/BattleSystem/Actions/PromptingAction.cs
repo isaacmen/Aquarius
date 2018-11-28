@@ -14,7 +14,7 @@ public abstract class PromptingAction : Action {
 		tile = null;
 		Debug.Log("pick a tile");
 		print(this);
-//		inRange = GameLoop.getInstance().getAllyField().getInRange(, minRange(), maxRange());
+		inRange = Field.tilesInCharacterRange(this.GetComponentInParent<Character>(), minRange(), maxRange(), targetYourField());
 	}
 
 	override protected void innerLoop() {
@@ -25,6 +25,7 @@ public abstract class PromptingAction : Action {
 
 	protected abstract int minRange();
 	protected abstract int maxRange();
+	protected abstract bool targetYourField();
 	protected abstract void postPromptStart();
 	protected abstract void postPromptLoop();
 	protected abstract void postPromptEnd();

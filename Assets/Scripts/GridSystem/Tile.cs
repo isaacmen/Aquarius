@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Tile : MonoBehaviour {
-	private Grid_Behavior field;
+	private Field field;
 
 	[Header("Character")]
 	public Character onTile;
@@ -12,11 +12,15 @@ public class Tile : MonoBehaviour {
 		onTile = null;
 	}
 
-	public void setField(Grid_Behavior f) {
+	public int[] getTileArrayCoords() {
+		return field.getTileArrayCoordsYX(this);
+	}
+
+	public void setField(Field f) {
 		field = f;
 	}
 
-	public Grid_Behavior getField() {
+	public Field getField() {
 		return field;
 	}
 
