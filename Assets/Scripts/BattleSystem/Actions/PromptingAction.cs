@@ -19,7 +19,7 @@ public abstract class PromptingAction : Action {
 
 	override protected void innerLoop() {
 		if(!prompted) {
-
+			//
 		}
 	}
 
