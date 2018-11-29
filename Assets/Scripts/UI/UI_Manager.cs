@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class UI_Manager : MonoBehaviour {
 
     [Header("Character Health Bars")]
-    public Slider character1Health;
-    public Slider enemy1Health;
+    public GameObject healthBarParent; //Game object that holds all the health bars, for ease
+    private HealthBar[] healthBars; //The actual list of health bars
 
     [Header("Characters")]
     public GameObject character1;
@@ -23,8 +23,7 @@ public class UI_Manager : MonoBehaviour {
 
     private void Start()
     {
-        setHealthSliders(character1Health, character1);
-        setHealthSliders(enemy1Health, enemy1);
+        healthBars = healthBarParent.GetComponentsInChildren<HealthBar>();
     }
 
     private void Update()
@@ -32,26 +31,23 @@ public class UI_Manager : MonoBehaviour {
         updateHealthBars();
     }
 
-    public void updateHealthBars()
-    {
-        character1Health.value = character1.GetComponent<Character>().health;
-        enemy1Health.value = enemy1.GetComponent<Character>().health;
-    }
-
-    private void setHealthSliders(Slider healthSlider, GameObject character)
-    {
-        healthSlider.maxValue = character.GetComponent<Character>().maxHealth;
-        healthSlider.value = healthSlider.maxValue;
-    }
-
     public void updateTurn()
     {
         turnOrder.GetComponent<TurnOrderUI>().updateTurn();
         updateHealthBars();
+        
         for (int i=0; i < availableActions.transform.childCount; i++)
         {
             GameObject child = availableActions.transform.GetChild(1).gameObject;
             child.SetActive(true);
+        }
+    }
+
+    public void updateHealthBars()
+    {
+        foreach (HealthBar healthBar in healthBars)
+        {
+            healthBar.updateHealthBar();
         }
     }
 }

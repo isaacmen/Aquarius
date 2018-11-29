@@ -4,22 +4,34 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class TurnOrderUI : MonoBehaviour {
-    public Image[] images;
+    [Header("Turn Order Bar")]
+    public Image[] imageSpaces; // the spaces for the actual shit
+    public Vector3 indicatorOffset; // the offset from the center where the indicator will be
 
     private Vector3[] positions;
-    private Vector3[] scales;
+    //private Vector3[] scales;
+
+    [Header("Current Turn Panel")]
+    public Text currentTurnText;
+    public Image characterPic;
+
+    //[Header("General Game Stuff")]
+    private GameLoop gameLoop;
     private int currentTurn;
 
     private void Start()
     {
+        gameLoop = GameLoop.getInstance();
         currentTurn = 1;
-        positions = new Vector3[images.Length];
-        scales = new Vector3[images.Length];
-        for (int i = 0; i < images.Length; i++)
+        positions = new Vector3[imageSpaces.Length];
+        //scales = new Vector3[images.Length];
+        for (int i = 0; i < imageSpaces.Length; i++)
         {
-            positions[i] = images[i].rectTransform.position;
-            scales[i] = images[i].rectTransform.localScale;
+            positions[i] = imageSpaces[i].rectTransform.position;
+            //scales[i] = images[i].rectTransform.localScale;
         }
+
+        updateCurrentInfo();
     }
 
     private void Update()
@@ -33,13 +45,9 @@ public class TurnOrderUI : MonoBehaviour {
 
     public void updateTurn()
     {
-        for (int i = 0; i < images.Length; i++)
-        {
-            int nextPositionIndex = (i + currentTurn) % images.Length;
-            images[i].rectTransform.position = positions[nextPositionIndex];
-            images[i].rectTransform.localScale = scales[nextPositionIndex];
-        }
-        currentTurn++;
+        updateTurnBar();
+        updateTurnIndicator();
+        updateCurrentInfo();
     }
 
     public void addNewTurn()
@@ -52,5 +60,42 @@ public class TurnOrderUI : MonoBehaviour {
          *   - basically, we'll rewrite, but save this for later 
          *     when we can better test
          */
+    }
+
+    private void updateTurnIndicator()
+    {
+
+    }
+
+    private void updateTurnBar()
+    {
+        ///Will Hopefully be Obsolete
+        List<Character> turnOrder = gameLoop.turnOrder;
+        for (int i = 0; i < imageSpaces.Length; i++)
+        {
+            int nextPositionIndex = (i + currentTurn) % imageSpaces.Length;
+            //images[i].rectTransform.position = positions[nextPositionIndex];
+            //images[i].rectTransform.localScale = scales[nextPositionIndex];
+        }
+        currentTurn++;
+    }
+
+    private void updateCurrentInfo()
+    {
+        updateCurrentText();
+        updateCurrentPic();
+    }
+
+    private void updateCurrentText()
+    {
+        currentTurnText.text = gameLoop.getCharacterTurn() + "'s turn";
+    }
+
+    private void updateCurrentPic()
+    {
+        // Updating the portrait of the current player
+        Character currentCharacter = gameLoop.getCharacterTurn();
+        if (currentCharacter.GetType() == typeof(AllyCharacter))
+            characterPic.sprite = currentCharacter.portrait;
     }
 }

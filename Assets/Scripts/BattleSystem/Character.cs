@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Character : MonoBehaviour {
 	private Field field;
@@ -9,6 +10,9 @@ public class Character : MonoBehaviour {
 	public int maxHealth;
 	public int health;
 	public int basicAttackDamage;
+
+    [Header("Visual Stuff")]
+    public Sprite portrait;
 	
 	public void setField(Field f) {
 		field = f;
