@@ -359,6 +359,7 @@ public class GameLoop : MonoBehaviour {
             activeAction = turnActions[i - 1];
             if (turnActions[i - 1].GetType() != typeof(Pass))
                 continue;
+            GetComponent<UI_Manager>().updateActionText(turnActions[i - 1].GetType().ToString());
             Debug.Log(turn + " passed.");
             activeAction.setActive();
             setState(GameState.ALLY_ACTION_ACTIVE);
@@ -373,6 +374,7 @@ public class GameLoop : MonoBehaviour {
             if (turnActions[i - 1].GetType() != typeof(BasicAttack))
                 continue;
             Debug.Log(turn + " used BasicAttack!");
+            GetComponent<UI_Manager>().updateActionText(turnActions[i - 1].GetType().ToString());
             activeAction.setActive();
             setState(GameState.ALLY_ACTION_ACTIVE);
         }
@@ -389,6 +391,7 @@ public class GameLoop : MonoBehaviour {
                 continue;
 
             Debug.Log(turn + " used " + turnActions[i - 1].GetType() + "!");
+            GetComponent<UI_Manager>().updateActionText(turnActions[i - 1].GetType().ToString());
             activeAction.setActive();
             setState(GameState.ALLY_ACTION_ACTIVE);
         }
@@ -403,6 +406,7 @@ public class GameLoop : MonoBehaviour {
                 continue;
 
             //Debug.Log("Moving " + direction);
+            GetComponent<UI_Manager>().updateActionText(turnActions[i - 1].GetType().ToString());
             activeAction.setActive();
             Move moveAction = (Move)activeAction;
             moveAction.moveDirection(direction);

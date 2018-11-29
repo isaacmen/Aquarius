@@ -24,7 +24,9 @@ public class HealthBar : MonoBehaviour
 
     private void Update()
     {
-        updatePosition();
+        if (cam)
+            updatePosition();
+        updateHealthBar();
     }
 
     private void updatePosition()
@@ -42,6 +44,7 @@ public class HealthBar : MonoBehaviour
 
     public void updateHealthBar()
     {
+        slider.maxValue = character.GetComponent<Character>().maxHealth;
         slider.value = character.GetComponent<Character>().health;
     }
 }
