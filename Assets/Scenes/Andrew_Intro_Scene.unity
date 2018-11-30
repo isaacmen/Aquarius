@@ -232,7 +232,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 997a43b767814dd0a7642ec9b78cba41, type: 3}
+    m_Font: {fileID: 12800000, guid: d5964c4752b804ef598a4b58bd2d09e8, type: 3}
     m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 0
@@ -714,8 +714,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textDisplay: {fileID: 1101581729}
   sentences:
-  - 'LIBRA: Aha! I am a giant now!'
-  - 'LEO: But you''re not Aquarius!'
+  - "AQUARIUS: \u201CIs this the best the Three Kingdoms could put forth? One stinky
+    kitten?\u201D"
+  - "LEO: \u201CI\u2019m more than enough for you, you oversized piece of sashimi!\u201D"
   - 'LIBRA: We ran out of budget so I am the boss now.'
   - 'LEO: ...'
   - 'LIBRA: Alright. Now you must die. <3'
@@ -2148,8 +2149,9 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
-  m_sharedMaterial: {fileID: 2140474, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5a6801eaed486411d8707c25729767dd, type: 2}
+  m_sharedMaterial: {fileID: 21507304061671984, guid: 5a6801eaed486411d8707c25729767dd,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2759,6 +2761,64 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4568928978255098, guid: ff550ebe11c82473b90bca2378919568,
     type: 2}
   m_PrefabInternal: {fileID: 1599398071}
+--- !u!1 &1673493344
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1673493347}
+  - component: {fileID: 1673493346}
+  - component: {fileID: 1673493345}
+  m_Layer: 0
+  m_Name: AbilityCatalog
+  m_TagString: AbilityCatalog
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1673493345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1673493344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3587b2ca7eceb4a30b83a622ee9871b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1673493346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1673493344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3f1c1719b83b4093ab28c3fdc89a01c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerWordKill: 0
+  lightning: 0
+  crescendo: 0
+  arpeggioPocoAPoco: 0
+  layOnHands: 0
+  shieldBash: 0
+--- !u!4 &1673493347
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1673493344}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1010.6835, y: 776.5277, z: 18.22839}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1674795948
 GameObject:
   m_ObjectHideFlags: 0
@@ -2947,7 +3007,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 997a43b767814dd0a7642ec9b78cba41, type: 3}
+    m_Font: {fileID: 12800000, guid: d5964c4752b804ef598a4b58bd2d09e8, type: 3}
     m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 0
