@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212907515656905992}
   - component: {fileID: 114464387032398668}
   m_Layer: 0
-  m_Name: Aquarius_Leo_v2_0
+  m_Name: Leo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55,7 +55,7 @@ MonoBehaviour:
   maxHealth: 0
   health: 0
   basicAttackDamage: 0
-  gridPosition: 3
+  portrait: {fileID: 0}
 --- !u!212 &212907515656905992
 SpriteRenderer:
   m_ObjectHideFlags: 1
