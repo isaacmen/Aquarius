@@ -4,12 +4,28 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour {
 	private Field field;
+	private PromptingAction action;
 
 	[Header("Character")]
 	public Character onTile;
 
 	void Awake() {
 		onTile = null;
+		action = null;
+	}
+
+	void Update() {
+		
+	}
+
+	public void setTargetableForPromptingAction(PromptingAction pa) {
+		action = pa;
+		GetComponent<SpriteRenderer>().sprite = field.tileClickableSprite;
+	}
+
+	public void setPromptDone() {
+		action = null;
+		GetComponent<SpriteRenderer>().sprite = field.tileRegularSprite;
 	}
 
 	public int[] getTileArrayCoords() {

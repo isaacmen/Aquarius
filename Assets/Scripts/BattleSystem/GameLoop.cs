@@ -396,7 +396,7 @@ public class GameLoop : MonoBehaviour {
             setState(GameState.ALLY_ACTION_ACTIVE);
         }
     }
-
+	/*
     public void moveInDirection(string direction)
     {
         for (int i = 1; i < turnActions.Count + 1; i++)
@@ -412,6 +412,6 @@ public class GameLoop : MonoBehaviour {
             moveAction.moveDirection(direction);
             setState(GameState.ALLY_ACTION_ACTIVE);
         }
-    }
+    }*/
     #endregion
 }

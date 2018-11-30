@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Field : MonoBehaviour {
-[SerializeField]
+	[SerializeField]
     private int rows;
     [SerializeField]
     private int cols;
@@ -13,8 +13,10 @@ public class Field : MonoBehaviour {
     private Vector2 gridOffset;
 
     
-    [SerializeField]
-    private Sprite cellSprite;
+    [Header("Sprites")]
+    public Sprite tileRegularSprite;
+	public Sprite tileClickableSprite;
+
     private Vector2 cellSize;
     private Vector2 cellScale;
 
@@ -109,10 +111,10 @@ public class Field : MonoBehaviour {
     void InitCells() {
         GameObject cellObject = new GameObject();
         
-        cellObject.AddComponent<SpriteRenderer>().sprite = cellSprite;
+        cellObject.AddComponent<SpriteRenderer>().sprite = tileRegularSprite;
 
         
-        cellSize = cellSprite.bounds.size;
+        cellSize = tileRegularSprite.bounds.size;
 
         
         Vector2 newCellSize = new Vector2(gridSize.x / (float)cols, gridSize.y / (float)rows);
@@ -132,17 +134,20 @@ public class Field : MonoBehaviour {
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
                 
-                Vector2 pos = new Vector2(col * cellSize.x + gridOffset.x + transform.position.x, row * cellSize.y + gridOffset.y + transform.position.y);
+                Vector2 pos = new Vector2(col * cellSize.x + gridOffset.x + transform.position.x, (2-row) * cellSize.y + gridOffset.y + transform.position.y);
 				
 				//instantiate the game object, at position pos, with rotation set to identity
                 GameObject c0 = Instantiate(cellObject, pos, Quaternion.identity) as GameObject;
+				c0.name = "Tile(" + row + ", " + col + ")"; 
+
 				Tile t = c0.AddComponent<Tile>();
 				t.setField(this);
-				gridPositions[row, col] = t;// new Vector3(c0.transform.position.x, c0.transform.position.y, -3.0f));
+				gridPositions[2-row, col] = t;
 
-                //set the parent of the cell to GRID so you can move the cells together with the grid;
-                c0.transform.parent = transform;
-                
+				c0.AddComponent<BoxCollider>();
+
+				//set the parent of the cell to GRID so you can move the cells together with the grid;
+				c0.transform.parent = transform;
             }
         }
 
