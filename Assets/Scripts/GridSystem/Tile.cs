@@ -28,7 +28,7 @@ public class Tile : MonoBehaviour {
 		GetComponent<SpriteRenderer>().sprite = field.tileRegularSprite;
 	}
 
-	public int[] getTileArrayCoords() {
+	public int[] getTileArrayCoordsYX() {
 		return field.getTileArrayCoordsYX(this);
 	}
 

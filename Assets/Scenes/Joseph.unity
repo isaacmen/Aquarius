@@ -202,18 +202,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a8c3a0781bf37b40b14803bd4037172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layOnHands_healValue: 10
+  layOnHands_healValue: 15
   layOnHands_minRange: 0
   layOnHands_maxRange: 1
   layOnHands_maxUses: 3
-  unload_damage: 20
+  unload_damage: 24
   unload_minRange: 1
-  unload_maxRange: 3
-  unload_maxUses: 2
-  fireball_damage: 10
-  fireball_minRange: 2
+  unload_maxRange: 2
+  unload_maxUses: 1
+  fireball_damage: 14
+  fireball_minRange: 3
   fireball_maxRange: 4
-  fireball_maxUses: 4
+  fireball_maxUses: 3
 --- !u!4 &136673556
 Transform:
   m_ObjectHideFlags: 0
@@ -499,7 +499,7 @@ MonoBehaviour:
   state: 0
   turnOrder: []
   randomizeTurnOrder: 1
-  DEBUG_LOG: 1
+  DEBUG_LOG: 0
 --- !u!1 &874798706 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1093174851331798, guid: 6709239ab61b2534caf5424902629b1c,
@@ -568,6 +568,16 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 631bdc4994c5040b2a37cdddfaacdbf1,
         type: 3}
+    - target: {fileID: 114289193526092752, guid: 6709239ab61b2534caf5424902629b1c,
+        type: 2}
+      propertyPath: basicAttackMinRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114289193526092752, guid: 6709239ab61b2534caf5424902629b1c,
+        type: 2}
+      propertyPath: basicAttackMaxRange
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6709239ab61b2534caf5424902629b1c, type: 2}
   m_IsPrefabAsset: 0
@@ -622,6 +632,8 @@ MonoBehaviour:
   maxHealth: 150
   health: 150
   basicAttackDamage: 8
+  basicAttackMinRange: 2
+  basicAttackMaxRange: 3
   portrait: {fileID: 0}
   type: 1
 --- !u!212 &1119493868
@@ -868,6 +880,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 212064411187966978, guid: a013fc6590226654ca3c25e2f8ccd742,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1a6bd3bd43e874dea8b773fdc0a21b17,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a013fc6590226654ca3c25e2f8ccd742, type: 2}
   m_IsPrefabAsset: 0
@@ -876,6 +894,24 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1977113524068710, guid: a013fc6590226654ca3c25e2f8ccd742,
     type: 2}
   m_PrefabInternal: {fileID: 1594521734}
+--- !u!95 &1594521736
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1594521735}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0a50f9bdd901f4cd9adfc16496206aa8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1827868493 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114289193526092752, guid: 6709239ab61b2534caf5424902629b1c,
@@ -926,6 +962,27 @@ Prefab:
       propertyPath: type
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 212085248236197328, guid: 227c5d4f93e389a4ba8d3ec3c272d011,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7af1651bf893f47669f97ac2fb1f18d5,
+        type: 3}
+    - target: {fileID: 114680387680037462, guid: 227c5d4f93e389a4ba8d3ec3c272d011,
+        type: 2}
+      propertyPath: basicAttackRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114680387680037462, guid: 227c5d4f93e389a4ba8d3ec3c272d011,
+        type: 2}
+      propertyPath: basicAttackMinRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114680387680037462, guid: 227c5d4f93e389a4ba8d3ec3c272d011,
+        type: 2}
+      propertyPath: basicAttackMaxRange
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 227c5d4f93e389a4ba8d3ec3c272d011, type: 2}
   m_IsPrefabAsset: 0
@@ -949,7 +1006,7 @@ Animator:
   m_GameObject: {fileID: 2023541758}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f20668dff627447fcb9ab5964b5566ef, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -39,8 +39,7 @@ public class Field : MonoBehaviour {
 	}
 
 	public Tile getTileAtYX(int y, int x) {
-		print(this.name + " " + y + " " + x);
-		return gridPositions[y, x];
+		return (y < 0 || y > 2 || x < 0 || x > 2) ? null : gridPositions[y, x];
 	}
 
 	public Tile getTileAt(Vector3 pos) {
@@ -88,8 +87,8 @@ public class Field : MonoBehaviour {
 
 	public static int rangeBetween(Tile t1, Tile t2) {
 		if(t1.getField() == t2.getField()) {
-			int[] t1YX = t1.getTileArrayCoords();
-			int[] t2YX = t2.getTileArrayCoords();
+			int[] t1YX = t1.getTileArrayCoordsYX();
+			int[] t2YX = t2.getTileArrayCoordsYX();
 
 			if(t1YX == null || t2YX == null)
 				return -1;
@@ -97,8 +96,8 @@ public class Field : MonoBehaviour {
 			return Mathf.Abs(t1YX[0] - t2YX[0]) + Mathf.Abs(t1YX[1] - t2YX[1]);
 		} else {
 			Tile right = (t1.transform.position.x - t2.transform.position.x > 0) ? t1 : t2 ;
-			int[] leftYX = (right == t1) ? t2.getTileArrayCoords() : t1.getTileArrayCoords();
-			int[] rightYX = right.getTileArrayCoords();
+			int[] leftYX = (right == t1) ? t2.getTileArrayCoordsYX() : t1.getTileArrayCoordsYX();
+			int[] rightYX = right.getTileArrayCoordsYX();
 
 			if(leftYX == null || rightYX == null)
 				return -1;

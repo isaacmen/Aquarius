@@ -3,48 +3,66 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Scorpio
-public class Fireball : Action {
-	private MyState state;
-//	private Tile target;
-
-	private const int CENTER_DAMAGE = 16;
-	private const int EDGE_DAMAGE = 8;
-
+public class Fireball : PromptingAction {
 	override public ActionType getActionType() {
 		return ActionType.ABILITY;
 	}
 
-	public override int maxUses() {
+	override public int maxUses() {
 		return Constants.getInstance().fireball_maxUses;
 	}
 
-	override protected void innerStart() {
-		state = MyState.PROMPTING;
-		// print to pick a tile
+	override protected int minRange() { return Constants.getInstance().fireball_minRange; }
+	override protected int maxRange() { return Constants.getInstance().fireball_maxRange; }
+
+	override protected bool validTileToShow(Tile t) {
+		return true;
 	}
 
-	override protected void innerLoop() {
-		switch(state) {
-			case MyState.PROMPTING:
-				// if(tile picked) {
-				//					state = MyState.ACTING;
-				//					target = getTileFromInput(inputCode);
-				//				} else {
-				//					setInactiveWithCompletion(false);
-				//				}
-				state = MyState.ACTING;
-				break;
-			case MyState.ACTING:
+	protected override bool validTileToClick(Tile t) {
+		return true;
+	}
 
-				setInactiveWithCompletion(true);
-				break;
+	override protected bool targetYourField() { return false; }
+
+	override protected void postPromptStart() {
+		GetComponentInParent<Animator>().Play("Attacking");
+	}
+
+	override protected void postPromptLoop() {
+		if(GetComponentInParent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle")) {
+			if(getTarget().getCharacter() != null)
+				getTarget().getCharacter().takeDamage(Constants.getInstance().fireball_damage);
+
+			int[] targetYX = getTarget().getTileArrayCoordsYX();
+			int[] yx = new int[] { 0, 1 };
+			for(int i = 0; i < 4; i++) {
+				Tile t = getTarget().getField().getTileAtYX(targetYX[0] + yx[0], targetYX[1] + yx[1]);
+				if(t != null && t.getCharacter() != null)
+					t.getCharacter().takeDamage(Constants.getInstance().fireball_damage);
+				nextDYX(yx);
+			}
+			setInactiveWithCompletion(true);
 		}
-
 	}
 
-	override protected void innerEnd() {}
-
-	private enum MyState {
-		PROMPTING, ACTING
+	private void nextDYX(int[] yx) {
+		if(yx[0] == 0) {
+			if(yx[1] == 1) {
+				yx[1] = -1;
+			} else {
+				yx[0] = 1;
+				yx[1] = 0;
+			}
+		} else {
+			if(yx[0] == 1) {
+				yx[0] = -1;
+			} else {
+				yx[1] = 1;
+				yx[0] = 0;
+			}
+		}
 	}
+
+	override protected void innerEnd() { }
 }

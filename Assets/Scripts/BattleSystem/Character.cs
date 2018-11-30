@@ -10,8 +10,10 @@ public class Character : MonoBehaviour {
 	public int maxHealth;
 	public int health;
 	public int basicAttackDamage;
+	public int basicAttackMinRange;
+	public int basicAttackMaxRange;
 
-    [Header("Visual Stuff")]
+	[Header("Visual Stuff")]
     public Sprite portrait;
 	
 	public void setField(Field f) {
@@ -36,6 +38,6 @@ public class Character : MonoBehaviour {
 	}
 
 	public void takeDamage(int d) {
-		health -= d;
+		health = Mathf.Max(Mathf.Min(health - d, maxHealth), 0);
 	}
 }
