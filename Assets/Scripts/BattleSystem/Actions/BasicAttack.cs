@@ -55,6 +55,8 @@ public class BasicAttack : Action {
 	private void damage() {
 		if(target != null) {
 			target.takeDamage(GameObject.Find(this.name).GetComponent<Character>().basicAttackDamage);
+			GetComponentInParent<Animator>().Play("Attacking");
+			setInactiveWithCompletion(true);
 		} else {
 			Debug.Log("NO/INVALID TARGET");
 		}

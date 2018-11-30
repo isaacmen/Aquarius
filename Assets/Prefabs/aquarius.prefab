@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 95637715354225960}
   - component: {fileID: 114868621697029316}
   m_Layer: 0
-  m_Name: Aquarius
+  m_Name: aquarius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

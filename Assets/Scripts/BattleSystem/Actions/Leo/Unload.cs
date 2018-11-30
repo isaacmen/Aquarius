@@ -3,26 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Leo
-public class Unload : Action {
+public class Unload : PromptingAction {
+
 	override public ActionType getActionType() {
 		return ActionType.ABILITY;
 	}
 
-	public override int maxUses() {
+	override public int maxUses() {
 		return Constants.getInstance().unload_maxUses;
 	}
 
-	override protected void innerStart() {
-		setInactiveWithCompletion(true);
+	override protected int minRange() { return Constants.getInstance().unload_minRange; }
+	override protected int maxRange() { return Constants.getInstance().unload_maxRange; }
+
+	override protected bool validTileToShow(Tile t) {
+		return true;
 	}
 
-	override protected void innerLoop() {
-
+	protected override bool validTileToClick(Tile t) {
+		return t.getCharacter() != null;
 	}
 
-	override protected void innerEnd() {}
+	override protected bool targetYourField() { return false; }
 
-	private enum MyState {
-
+	override protected void postPromptStart() {
+		GetComponentInParent<Animator>().Play("Attacking");
 	}
+
+	override protected void postPromptLoop() {
+		if(GetComponentInParent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle")) {
+			getTarget().getCharacter().takeDamage(Constants.getInstance().unload_damage);
+			setInactiveWithCompletion(true);
+		}
+	}
+
+	override protected void innerEnd() { }
 }

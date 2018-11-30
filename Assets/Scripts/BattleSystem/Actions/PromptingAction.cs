@@ -17,7 +17,7 @@ public abstract class PromptingAction : Action {
 		Debug.Log("pick a tile");
 		inRange = Field.tilesInCharacterRange(this.GetComponentInParent<Character>(), minRange(), maxRange(), targetYourField());
 		foreach(Tile t in inRange) {
-			if(validTile(t))
+			if(validTileToShow(t))
 				t.setTargetableForPromptingAction(this);
 		}
 	}
@@ -30,16 +30,24 @@ public abstract class PromptingAction : Action {
 				if(Physics.Raycast(ray, out hit, 100)) {
 					GameObject obj = hit.collider.gameObject;
 
-
 					if(obj.name.Contains("Tile") && inRange.Contains(obj.GetComponent<Tile>())) {
 						target = obj.GetComponent<Tile>();
-						foreach(Tile t in inRange)
-							t.setPromptDone();
-					
-						postPromptStart();
-						innerStarted = true;
+						if(validTileToClick(target)) {
+							foreach(Tile t in inRange)
+								t.setPromptDone();
+
+							postPromptStart();
+							innerStarted = true;
+						} else {
+							print("invalid target");
+						}
 					}
 				}
+			}
+			if(Input.GetKey(KeyCode.C)) {
+				foreach(Tile t in inRange)
+					t.setPromptDone();
+				setInactiveWithCompletion(false);
 			}
 		} else {
 			postPromptLoop();
@@ -48,7 +56,8 @@ public abstract class PromptingAction : Action {
 
 	protected abstract int minRange();
 	protected abstract int maxRange();
-	protected abstract bool validTile(Tile t);
+	protected abstract bool validTileToShow(Tile t);
+	protected abstract bool validTileToClick(Tile t);
 	protected abstract bool targetYourField();
 
 	protected abstract void postPromptStart();

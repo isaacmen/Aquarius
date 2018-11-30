@@ -22,8 +22,12 @@ public class Move : PromptingAction {
 	override protected int minRange() { return 1; }
 	override protected int maxRange() { return 1; }
 
-	protected override bool validTile(Tile t) {
+	override protected bool validTileToShow(Tile t) {
 		return t.getCharacter() == null;
+	}
+
+	protected override bool validTileToClick(Tile t) {
+		return true;
 	}
 
 	override protected bool targetYourField() { return true; }
