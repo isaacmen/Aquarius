@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212969564463664034}
   - component: {fileID: 95239300991297476}
   m_Layer: 0
-  m_Name: ScorpioAttack
+  m_Name: Scorpio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

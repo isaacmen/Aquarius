@@ -9,48 +9,49 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1700574100427248}
+  m_RootGameObject: {fileID: 1124066542926736}
   m_IsPrefabAsset: 1
---- !u!1 &1700574100427248
+--- !u!1 &1124066542926736
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4106832636994564}
-  - component: {fileID: 212153024594266844}
-  - component: {fileID: 95638632638410794}
+  - component: {fileID: 4993380774199950}
+  - component: {fileID: 212307134554446526}
+  - component: {fileID: 95520674630354440}
+  - component: {fileID: 114265314089467102}
   m_Layer: 0
-  m_Name: Enlight15_0
+  m_Name: Libra
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4106832636994564
+--- !u!4 &4993380774199950
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1700574100427248}
+  m_GameObject: {fileID: 1124066542926736}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.799, y: 0.085, z: 0}
-  m_LocalScale: {x: 1.685, y: 1.685, z: 1.685}
+  m_LocalPosition: {x: 4.07, y: 0.08, z: 0}
+  m_LocalScale: {x: 3.2015939, y: 3.2015939, z: 3.2015939}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &95638632638410794
+--- !u!95 &95520674630354440
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1700574100427248}
+  m_GameObject: {fileID: 1124066542926736}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 34e55ac2c8adf4b57b6213d1cae551df, type: 2}
+  m_Controller: {fileID: 9100000, guid: f20668dff627447fcb9ab5964b5566ef, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -59,12 +60,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!212 &212153024594266844
+--- !u!114 &114265314089467102
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1124066542926736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1dd47923db6f494285f21e5cf8eba56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!212 &212307134554446526
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1700574100427248}
+  m_GameObject: {fileID: 1124066542926736}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -94,12 +106,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: cd7249e7f48584490818456068f5abc9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7af1651bf893f47669f97ac2fb1f18d5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.64, y: 0.25}
+  m_Size: {x: 0.62, y: 0.62}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

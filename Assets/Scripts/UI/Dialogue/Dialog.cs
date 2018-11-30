@@ -7,7 +7,7 @@ using TMPro;
 public class Dialog : MonoBehaviour {
 
     public TextMeshProUGUI textDisplay;
-    [TextArea(5, 15)]
+    [TextArea(3, 15)]
     public string[] sentences;
     private int index;
     private bool option1 = false;
