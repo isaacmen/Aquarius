@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicAttack : PromptingAction {
-	
+// Libra
+public class ShieldBash : PromptingAction {
 	override public ActionType getActionType() {
 		return ActionType.ABILITY;
 	}
 
 	override public int maxUses() {
-		return 9999999;
+		return Constants.getInstance().shieldBash_maxUses;
 	}
 
-	override protected int minRange() { return GetComponentInParent<Character>().basicAttackMinRange; }
-	override protected int maxRange() { return GetComponentInParent<Character>().basicAttackMaxRange; }
+	override protected int minRange() { return Constants.getInstance().shieldBash_minRange; }
+	override protected int maxRange() { return Constants.getInstance().shieldBash_maxRange; }
 
 	override protected bool validTileToShow(Tile t) {
 		return true;
@@ -31,7 +31,8 @@ public class BasicAttack : PromptingAction {
 
 	override protected void postPromptLoop() {
 		if(GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle")) {
-			target.getCharacter().takeDamage(GetComponentInParent<Character>().basicAttackDamage);
+			target.getCharacter().takeDamage(Constants.getInstance().shieldBash_damage);
+			GameLoop.getInstance().statusManager.addStatusEffect(this.GetComponentInParent<Character>(), new List<Character>() { target.getCharacter() }, StatusEffect.STUNNED);
 			setInactiveWithCompletion(true);
 		}
 	}

@@ -32,9 +32,16 @@ public class Move : PromptingAction {
 
 	override protected bool targetYourField() { return true; }
 
+	override protected void innerStart() {
+		base.innerStart();
+
+		Character c = GetComponentInParent<Character>();
+		c.getField().getTileAt(c.transform.position).setSecondarySprite();
+	}
+
 	override protected void postPromptStart() {
 		start = transform.position;
-		end = getTarget().transform.position - new Vector3(0, 0, 3);
+		end = target.transform.position - new Vector3(0, 0, 3);
 		dir = (end - start) / (end-start).magnitude;
 	}
 

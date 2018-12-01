@@ -13,6 +13,8 @@ public class GameLoop : MonoBehaviour {
 	private Action activeAction = null;
 	private List<ActionType> actionTypesPerTurn = null;
 
+	public StatusEffectManager statusManager;
+
 	private Field yourField;
 	private Field enemyField;
 
@@ -41,6 +43,7 @@ public class GameLoop : MonoBehaviour {
 		}
 
 		//turnOrder = new List<Character>();
+		statusManager = new StatusEffectManager();
 	}
 
 	public Field getAllyField() {
@@ -57,7 +60,7 @@ public class GameLoop : MonoBehaviour {
 		turnOrder.Remove(turnDone);
 		turnOrder.Add(turnDone);
 		setState(GameState.START_TURN);
-        GetComponent<UI_Manager>().updateTurn();
+//        GetComponent<UI_Manager>().updateTurn();
     }
 
 	// may be unnecessary
@@ -155,7 +158,7 @@ public class GameLoop : MonoBehaviour {
 							}
 						}
                     }
-                    GetComponent<UI_Manager>().resetMenus(actionTypesPerTurn.IndexOf(ActionType.MOVE) != -1);
+//                    GetComponent<UI_Manager>().resetMenus(actionTypesPerTurn.IndexOf(ActionType.MOVE) != -1);
 
                     // if there are no more abilities in the turn, remove
                     // all actions with ActionType.ABILITY from turnActions
@@ -214,11 +217,11 @@ public class GameLoop : MonoBehaviour {
         switch (state)
         {
             case GameState.START_TURN:
-                // resets variables for each turn
-                turn = getCharacterTurn();
-                Debug.Log(turn.name + "'s Turn!");
+				// resets variables for each turn
+				turn = getCharacterTurn();
+				Debug.Log(turn.name + "'s Turn!");
 
-                if (turn.GetType() == typeof(AllyCharacter))
+				if (turn.GetType() == typeof(AllyCharacter))
                 {
                     turnActions = ((AllyCharacter)turn).getActions();
                     actionTypesPerTurn = ((AllyCharacter)turn).getActionTypesPerTurn();
@@ -283,8 +286,15 @@ public class GameLoop : MonoBehaviour {
 		switch(state) {
 			case GameState.START_TURN:
 				// resets variables for each turn
-				turn = getCharacterTurn();
-				Debug.Log(turn.name + "'s Turn!");
+				do {
+					turn = getCharacterTurn();
+					Debug.Log(turn.name + "'s Turn!");
+					if(turn.statusEffects.Contains(StatusEffect.STUNNED)) {
+						Debug.Log(turn.name + " is stunned!");
+						nextTurn();
+					}
+				} while(turn.statusEffects.Contains(StatusEffect.STUNNED));
+				statusManager.onTurn(turn);
 
 				if(turn.GetType() == typeof(AllyCharacter)) {
 					turnActions = ((AllyCharacter)turn).getActions();
@@ -325,6 +335,7 @@ public class GameLoop : MonoBehaviour {
 				break;
 			case GameState.ENEMY_STATE:
 				Debug.Log("GameLoop entered ENEMY_STATE for " + turn);
+				GameObject.Find("Libra").GetComponent<Character>().takeDamage(50);
 				break;
 		}
 	}

@@ -206,6 +206,13 @@ MonoBehaviour:
   layOnHands_minRange: 0
   layOnHands_maxRange: 1
   layOnHands_maxUses: 3
+  guard_minRange: 0
+  guard_maxRange: 0
+  guard_maxUses: 2
+  shieldBash_minRange: 1
+  shieldBash_maxRange: 2
+  shieldBash_damage: 8
+  shieldBash_maxUses: 1
   unload_damage: 24
   unload_minRange: 1
   unload_maxRange: 2
@@ -292,6 +299,12 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 1a3a456fea65c485eab25fd5a47af916,
         type: 3}
+    - target: {fileID: 114820808428215652, guid: 64d268c2a26f8f54680b5fcb2f7ff68f,
+        type: 2}
+      propertyPath: tileAffectedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 238898372a1bf4274acf1ddefa60e2b3,
+        type: 3}
     m_RemovedComponents:
     - {fileID: 114031591541258250, guid: 64d268c2a26f8f54680b5fcb2f7ff68f, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 64d268c2a26f8f54680b5fcb2f7ff68f, type: 2}
@@ -299,6 +312,11 @@ Prefab:
 --- !u!1 &389518945 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1870322179713644, guid: 033c93452962a524f8a752ad31ce0e50,
+    type: 2}
+  m_PrefabInternal: {fileID: 2080246841}
+--- !u!1 &402902569 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1648986234462050, guid: 033c93452962a524f8a752ad31ce0e50,
     type: 2}
   m_PrefabInternal: {fileID: 2080246841}
 --- !u!1 &725275684
@@ -484,6 +502,8 @@ MonoBehaviour:
   healthBarParent: {fileID: 0}
   turnOrder: {fileID: 741063037}
   availableActions: {fileID: 389518945}
+  actions: {fileID: 402902569}
+  moves: {fileID: 0}
   actionText: {fileID: 0}
 --- !u!114 &835699532
 MonoBehaviour:
@@ -629,9 +649,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c7c4de2b4323d84da0a05a640b9ebc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statusEffects: 
   maxHealth: 150
   health: 150
-  basicAttackDamage: 8
+  basicAttackDamage: 10
   basicAttackMinRange: 2
   basicAttackMaxRange: 3
   portrait: {fileID: 0}
@@ -837,6 +858,17 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 1a3a456fea65c485eab25fd5a47af916,
         type: 3}
+    - target: {fileID: 114999377057791432, guid: 59ebd6f6915872046af9e9e11c010966,
+        type: 2}
+      propertyPath: tileAffectedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 238898372a1bf4274acf1ddefa60e2b3,
+        type: 3}
+    - target: {fileID: 114999377057791432, guid: 59ebd6f6915872046af9e9e11c010966,
+        type: 2}
+      propertyPath: isRight
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114789364531044780, guid: 59ebd6f6915872046af9e9e11c010966, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 59ebd6f6915872046af9e9e11c010966, type: 2}
@@ -982,6 +1014,11 @@ Prefab:
         type: 2}
       propertyPath: basicAttackMaxRange
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114680387680037462, guid: 227c5d4f93e389a4ba8d3ec3c272d011,
+        type: 2}
+      propertyPath: basicAttackDamage
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 227c5d4f93e389a4ba8d3ec3c272d011, type: 2}

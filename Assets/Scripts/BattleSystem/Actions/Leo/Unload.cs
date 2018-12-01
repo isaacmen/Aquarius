@@ -4,7 +4,6 @@ using UnityEngine;
 
 // Leo
 public class Unload : PromptingAction {
-
 	override public ActionType getActionType() {
 		return ActionType.ABILITY;
 	}
@@ -32,7 +31,7 @@ public class Unload : PromptingAction {
 
 	override protected void postPromptLoop() {
 		if(GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle")) {
-			getTarget().getCharacter().takeDamage(Constants.getInstance().unload_damage);
+			target.getCharacter().takeDamage(Constants.getInstance().unload_damage);
 			setInactiveWithCompletion(true);
 		}
 	}

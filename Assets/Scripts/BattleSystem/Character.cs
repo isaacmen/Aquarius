@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class Character : MonoBehaviour {
 	private Field field;
 
+	[Header("Status Effects")]
+	public List<StatusEffect> statusEffects;
+
 	[Header("Attributes")]
 	public int maxHealth;
 	public int health;
@@ -29,15 +32,29 @@ public class Character : MonoBehaviour {
 		field.getTileAt(end).placeCharacter(this);
 	}
 
-	void Start() {
+	protected virtual void Awake() {
+		if(GameLoop.getInstance().DEBUG_LOG) print(this.name + " awake");
+		statusEffects = new List<StatusEffect>();
+	}
 
+	protected virtual void Start() {
+		if(GameLoop.getInstance().DEBUG_LOG) print(this.name + " start");
 	}
 	
-	void Update() {
+	protected void Update() {
 		
 	}
 
+	public void addStatus(StatusEffect status) {
+		statusEffects.Add(status);
+	}
+
+	public void removeStatus(StatusEffect status) {
+		statusEffects.Remove(status);
+	}
+
 	public void takeDamage(int d) {
-		health = Mathf.Max(Mathf.Min(health - d, maxHealth), 0);
+		if(d < 0 || !statusEffects.Contains(StatusEffect.INVULNERABLE))
+			health = Mathf.Max(Mathf.Min(health - d, maxHealth), 0);
 	}
 }

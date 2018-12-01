@@ -3,13 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class PromptingAction : Action {
-	private bool innerStarted;
-	private List<Tile> inRange;
-	private Tile target;
-
-	public Tile getTarget() {
-		return target;
-	}
+	protected bool innerStarted;
+	protected List<Tile> inRange;
+	protected Tile target;
 
 	override protected void innerStart() {
 		innerStarted = false;
@@ -18,7 +14,7 @@ public abstract class PromptingAction : Action {
 		inRange = Field.tilesInCharacterRange(this.GetComponentInParent<Character>(), minRange(), maxRange(), targetYourField());
 		foreach(Tile t in inRange) {
 			if(validTileToShow(t))
-				t.setTargetableForPromptingAction(this);
+				t.setClickableSprite();
 		}
 	}
 
@@ -32,8 +28,8 @@ public abstract class PromptingAction : Action {
 					if(obj.name.Contains("Tile") && inRange.Contains(obj.GetComponent<Tile>())) {
 						target = obj.GetComponent<Tile>();
 						if(validTileToClick(target)) {
-							foreach(Tile t in inRange)
-								t.setPromptDone();
+							foreach(Tile t in inRange[0].getField().getTiles())
+								t.setRegularSprite();
 
 							postPromptStart();
 							innerStarted = true;
@@ -44,8 +40,8 @@ public abstract class PromptingAction : Action {
 				}
 			}
 			if(Input.GetKey(KeyCode.C)) {
-				foreach(Tile t in inRange)
-					t.setPromptDone();
+				foreach(Tile t in inRange[0].getField().getTiles())
+					t.setRegularSprite();
 				setInactiveWithCompletion(false);
 			}
 		} else {
@@ -65,7 +61,7 @@ public abstract class PromptingAction : Action {
     public void cancelAction()
     {
         foreach (Tile t in inRange)
-            t.setPromptDone();
+            t.setRegularSprite();
         Debug.Log("Cancelling Action");
         setInactiveWithCompletion(false);
     }

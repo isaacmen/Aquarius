@@ -9,13 +9,15 @@ public class AllyCharacter : Character {
 	private List<Action> actionList;
 	private List<ActionType> actionTypesPerTurn;
 
-	void Awake() {
-		if(GameLoop.getInstance().DEBUG_LOG) print(this.name + " awake");
+	override protected void Awake() {
+		base.Awake();
+
 		instantiateActionsFor(type);
 	}
 
-	void Start() {
-		if(GameLoop.getInstance().DEBUG_LOG) print(this.name + " start");
+	override protected void Start() {
+		base.Start();
+
 		GameLoop.getInstance().addAllyCharacter(this);
 	}
 
@@ -46,7 +48,9 @@ public class AllyCharacter : Character {
 				actionList.Add(GameObject.Find(this.name).AddComponent<Move>());
 				actionList.Add(GameObject.Find(this.name).AddComponent<BasicAttack>());
 
+				actionList.Add(GameObject.Find(this.name).AddComponent<Guard>());
 				actionList.Add(GameObject.Find(this.name).AddComponent<LayOnHands>());
+				actionList.Add(GameObject.Find(this.name).AddComponent<ShieldBash>());
 
 				break;
 			case AllyCharacterType.Leo:
