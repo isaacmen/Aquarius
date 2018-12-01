@@ -90,7 +90,7 @@ public class GameLoop : MonoBehaviour {
 	}
 
 	void Update() {
-		switch(state) {
+        switch (state) {
 			case GameState.INIT:
 				// can randomize turn order
 				if(randomizeTurnOrder) {
@@ -110,6 +110,7 @@ public class GameLoop : MonoBehaviour {
 				setState(GameState.START_TURN);
 				break;
 			case GameState.START_TURN:
+                //GetComponent<UI_Manager>().resetMenus(true);
 				break;
 			case GameState.ALLY_WAIT_INPUT:
 				// keeps checking for keyboard input; eventually to be overwritten with ui
@@ -153,11 +154,12 @@ public class GameLoop : MonoBehaviour {
 								i--;
 							}
 						}
-					}
+                    }
+                    GetComponent<UI_Manager>().resetMenus(actionTypesPerTurn.IndexOf(ActionType.MOVE) != -1);
 
-					// if there are no more abilities in the turn, remove
-					// all actions with ActionType.ABILITY from turnActions
-					if(actionTypesPerTurn.IndexOf(ActionType.ABILITY) == -1) {
+                    // if there are no more abilities in the turn, remove
+                    // all actions with ActionType.ABILITY from turnActions
+                    if (actionTypesPerTurn.IndexOf(ActionType.ABILITY) == -1) {
 						for(int i = 0; i < turnActions.Count; i++) {
 							if(turnActions[i].getActionType() == ActionType.ABILITY) {
 								turnActions.Remove(turnActions[i]);
@@ -370,9 +372,10 @@ public class GameLoop : MonoBehaviour {
     {
         for (int i = 1; i < turnActions.Count + 1; i++)
         {
-            activeAction = turnActions[i - 1];
             if (turnActions[i - 1].GetType() != typeof(BasicAttack))
                 continue;
+            
+            activeAction = turnActions[i - 1];
             Debug.Log(turn + " used BasicAttack!");
             GetComponent<UI_Manager>().updateActionText(turnActions[i - 1].GetType().ToString());
             activeAction.setActive();
@@ -384,19 +387,55 @@ public class GameLoop : MonoBehaviour {
     {
         for (int i = 1; i < turnActions.Count + 1; i++)
         {
-            activeAction = turnActions[i - 1];
             if (turnActions[i - 1].GetType() == typeof(BasicAttack) ||
                 turnActions[i - 1].GetType() == typeof(Move) ||
                 turnActions[i - 1].GetType() == typeof(Pass))
                 continue;
 
+            activeAction = turnActions[i - 1];
             Debug.Log(turn + " used " + turnActions[i - 1].GetType() + "!");
             GetComponent<UI_Manager>().updateActionText(turnActions[i - 1].GetType().ToString());
             activeAction.setActive();
             setState(GameState.ALLY_ACTION_ACTIVE);
         }
     }
-	/*
+
+    public void move()
+    {
+        Debug.Log("Moving");
+        for (int i = 1; i < turnActions.Count + 1; i++)
+        {
+            if (turnActions[i - 1].GetType() != typeof(Move))
+                continue;
+
+            activeAction = turnActions[i - 1];
+            GetComponent<UI_Manager>().updateActionText(turnActions[i - 1].GetType().ToString());
+            activeAction.setActive();
+            setState(GameState.ALLY_ACTION_ACTIVE);
+            Debug.Log(turn + " beginning move.");
+        }
+    }
+
+    public void cancelAction()
+    {
+        if (activeAction)
+        {
+            Debug.Log("Canceling... " + activeAction.name);
+            if (activeAction.GetType() != typeof(PromptingAction))
+            {
+                PromptingAction activePrompt = (PromptingAction) activeAction;
+                activePrompt.cancelAction();
+            }
+            activeAction.setInactiveWithCompletion(false);
+        }
+        else
+        {
+            Debug.Log("No action to cancel...");
+        }
+
+    }
+
+    /*
     public void moveInDirection(string direction)
     {
         for (int i = 1; i < turnActions.Count + 1; i++)

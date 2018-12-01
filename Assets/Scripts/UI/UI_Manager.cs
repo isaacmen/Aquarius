@@ -14,8 +14,8 @@ public class UI_Manager : MonoBehaviour {
 
     [Header("Menus")]
     public GameObject availableActions;
-    //public GameObject actions;
-    //public GameObject moves;
+    public GameObject actions;
+    public GameObject moves;
 
     [Header("Feedback")]
     public Text actionText;
@@ -34,6 +34,7 @@ public class UI_Manager : MonoBehaviour {
     {
         turnOrder.GetComponent<TurnOrderUI>().updateTurn();
         updateHealthBars();
+        resetMenus(true);
         
         for (int i=0; i < availableActions.transform.childCount; i++)
         {
@@ -53,5 +54,19 @@ public class UI_Manager : MonoBehaviour {
     public void updateActionText(string text)
     {
         actionText.text = text;
+    }
+
+    public void resetMenus(bool moveActive)
+    {
+        availableActions.SetActive(true);
+        foreach (Button child in availableActions.GetComponentsInChildren<Button>())
+        {
+            if (child.gameObject.name.Contains("Move"))
+                child.gameObject.SetActive(moveActive);
+            else
+                child.gameObject.SetActive(true);
+        }
+        actions.SetActive(false);
+        moves.SetActive(false);
     }
 }

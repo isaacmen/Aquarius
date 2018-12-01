@@ -29,7 +29,6 @@ public abstract class PromptingAction : Action {
 				RaycastHit hit;
 				if(Physics.Raycast(ray, out hit, 100)) {
 					GameObject obj = hit.collider.gameObject;
-
 					if(obj.name.Contains("Tile") && inRange.Contains(obj.GetComponent<Tile>())) {
 						target = obj.GetComponent<Tile>();
 						if(validTileToClick(target)) {
@@ -62,4 +61,12 @@ public abstract class PromptingAction : Action {
 
 	protected abstract void postPromptStart();
 	protected abstract void postPromptLoop();
+
+    public void cancelAction()
+    {
+        foreach (Tile t in inRange)
+            t.setPromptDone();
+        Debug.Log("Cancelling Action");
+        setInactiveWithCompletion(false);
+    }
 }

@@ -27,11 +27,11 @@ public class Unload : PromptingAction {
 	override protected bool targetYourField() { return false; }
 
 	override protected void postPromptStart() {
-		GetComponentInParent<Animator>().Play("Attacking");
+		GetComponentInChildren<Animator>().Play("Attacking");
 	}
 
 	override protected void postPromptLoop() {
-		if(GetComponentInParent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle")) {
+		if(GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle")) {
 			getTarget().getCharacter().takeDamage(Constants.getInstance().unload_damage);
 			setInactiveWithCompletion(true);
 		}

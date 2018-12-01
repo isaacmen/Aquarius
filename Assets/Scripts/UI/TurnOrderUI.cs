@@ -93,9 +93,6 @@ public class TurnOrderUI : MonoBehaviour {
     {
 
         Vector3 newPosition = indicator.transform.position;
-        Debug.Log("Current Turn: " + currentTurn);
-        Debug.Log("Positions Count: " + positions.Count);
-        Debug.Log("Next Space: " + positions[currentTurn % positions.Count]);
         Transform nextPic = positions[currentTurn % positions.Count];
         newPosition.x = nextPic.position.x;//gameLoop.getCharacterTurn().transform.position.x;
 

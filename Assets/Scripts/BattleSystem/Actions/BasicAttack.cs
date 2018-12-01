@@ -26,11 +26,11 @@ public class BasicAttack : PromptingAction {
 	override protected bool targetYourField() { return false; }
 
 	override protected void postPromptStart() {
-		GetComponentInParent<Animator>().Play("Attacking");
+		GetComponentInChildren<Animator>().Play("Attacking");
 	}
 
 	override protected void postPromptLoop() {
-		if(GetComponentInParent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle")) {
+		if(GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle")) {
 			getTarget().getCharacter().takeDamage(GetComponentInParent<Character>().basicAttackDamage);
 			setInactiveWithCompletion(true);
 		}
