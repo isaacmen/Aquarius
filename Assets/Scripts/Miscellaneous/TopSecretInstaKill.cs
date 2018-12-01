@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TopSecretInstaKill : MonoBehaviour {
+    /*
+     * This is for the demonstration, so that the Aquarius can be killed quickly
+     * without much hassle
+     */
 
     public GameLoop gameLoop; //So we can actually access the state of the game
     private EnemyCharacter enemyScript;
@@ -31,7 +35,7 @@ public class TopSecretInstaKill : MonoBehaviour {
     {
         foreach (KeyCode key in code)
         {
-            if (!Input.GetKeyDown(key))
+            if (!Input.GetKey(key))
                 return false;
         }
         return true;
