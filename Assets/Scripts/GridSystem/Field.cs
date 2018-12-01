@@ -12,10 +12,13 @@ public class Field : MonoBehaviour {
     [SerializeField]
     private Vector2 gridOffset;
 
+	[Header("Side")]
+	public bool isRight;
     
     [Header("Sprites")]
     public Sprite tileRegularSprite;
 	public Sprite tileClickableSprite;
+	public Sprite tileSecondarySprite;
 
     private Vector2 cellSize;
     private Vector2 cellScale;
@@ -38,8 +41,16 @@ public class Field : MonoBehaviour {
 		return false;
 	}
 
+	public Tile[,] getTiles() {
+		return gridPositions;
+	}
+
 	public Tile getTileAtYX(int y, int x) {
 		return (y < 0 || y > 2 || x < 0 || x > 2) ? null : gridPositions[y, x];
+	}
+
+	public Tile getTileAtYX(int[] yx) {
+		return getTileAtYX(yx[0], yx[1]);
 	}
 
 	public Tile getTileAt(Vector3 pos) {

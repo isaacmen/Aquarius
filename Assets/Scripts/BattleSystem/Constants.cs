@@ -9,6 +9,15 @@ public class Constants : MonoBehaviour {
 	public int layOnHands_maxRange;
 	public int layOnHands_maxUses;
 
+	public int guard_minRange;
+	public int guard_maxRange;
+	public int guard_maxUses;
+
+	public int shieldBash_minRange;
+	public int shieldBash_maxRange;
+	public int shieldBash_damage;
+	public int shieldBash_maxUses;
+
 	[Header("Leo")]
 	public int unload_damage;
 	public int unload_minRange;

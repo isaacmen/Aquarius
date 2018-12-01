@@ -31,7 +31,7 @@ public class LayOnHands : PromptingAction {
 
 	override protected void postPromptLoop() {
 		if(GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle")) {
-			getTarget().getCharacter().takeDamage(-Constants.getInstance().layOnHands_healValue);
+			target.getCharacter().takeDamage(-Constants.getInstance().layOnHands_healValue);
 			setInactiveWithCompletion(true);
 		}
 	}

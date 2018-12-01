@@ -31,13 +31,13 @@ public class Fireball : PromptingAction {
 
 	override protected void postPromptLoop() {
 		if(GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle")) {
-			if(getTarget().getCharacter() != null)
-				getTarget().getCharacter().takeDamage(Constants.getInstance().fireball_damage);
+			if(target.getCharacter() != null)
+				target.getCharacter().takeDamage(Constants.getInstance().fireball_damage);
 
-			int[] targetYX = getTarget().getTileArrayCoordsYX();
+			int[] targetYX = target.getTileArrayCoordsYX();
 			int[] yx = new int[] { 0, 1 };
 			for(int i = 0; i < 4; i++) {
-				Tile t = getTarget().getField().getTileAtYX(targetYX[0] + yx[0], targetYX[1] + yx[1]);
+				Tile t = target.getField().getTileAtYX(targetYX[0] + yx[0], targetYX[1] + yx[1]);
 				if(t != null && t.getCharacter() != null)
 					t.getCharacter().takeDamage(Constants.getInstance().fireball_damage);
 				nextDYX(yx);
