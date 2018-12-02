@@ -1609,7 +1609,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 906245899}
   character: {fileID: 1193082566}
-  offset: {x: 0, y: -40, z: 0}
+  offset: {x: 0, y: -25, z: 0}
 --- !u!1 &509164100
 GameObject:
   m_ObjectHideFlags: 0
@@ -2446,7 +2446,7 @@ MonoBehaviour:
     lineCount: 6
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -5253,7 +5253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 906245899}
   character: {fileID: 1494518382}
-  offset: {x: 0, y: -40, z: 0}
+  offset: {x: 0, y: -25, z: 0}
 --- !u!1001 &1333642114
 Prefab:
   m_ObjectHideFlags: 0
@@ -5996,7 +5996,7 @@ MonoBehaviour:
   turnOrder: {fileID: 2023683585}
   availableActions: {fileID: 439060721}
   actions: {fileID: 81877969}
-  moves: {fileID: 1340076349}
+  cancelMenu: {fileID: 1340076349}
   skillInfo: {fileID: 576690337}
   actionText: {fileID: 305351773}
 --- !u!212 &1400511935
@@ -6085,7 +6085,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: bcc185c2497251046963034243b4250e, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7786ba81f5d0355449d9653f929e72af, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -6584,7 +6584,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -299.26, y: -381.11}
+  m_AnchoredPosition: {x: -299.26, y: -373}
   m_SizeDelta: {x: 110.400024, y: 24.699997}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1511578081
@@ -7735,7 +7735,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 906245899}
   character: {fileID: 971934706}
-  offset: {x: 0, y: -40, z: 0}
+  offset: {x: 0, y: -25, z: 0}
 --- !u!1 &1734577924
 GameObject:
   m_ObjectHideFlags: 0
@@ -7867,7 +7867,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -8917,7 +8917,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 906245899}
   character: {fileID: 1801873932}
-  offset: {x: 0, y: -40, z: 0}
+  offset: {x: 0, y: -25, z: 0}
 --- !u!1 &2094188470
 GameObject:
   m_ObjectHideFlags: 0

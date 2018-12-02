@@ -145,5 +145,7 @@ public class TurnOrderUI : MonoBehaviour {
     {
         currentCharacterHealth.character = gameLoop.getCharacterTurn().gameObject;
         currentCharacterHealth.updateHealthBar();
+
+        currentCharacterHealth.gameObject.SetActive(gameLoop.getCharacterTurn().GetType() == typeof(AllyCharacter));
     }
 }

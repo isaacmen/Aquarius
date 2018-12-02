@@ -15,7 +15,7 @@ public class UI_Manager : MonoBehaviour {
     [Header("Menus")]
     public GameObject availableActions;
     public GameObject actions;
-    public GameObject moves;
+    public GameObject cancelMenu;
     public GameObject skillInfo;
 
     [Header("Feedback")]
@@ -65,11 +65,13 @@ public class UI_Manager : MonoBehaviour {
         resetAvailableActions(true, true);
 
         actions.SetActive(false);
-        moves.SetActive(false);
+        cancelMenu.SetActive(false);
     }
 
     public void resetAvailableActions(bool moveActive, bool actionsActive)
     {
+        Debug.Log("RESETING: " + moveActive + " " + actionsActive);
+        availableActions.SetActive(true);
         for (int i = 0; i < availableActions.transform.childCount; i++)
         {
             GameObject child = availableActions.transform.GetChild(i).gameObject;
@@ -79,12 +81,19 @@ public class UI_Manager : MonoBehaviour {
                 child.gameObject.SetActive(actionsActive);
             else
                 child.gameObject.SetActive(true);
-
         }
     }
 
     public void enableInfoMenu(bool enable)
     {
         skillInfo.SetActive(enable);
+    }
+
+    public void noMenus()
+    {
+        availableActions.SetActive(false);
+        actions.SetActive(false);
+        cancelMenu.SetActive(false);
+        enableInfoMenu(false);
     }
 }
