@@ -49,6 +49,10 @@ public class Field : MonoBehaviour {
 		return (y < 0 || y > 2 || x < 0 || x > 2) ? null : gridPositions[y, x];
 	}
 
+	public bool isCharacterAtYX(int y, int x) {
+		return getTileAtYX(y, x) != null && getTileAtYX(y, x).getCharacter() != null;
+	}
+
 	public Tile getTileAtYX(int[] yx) {
 		return getTileAtYX(yx[0], yx[1]);
 	}

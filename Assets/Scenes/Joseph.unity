@@ -217,10 +217,21 @@ MonoBehaviour:
   unload_minRange: 1
   unload_maxRange: 2
   unload_maxUses: 1
+  lullaby_minRange: 2
+  lullaby_maxRange: 3
+  lullaby_maxUses: 3
+  crescendo_damage: 20
+  crescendo_maxUses: 6
   fireball_damage: 14
   fireball_minRange: 3
   fireball_maxRange: 4
   fireball_maxUses: 3
+  powerWordKill_damage: 30
+  powerWordKill_minRange: 2
+  powerWordKill_maxRange: 4
+  powerWordKill_maxUses: 1
+  lightningBolt_damage: 18
+  lightningBolt_maxUses: 2
 --- !u!4 &136673556
 Transform:
   m_ObjectHideFlags: 0
@@ -302,6 +313,12 @@ Prefab:
     - target: {fileID: 114820808428215652, guid: 64d268c2a26f8f54680b5fcb2f7ff68f,
         type: 2}
       propertyPath: tileAffectedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 238898372a1bf4274acf1ddefa60e2b3,
+        type: 3}
+    - target: {fileID: 114820808428215652, guid: 64d268c2a26f8f54680b5fcb2f7ff68f,
+        type: 2}
+      propertyPath: tileSecondarySprite
       value: 
       objectReference: {fileID: 21300000, guid: 238898372a1bf4274acf1ddefa60e2b3,
         type: 3}
@@ -869,6 +886,12 @@ Prefab:
       propertyPath: isRight
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114999377057791432, guid: 59ebd6f6915872046af9e9e11c010966,
+        type: 2}
+      propertyPath: tileSecondarySprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 238898372a1bf4274acf1ddefa60e2b3,
+        type: 3}
     m_RemovedComponents:
     - {fileID: 114789364531044780, guid: 59ebd6f6915872046af9e9e11c010966, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 59ebd6f6915872046af9e9e11c010966, type: 2}

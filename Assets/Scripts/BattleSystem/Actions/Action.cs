@@ -60,5 +60,5 @@ public abstract class Action : MonoBehaviour {
 }
 
 public enum ActionType {
-	PASS, MOVE, ABILITY
+	PASS, MOVE, ABILITY, NA
 }

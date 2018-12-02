@@ -64,9 +64,5 @@ public class Guard : PromptingAction {
 		}
 	}
 
-	override protected void innerEnd() {
-		foreach(Tile t in affectedTiles) {
-			t.setRegularSprite();
-		}
-	}
+	override protected void innerEnd() {}
 }

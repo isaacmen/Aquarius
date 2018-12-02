@@ -14,6 +14,7 @@ public class GameLoop : MonoBehaviour {
 	private List<ActionType> actionTypesPerTurn = null;
 
 	public StatusEffectManager statusManager;
+	public DelayedActionManager delayedActionManager;
 
 	private Field yourField;
 	private Field enemyField;
@@ -44,6 +45,7 @@ public class GameLoop : MonoBehaviour {
 
 		//turnOrder = new List<Character>();
 		statusManager = new StatusEffectManager();
+		delayedActionManager = new DelayedActionManager();
 	}
 
 	public Field getAllyField() {
@@ -93,6 +95,11 @@ public class GameLoop : MonoBehaviour {
 	}
 
 	void Update() {
+		if(delayedActionManager.inProgress()) {
+			print("IP");
+			return;
+		}
+
         switch (state) {
 			case GameState.INIT:
 				// can randomize turn order
@@ -271,7 +278,7 @@ public class GameLoop : MonoBehaviour {
     }
 
 	public void setState(GameState newState) {
-		// things to be done when exiting a state (nothing so far; maybe won't be needed)
+		// things to be done when exiting a state
 		switch(state) {
 			case GameState.START_TURN:			break;
 			case GameState.ALLY_WAIT_INPUT:		break;
@@ -289,12 +296,15 @@ public class GameLoop : MonoBehaviour {
 				do {
 					turn = getCharacterTurn();
 					Debug.Log(turn.name + "'s Turn!");
+					statusManager.onTurn(turn);
 					if(turn.statusEffects.Contains(StatusEffect.STUNNED)) {
 						Debug.Log(turn.name + " is stunned!");
-						nextTurn();
+						Character turnDone = turnOrder[0];
+						turnOrder.Remove(turnDone);
+						turnOrder.Add(turnDone);
 					}
 				} while(turn.statusEffects.Contains(StatusEffect.STUNNED));
-				statusManager.onTurn(turn);
+				delayedActionManager.onTurn(turn);
 
 				if(turn.GetType() == typeof(AllyCharacter)) {
 					turnActions = ((AllyCharacter)turn).getActions();

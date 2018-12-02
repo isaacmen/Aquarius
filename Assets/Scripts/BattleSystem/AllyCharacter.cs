@@ -32,10 +32,6 @@ public class AllyCharacter : Character {
 	public List<ActionType> getActionTypesPerTurn() {
 		return new List<ActionType>(actionTypesPerTurn);
 	}
-	
-	void Update() {
-		
-	}
 
 	private void instantiateActionsFor(AllyCharacterType type) {
 		actionList = new List<Action>();
@@ -58,6 +54,8 @@ public class AllyCharacter : Character {
 				actionList.Add(GameObject.Find(this.name).AddComponent<BasicAttack>());
 
 				actionList.Add(GameObject.Find(this.name).AddComponent<Unload>());
+				actionList.Add(GameObject.Find(this.name).AddComponent<Lullaby>());
+				actionList.Add(GameObject.Find(this.name).AddComponent<Crescendo>());
 
 				break;
 			case AllyCharacterType.Scorpio:
@@ -65,6 +63,9 @@ public class AllyCharacter : Character {
 				actionList.Add(GameObject.Find(this.name).AddComponent<BasicAttack>());
 
 				actionList.Add(GameObject.Find(this.name).AddComponent<Fireball>());
+				actionList.Add(GameObject.Find(this.name).AddComponent<PowerWordKill>());
+				GameObject.Find(this.name).AddComponent<PowerWordKill2>(); // the delayed 2ndary part
+				actionList.Add(GameObject.Find(this.name).AddComponent<LightningBolt>());
 
 				break;
 		}
