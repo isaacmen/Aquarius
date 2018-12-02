@@ -5,13 +5,12 @@ using UnityEngine.UI;
 
 public class TurnOrderUI : MonoBehaviour {
     [Header("Turn Order Bar")]
-    //public Image[] imageSpaces; // the spaces for the actual shit
-    //public Vector3 indicatorOffset; // the offset from the center where the indicator will be
-    public GameObject turnOrderParent; //parent of the images of the turn order
+    //public GameObject turnOrderParent; //parent of the images of the turn order
+    public List<GameObject> potentialPics;
     public GameObject indicator; // the little thing that shows which turn it is on the bar
 
-    public List<Image> turnOrderImages;
-    public List<Transform> positions;
+    //private List<Image> turnOrderImages;
+    private List<Transform> positions;
     //private Vector3[] scales;
 
     [Header("Current Turn Panel")]
@@ -21,39 +20,30 @@ public class TurnOrderUI : MonoBehaviour {
 
     //[Header("General Game Stuff")]
     private GameLoop gameLoop;
+    private List<Character> order;
     private int currentTurn;
 
-    private void Start()
+    private void Awake()
     {
         gameLoop = GameLoop.getInstance();
+        order = gameLoop.turnOrder;
+        
         currentTurn = 0;
 
-        Transform[] kidsTransforms = turnOrderParent.GetComponentsInChildren<Transform>();
-        turnOrderImages = new List<Image>();
+        //setUpTurnBar();
+
+        //Transform[] kidsTransforms = turnOrderParent.GetComponentsInChildren<Transform>();
+        //turnOrderImages = new List<Image>();
         positions = new List<Transform>();
 
-        foreach (Transform kid in kidsTransforms)
-        {
-            if (kid.name.Equals("Image"))
-            {
-                turnOrderImages.Add(kid.gameObject.GetComponent<Image>());
-            }
-            else if (kid.name.Contains("Pic"))
-            {
-                positions.Add(kid);
-            }
-        }
+        setUpTurnBar();
 
         updateTurn();
     }
 
     private void Update()
     {
-        ////TODO: fix for actual turn change
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    updateTurn();
-        //}
+        updateTurnBar();
     }
 
     public void updateTurn()
@@ -78,15 +68,45 @@ public class TurnOrderUI : MonoBehaviour {
 
     private void updateTurnBar()
     {
-        ///Will Hopefully be Obsolete
-        List<Character> turnOrder = gameLoop.turnOrder;
-        //for (int i = 0; i < imageSpaces.Length; i++)
-        //{
-        //    int nextPositionIndex = (i + currentTurn) % imageSpaces.Length;
-        //    //images[i].rectTransform.position = positions[nextPositionIndex];
-        //    //images[i].rectTransform.localScale = scales[nextPositionIndex];
-        //}
-        //currentTurn++;
+        if (order.Count == positions.Count)
+            return;
+
+        positions.Clear();
+        setUpTurnBar();
+    }
+
+    private void setUpTurnBar()
+    {
+        order = gameLoop.turnOrder;
+        currentTurn = 0;
+
+        for (int i=0; i<potentialPics.Count; i++)
+        {
+            GameObject kid = potentialPics[i];
+            if (i >= order.Count)
+            {
+                kid.SetActive(false);
+            }
+            else
+            {
+                kid.SetActive(true);
+                positions.Add(kid.transform);
+                Debug.Log("Kid name: " + kid.name);
+                Transform[] kidsKids = kid.GetComponentsInChildren<Transform>();
+                
+                foreach (Transform kidsKid in kidsKids)
+                {
+                    if (kidsKid.name.Contains("Mask"))
+                        Debug.Log("Found mask");
+                    if (kidsKid.name.Contains("Image"))
+                    {
+                        kidsKid.gameObject.GetComponent<Image>().sprite = order[i].portrait;
+                    }
+                }
+
+            }
+
+        }
     }
 
     private void updateTurnIndicator()
@@ -110,7 +130,7 @@ public class TurnOrderUI : MonoBehaviour {
 
     private void updateCurrentText()
     {
-        currentTurnText.text = gameLoop.getCharacterTurn() + "'s turn";
+        currentTurnText.text = gameLoop.getCharacterTurn().ToString(); // + "'s turn";
     }
 
     private void updateCurrentPic()
@@ -125,5 +145,7 @@ public class TurnOrderUI : MonoBehaviour {
     {
         currentCharacterHealth.character = gameLoop.getCharacterTurn().gameObject;
         currentCharacterHealth.updateHealthBar();
+
+        currentCharacterHealth.gameObject.SetActive(gameLoop.getCharacterTurn().GetType() == typeof(AllyCharacter));
     }
 }

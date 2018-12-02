@@ -15,7 +15,8 @@ public class UI_Manager : MonoBehaviour {
     [Header("Menus")]
     public GameObject availableActions;
     public GameObject actions;
-    public GameObject moves;
+    public GameObject cancelMenu;
+    public GameObject skillInfo;
 
     [Header("Feedback")]
     public Text actionText;
@@ -28,13 +29,15 @@ public class UI_Manager : MonoBehaviour {
     private void Update()
     {
         updateHealthBars();
+        if (Input.GetKeyDown(KeyCode.I))
+            enableInfoMenu(!skillInfo.activeSelf);
     }
 
     public void updateTurn()
     {
         turnOrder.GetComponent<TurnOrderUI>().updateTurn();
         updateHealthBars();
-        resetMenus(true);
+        resetMenus();
         
         for (int i=0; i < availableActions.transform.childCount; i++)
         {
@@ -56,17 +59,41 @@ public class UI_Manager : MonoBehaviour {
         actionText.text = text;
     }
 
-    public void resetMenus(bool moveActive)
+    public void resetMenus()
     {
         availableActions.SetActive(true);
-        foreach (Button child in availableActions.GetComponentsInChildren<Button>())
+        resetAvailableActions(true, true);
+
+        actions.SetActive(false);
+        cancelMenu.SetActive(false);
+    }
+
+    public void resetAvailableActions(bool moveActive, bool actionsActive)
+    {
+        Debug.Log("RESETING: " + moveActive + " " + actionsActive);
+        availableActions.SetActive(true);
+        for (int i = 0; i < availableActions.transform.childCount; i++)
         {
+            GameObject child = availableActions.transform.GetChild(i).gameObject;
             if (child.gameObject.name.Contains("Move"))
                 child.gameObject.SetActive(moveActive);
+            else if (child.gameObject.name.Contains("Action"))
+                child.gameObject.SetActive(actionsActive);
             else
                 child.gameObject.SetActive(true);
         }
+    }
+
+    public void enableInfoMenu(bool enable)
+    {
+        skillInfo.SetActive(enable);
+    }
+
+    public void noMenus()
+    {
+        availableActions.SetActive(false);
         actions.SetActive(false);
-        moves.SetActive(false);
+        cancelMenu.SetActive(false);
+        enableInfoMenu(false);
     }
 }
