@@ -16,6 +16,7 @@ public class UI_Manager : MonoBehaviour {
     public GameObject availableActions;
     public GameObject actions;
     public GameObject moves;
+    public GameObject skillInfo;
 
     [Header("Feedback")]
     public Text actionText;
@@ -28,6 +29,8 @@ public class UI_Manager : MonoBehaviour {
     private void Update()
     {
         updateHealthBars();
+        if (Input.GetKeyDown(KeyCode.I))
+            enableInfoMenu(!skillInfo.activeSelf);
     }
 
     public void updateTurn()
@@ -68,5 +71,10 @@ public class UI_Manager : MonoBehaviour {
         }
         actions.SetActive(false);
         moves.SetActive(false);
+    }
+
+    public void enableInfoMenu(bool enable)
+    {
+        skillInfo.SetActive(enable);
     }
 }

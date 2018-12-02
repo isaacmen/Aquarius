@@ -42,7 +42,7 @@ public class GameLoop : MonoBehaviour {
 			enemyField = grids[0];
 		}
 
-		//turnOrder = new List<Character>();
+		turnOrder = new List<Character>();
 		statusManager = new StatusEffectManager();
 	}
 
@@ -60,7 +60,7 @@ public class GameLoop : MonoBehaviour {
 		turnOrder.Remove(turnDone);
 		turnOrder.Add(turnDone);
 		setState(GameState.START_TURN);
-//        GetComponent<UI_Manager>().updateTurn();
+        GetComponent<UI_Manager>().updateTurn();
     }
 
 	// may be unnecessary
@@ -110,10 +110,11 @@ public class GameLoop : MonoBehaviour {
 
 					turnOrder = newTurnOrder;
 				}
-				setState(GameState.START_TURN);
+                GetComponent<UI_Manager>().updateTurn();
+                setState(GameState.START_TURN);
 				break;
 			case GameState.START_TURN:
-                //GetComponent<UI_Manager>().resetMenus(true);
+                GetComponent<UI_Manager>().resetMenus(true);
 				break;
 			case GameState.ALLY_WAIT_INPUT:
 				// keeps checking for keyboard input; eventually to be overwritten with ui
@@ -335,8 +336,8 @@ public class GameLoop : MonoBehaviour {
 				break;
 			case GameState.ENEMY_STATE:
 				Debug.Log("GameLoop entered ENEMY_STATE for " + turn);
-				GameObject.Find("Libra").GetComponent<Character>().takeDamage(50);
-				break;
+                //GameObject.Find("Libra").GetComponent<Character>().takeDamage(50);
+                break;
 		}
 	}
 
