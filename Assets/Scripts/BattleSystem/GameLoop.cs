@@ -124,19 +124,8 @@ public class GameLoop : MonoBehaviour {
 
 				break;
 			case GameState.ALLY_WAIT_INPUT:
-                //bool moveActive = false;
-                //bool actionsActive = false;
-                //for (int i = 1; i < turnActions.Count + 1; i++)
-                //{
-                //    if (turnActions[i - 1].GetType() == typeof(Move))
-                //        moveActive = true;
-                //    else if (turnActions[i - 1].GetType() != typeof(Pass))
-                //        actionsActive = true;
-                //}
-                //GetComponent<UI_Manager>().resetAvailableActions(moveActive, actionsActive);
-
-				// keeps checking for keyboard input; eventually to be overwritten with ui
-				for(int i = 1; i < turnActions.Count + 1; i++) {
+                // keeps checking for keyboard input; eventually to be overwritten with ui
+                for (int i = 1; i < turnActions.Count + 1; i++) {
 					if(Input.GetKeyDown(GameLoop.keyCodeFromInt(i)) && !turnActions[i - 1].isActive()) {
 						activeAction = turnActions[i-1];
 						if(turnActions[i-1].GetType() == typeof(Pass))
@@ -207,9 +196,10 @@ public class GameLoop : MonoBehaviour {
 	}
 
 	private bool turnOver() {
-		return  actionTypesPerTurn.Count == 0 ||
-				(turnActions.Count == 0) ||
-				(turnActions.Count == 1 && turnActions[0].getActionType() == ActionType.PASS);
+        return actionTypesPerTurn.Count == 0 ||
+                (turnActions.Count == 0) ||
+                (turnActions.Count == 2);
+				//(turnActions.Count == 1 && turnActions[0].getActionType() == ActionType.PASS);
 	}
 
     public void setState(string newState)
