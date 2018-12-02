@@ -68,8 +68,6 @@ public class TurnOrderUI : MonoBehaviour {
 
     private void updateTurnBar()
     {
-        Debug.Log("Order: " + order.Count);
-        Debug.Log("turnOrder: " + gameLoop.turnOrder.Count);
         if (order.Count == positions.Count)
             return;
 
@@ -132,7 +130,7 @@ public class TurnOrderUI : MonoBehaviour {
 
     private void updateCurrentText()
     {
-        currentTurnText.text = gameLoop.getCharacterTurn() + "'s turn";
+        currentTurnText.text = gameLoop.getCharacterTurn().ToString(); // + "'s turn";
     }
 
     private void updateCurrentPic()

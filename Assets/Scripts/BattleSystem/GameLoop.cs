@@ -114,9 +114,21 @@ public class GameLoop : MonoBehaviour {
                 setState(GameState.START_TURN);
 				break;
 			case GameState.START_TURN:
-                GetComponent<UI_Manager>().resetMenus(true);
+
 				break;
 			case GameState.ALLY_WAIT_INPUT:
+                bool moveActive = false;
+                bool actionsActive = false;
+                for (int i = 1; i < turnActions.Count + 1; i++)
+                {
+                    if (turnActions[i - 1].GetType() == typeof(Move))
+                        moveActive = true;
+                    else if (turnActions[i - 1].GetType() != typeof(Pass))
+                        actionsActive = true;
+                }
+                Debug.Log(moveActive + " " + actionsActive);
+                GetComponent<UI_Manager>().resetAvailableActions(moveActive, actionsActive);
+
 				// keeps checking for keyboard input; eventually to be overwritten with ui
 				for(int i = 1; i < turnActions.Count + 1; i++) {
 					if(Input.GetKeyDown(GameLoop.keyCodeFromInt(i)) && !turnActions[i - 1].isActive()) {
@@ -159,7 +171,7 @@ public class GameLoop : MonoBehaviour {
 							}
 						}
                     }
-//                    GetComponent<UI_Manager>().resetMenus(actionTypesPerTurn.IndexOf(ActionType.MOVE) != -1);
+                    //GetComponent<UI_Manager>().resetMenus(actionTypesPerTurn.IndexOf(ActionType.MOVE) != -1);
 
                     // if there are no more abilities in the turn, remove
                     // all actions with ActionType.ABILITY from turnActions
@@ -240,6 +252,7 @@ public class GameLoop : MonoBehaviour {
 
                     setState(GameState.ENEMY_STATE);
                 }
+                GetComponent<UI_Manager>().resetMenus();
 
                 break;
             case GameState.ALLY_WAIT_INPUT:
@@ -410,6 +423,35 @@ public class GameLoop : MonoBehaviour {
             activeAction.setActive();
             setState(GameState.ALLY_ACTION_ACTIVE);
         }
+    }
+
+    public void skill(int index)
+    {
+        List<Action> potentialSkills = getActiveSkills();
+        int grabIndex = index;
+        if (index >= potentialSkills.Count)
+            grabIndex = 0;
+
+        activeAction = potentialSkills[grabIndex];
+        Debug.Log(turn + " used " + potentialSkills[grabIndex].GetType() + "!");
+        GetComponent<UI_Manager>().updateActionText(potentialSkills[grabIndex].GetType().ToString());
+        activeAction.setActive();
+        setState(GameState.ALLY_ACTION_ACTIVE);
+    }
+
+    private List<Action> getActiveSkills()
+    {
+        List<Action> skills = new List<Action>();
+        for (int i = 1; i < turnActions.Count + 1; i++)
+        {
+            if (turnActions[i - 1].GetType() == typeof(BasicAttack) ||
+                turnActions[i - 1].GetType() == typeof(Move) ||
+                turnActions[i - 1].GetType() == typeof(Pass))
+                continue;
+
+            skills.Add(turnActions[i - 1]);
+        }
+        return skills;
     }
 
     public void move()
