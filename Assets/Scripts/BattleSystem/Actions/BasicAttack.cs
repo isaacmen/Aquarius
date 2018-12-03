@@ -37,4 +37,25 @@ public class BasicAttack : PromptingAction {
 	}
 
 	override protected void innerEnd() { }
+
+    public override string getName()
+    {
+        return "Attack";
+    }
+
+    public override string getDescription()
+    {
+        Character character = GetComponentInParent<Character>();
+        string description = "Single Target\n" +
+            "Damage: " + character.basicAttackDamage + "\n" +
+            "Uses: Infinite\n" +
+            "Range: ";
+        if (character.name.Contains("Scorpio"))
+            description += "Infinite";
+        else if (character.name.Contains("Libra"))
+            description += "1";
+        else if (character.name.Contains("Leo"))
+            description += "2-3";
+        return description;
+    }
 }

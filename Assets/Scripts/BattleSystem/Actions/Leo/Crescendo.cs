@@ -93,4 +93,12 @@ public class Crescendo : PromptingAction {
 	}
 
 	override protected void innerEnd() { }
+
+    public override string getDescription()
+    {
+        return "AoE Cone\n" +
+            "Damage: " + Constants.getInstance().crescendo_damage + "\n" +
+            "Uses: " + maxUses() + "\n" +
+            "Range: Area directly to left of caster";
+    }
 }

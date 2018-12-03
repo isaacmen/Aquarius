@@ -65,4 +65,12 @@ public class Guard : PromptingAction {
 	}
 
 	override protected void innerEnd() {}
+
+    public override string getDescription()
+    {
+        return "Single Target, Defense\n" +
+            "Damage: 0\n" +
+            "Uses: " + maxUses() + "\n" +
+            "Range: All spaces to the right, including current";
+    }
 }

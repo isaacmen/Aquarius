@@ -38,4 +38,17 @@ public class ShieldBash : PromptingAction {
 	}
 
 	override protected void innerEnd() { }
+
+    public override string getName()
+    {
+        return "Shield Bash";
+    }
+
+    public override string getDescription()
+    {
+        return "Single Target, Stuns\n" +
+            "Damage: " + Constants.getInstance().shieldBash_damage + "\n" +
+            "Uses: " + maxUses() + "\n" +
+            "Range: " + minRange() + "-" + maxRange();
+    }
 }

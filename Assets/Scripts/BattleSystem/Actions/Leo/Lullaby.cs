@@ -36,4 +36,12 @@ public class Lullaby : PromptingAction {
 	}
 
 	override protected void innerEnd() { }
+
+    public override string getDescription()
+    {
+        return "Single Target, Stuns\n" +
+            "Damage: 0\n" +
+            "Uses: " + maxUses() + "\n" +
+            "Range: " + minRange() + "-" + maxRange();
+    }
 }

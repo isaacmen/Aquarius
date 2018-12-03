@@ -69,4 +69,17 @@ public class LightningBolt : PromptingAction {
 	}
 
 	override protected void innerEnd() { }
+
+    public override string getName()
+    {
+        return "Lightning Bolt";
+    }
+
+    public override string getDescription()
+    {
+        return "AoE Line\n" +
+            "Damage: " + Constants.getInstance().lightningBolt_damage + "\n" +
+            "Uses: " + maxUses() + "\n" +
+            "Range: Whole row (no friendly fire)";
+    }
 }

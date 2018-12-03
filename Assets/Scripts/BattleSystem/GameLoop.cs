@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -190,7 +190,9 @@ public class GameLoop : MonoBehaviour {
                 break;
 			case GameState.ENEMY_STATE:
 				Debug.Log("GameLoop Update() in ENEMY_STATE for " + turn);
-				nextTurn();
+                Debug.Log("Chosen Action: " + activeAction);
+                //if (turnOver())
+				    nextTurn();
 				break;
 		}
 	}
@@ -198,7 +200,8 @@ public class GameLoop : MonoBehaviour {
 	private bool turnOver() {
         return actionTypesPerTurn.Count == 0 ||
                 (turnActions.Count == 0) ||
-                (turnActions.Count == 2);
+                (turnActions.Count == 2) ||
+                activeAction.GetType() == typeof(Pass);
 				//(turnActions.Count == 1 && turnActions[0].getActionType() == ActionType.PASS);
 	}
 
@@ -461,7 +464,7 @@ public class GameLoop : MonoBehaviour {
         setState(GameState.ALLY_ACTION_ACTIVE);
     }
 
-    private List<Action> getActiveSkills()
+    public List<Action> getActiveSkills()
     {
         List<Action> skills = new List<Action>();
         for (int i = 1; i < turnActions.Count + 1; i++)
@@ -474,6 +477,20 @@ public class GameLoop : MonoBehaviour {
             skills.Add(turnActions[i - 1]);
         }
         return skills;
+    }
+
+    public List<Action> getActiveActions()
+    {
+        List<Action> actions = new List<Action>();
+        for (int i = 1; i < turnActions.Count + 1; i++)
+        {
+            if (turnActions[i - 1].GetType() == typeof(Move) ||
+                turnActions[i - 1].GetType() == typeof(Pass))
+                continue;
+
+            actions.Add(turnActions[i - 1]);
+        }
+        return actions;
     }
 
     public void move()
@@ -511,22 +528,5 @@ public class GameLoop : MonoBehaviour {
 
     }
 
-    /*
-    public void moveInDirection(string direction)
-    {
-        for (int i = 1; i < turnActions.Count + 1; i++)
-        {
-            activeAction = turnActions[i - 1];
-            if (turnActions[i - 1].GetType() != typeof(Move))
-                continue;
-
-            //Debug.Log("Moving " + direction);
-            GetComponent<UI_Manager>().updateActionText(turnActions[i - 1].GetType().ToString());
-            activeAction.setActive();
-            Move moveAction = (Move)activeAction;
-            moveAction.moveDirection(direction);
-            setState(GameState.ALLY_ACTION_ACTIVE);
-        }
-    }*/
     #endregion
 }

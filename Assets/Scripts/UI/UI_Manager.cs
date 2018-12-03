@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UI_Manager : MonoBehaviour {
 
@@ -31,6 +32,9 @@ public class UI_Manager : MonoBehaviour {
         updateHealthBars();
         if (Input.GetKeyDown(KeyCode.I))
             enableInfoMenu(!skillInfo.activeSelf);
+
+        if (actions.activeSelf)
+            updateActionButtons();
     }
 
     public void updateTurn()
@@ -66,11 +70,12 @@ public class UI_Manager : MonoBehaviour {
 
         actions.SetActive(false);
         cancelMenu.SetActive(false);
+        skillInfo.SetActive(false);
     }
 
     public void resetAvailableActions(bool moveActive, bool actionsActive)
     {
-        Debug.Log("RESETING: " + moveActive + " " + actionsActive);
+        //Debug.Log("RESETING: " + moveActive + " " + actionsActive);
         availableActions.SetActive(true);
         for (int i = 0; i < availableActions.transform.childCount; i++)
         {
@@ -95,5 +100,51 @@ public class UI_Manager : MonoBehaviour {
         actions.SetActive(false);
         cancelMenu.SetActive(false);
         enableInfoMenu(false);
+    }
+
+    private void updateActionButtons()
+    {
+        Transform[] actionKids = actions.GetComponentsInChildren<Transform>();
+        foreach (Transform kid in actionKids)
+        {
+            if (kid.name.Contains("Skill"))
+            {
+                string newText = "Skill";
+                List<Action> activeSkills = GetComponent<GameLoop>().getActiveSkills();
+                if (kid.name.Contains("1"))
+                {
+                    newText = activeSkills[1].getName();
+                }
+                else
+                {
+                    newText = activeSkills[0].getName();
+                }
+                kid.GetComponentInChildren<Text>().text = newText;
+            }
+        }
+    }
+
+    public void updateInfoBox(int actionIndex)
+    {
+        List<Action> actions = GetComponent<GameLoop>().getActiveActions();
+        Debug.Log(actions[actionIndex].GetType());
+        Action hoveredAction = actions[actionIndex];
+
+        Debug.Log(skillInfo.GetComponentInChildren<TextMeshProUGUI>());
+        foreach (TextMeshProUGUI textBB in skillInfo.GetComponentsInChildren<TextMeshProUGUI>())
+        {
+            Debug.Log(textBB.name);
+            if (textBB.name.Contains("Skill"))
+                textBB.text = hoveredAction.getName();
+            else if (textBB.name.Contains("Description"))
+                textBB.text = hoveredAction.getDescription();
+        }
+
+        skillInfo.SetActive(true);
+    }
+
+    public void hideInfoBox()
+    {
+        skillInfo.SetActive(false);
     }
 }
