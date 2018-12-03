@@ -34,6 +34,7 @@ public abstract class PromptingAction : Action {
 							postPromptStart();
 							innerStarted = true;
                             UI_Manager ui = FindObjectOfType<UI_Manager>();
+                            ui.updateActionText(getName());
                             ui.noMenus();
 						} else {
 							print("invalid target");

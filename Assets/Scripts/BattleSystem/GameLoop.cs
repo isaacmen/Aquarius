@@ -427,7 +427,7 @@ public class GameLoop : MonoBehaviour {
             
             activeAction = turnActions[i - 1];
             Debug.Log(turn + " used BasicAttack!");
-            GetComponent<UI_Manager>().updateActionText(turnActions[i - 1].GetType().ToString());
+            //GetComponent<UI_Manager>().updateActionText(turnActions[i - 1].GetType().ToString());
             activeAction.setActive();
             setState(GameState.ALLY_ACTION_ACTIVE);
         }
@@ -444,7 +444,7 @@ public class GameLoop : MonoBehaviour {
 
             activeAction = turnActions[i - 1];
             Debug.Log(turn + " used " + turnActions[i - 1].GetType() + "!");
-            GetComponent<UI_Manager>().updateActionText(turnActions[i - 1].GetType().ToString());
+            //GetComponent<UI_Manager>().updateActionText(turnActions[i - 1].GetType().ToString());
             activeAction.setActive();
             setState(GameState.ALLY_ACTION_ACTIVE);
         }
@@ -459,7 +459,7 @@ public class GameLoop : MonoBehaviour {
 
         activeAction = potentialSkills[grabIndex];
         Debug.Log(turn + " used " + potentialSkills[grabIndex].GetType() + "!");
-        GetComponent<UI_Manager>().updateActionText(potentialSkills[grabIndex].GetType().ToString());
+        //GetComponent<UI_Manager>().updateActionText(potentialSkills[grabIndex].GetType().ToString());
         activeAction.setActive();
         setState(GameState.ALLY_ACTION_ACTIVE);
     }
@@ -502,7 +502,7 @@ public class GameLoop : MonoBehaviour {
                 continue;
 
             activeAction = turnActions[i - 1];
-            GetComponent<UI_Manager>().updateActionText(turnActions[i - 1].GetType().ToString());
+            //GetComponent<UI_Manager>().updateActionText(turnActions[i - 1].GetType().ToString());
             activeAction.setActive();
             setState(GameState.ALLY_ACTION_ACTIVE);
             Debug.Log(turn + " beginning move.");

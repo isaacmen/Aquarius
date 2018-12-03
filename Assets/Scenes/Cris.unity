@@ -2173,6 +2173,11 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 114290779746192340, guid: 82cf9fe7a274e444bbce22a910e25b9e,
+        type: 2}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82cf9fe7a274e444bbce22a910e25b9e, type: 2}
   m_IsPrefabAsset: 0
@@ -2250,6 +2255,12 @@ Prefab:
         type: 2}
       propertyPath: tileSecondarySprite
       value: 
+      objectReference: {fileID: 21300000, guid: 238898372a1bf4274acf1ddefa60e2b3,
+        type: 3}
+    - target: {fileID: 114999377057791432, guid: 59ebd6f6915872046af9e9e11c010966,
+        type: 2}
+      propertyPath: isRight
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114789364531044780, guid: 59ebd6f6915872046af9e9e11c010966, type: 2}

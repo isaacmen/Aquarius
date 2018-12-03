@@ -127,13 +127,13 @@ public class UI_Manager : MonoBehaviour {
     public void updateInfoBox(int actionIndex)
     {
         List<Action> actions = GetComponent<GameLoop>().getActiveActions();
-        Debug.Log(actions[actionIndex].GetType());
+        //Debug.Log(actions[actionIndex].GetType());
         Action hoveredAction = actions[actionIndex];
 
-        Debug.Log(skillInfo.GetComponentInChildren<TextMeshProUGUI>());
+        //Debug.Log(skillInfo.GetComponentInChildren<TextMeshProUGUI>());
         foreach (TextMeshProUGUI textBB in skillInfo.GetComponentsInChildren<TextMeshProUGUI>())
         {
-            Debug.Log(textBB.name);
+            //Debug.Log(textBB.name);
             if (textBB.name.Contains("Skill"))
                 textBB.text = hoveredAction.getName();
             else if (textBB.name.Contains("Description"))
