@@ -55,8 +55,12 @@ public class Guard : PromptingAction {
 			if(target.getCharacter() != null)
 				toInvuln.Add(target.getCharacter());
 			foreach(Tile t in affectedTiles)
-				if(t.getCharacter() != null)
-					toInvuln.Add(t.getCharacter());
+            {
+                t.addStatus(StatusEffect.INVULNERABLE);
+                //if (t.getCharacter() != null)
+                //    toInvuln.Add(t.getCharacter());
+            }
+
 
 			GameLoop.getInstance().statusManager.addStatusEffect(GetComponentInParent<Character>(), toInvuln, StatusEffect.INVULNERABLE);
 
