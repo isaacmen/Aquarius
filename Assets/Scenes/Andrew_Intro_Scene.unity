@@ -800,6 +800,7 @@ GameObject:
   m_Component:
   - component: {fileID: 361214179}
   - component: {fileID: 361214178}
+  - component: {fileID: 361214180}
   m_Layer: 0
   m_Name: DialogManager
   m_TagString: Untagged
@@ -854,6 +855,40 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &361214180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 361214177}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4f495f78905d41568b8f618f2ab4d8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textDisplay: {fileID: 1101581729}
+  sentences:
+  - "AQUARIUS: \u201CIs this the best the Three Kingdoms could put forth? One stinky
+    kitten?\u201D"
+  - "LEO: \u201CI\u2019m more than enough for you, you oversized piece of sashimi!\u201D"
+  - 'LEO: Gah!'
+  - "AQUARIUS: \u201CIs that all? Pathetic. Now waste away in my sea of despair!\u201D"
+  - "LEO: (No! I can\u2019t let it end like this. Everything up until now, for nothing?)"
+  - '???: Hmph. Have you forgotten already, Leo?'
+  - '???: Get your head in the game, Leo! After all, you said it yourself.'
+  - 'LEO: Huh?'
+  typingSpeed: 0.01
+  conversationNumberChoice1: 0
+  conversationNumberChoice2: 0
+  continueButton: {fileID: 1385199823}
+  choiceButton1: {fileID: 0}
+  choiceButton2: {fileID: 0}
+  dialogueBackplate: {fileID: 977995472}
+  choiceBackplate: {fileID: 0}
+  Speaker1: {fileID: 801738019}
+  Speaker2: {fileID: 1865592947}
+  Speaker3: {fileID: 280966941}
+  choiceNumber: 0
 --- !u!1 &396743877
 GameObject:
   m_ObjectHideFlags: 0

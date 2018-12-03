@@ -10,13 +10,7 @@ public class Dialog : MonoBehaviour {
     [TextArea(3, 15)]
     public string[] sentences;
     private int index;
-    private bool option1 = false;
-    private bool option2 = false;
-    private bool skip = false;
     public float typingSpeed;
-    public int conversationNumberChoice1;
-    public int conversationNumberChoice2;
-    private int conversationNumberChoice = 100;
     //int textIndex = 0;
 
     public GameObject continueButton;
@@ -27,7 +21,9 @@ public class Dialog : MonoBehaviour {
     public GameObject Speaker1;
     public GameObject Speaker2;
     public GameObject Speaker3;
-    public int choiceNumber;
+    public int choiceNumber1;
+    public int choiceNumber2;
+    public int choiceNumber3;
 
     void Start()
     {
@@ -50,14 +46,16 @@ public class Dialog : MonoBehaviour {
             Speaker2.SetActive(false);
             Speaker1.SetActive(false);
         }
-
-        if (textDisplay.text == sentences[index] && index != choiceNumber){
-            continueButton.SetActive(true);
+        else{
+            //Do nothing
         }
-        if (option1 == true){
-            conversationNumberChoice = conversationNumberChoice1;
-        } else if (option2 == true) {
-            conversationNumberChoice = conversationNumberChoice2;
+
+        if (textDisplay.text == sentences[index] && index != choiceNumber1 && index != choiceNumber2 && index != choiceNumber3){
+            continueButton.SetActive(true);
+        } else if (textDisplay.text == sentences[index] && (index == choiceNumber1 || index == choiceNumber2 || index == choiceNumber3)){
+            choiceButton1.SetActive(true);
+            choiceButton2.SetActive(true);
+            choiceBackplate.SetActive(true);
         }
     }
 
@@ -69,13 +67,34 @@ public class Dialog : MonoBehaviour {
         }
     }
 
-    public void choice1(){
-        option1 = true;
-        choiceBackplate.SetActive(false);
+    public void Choice1() {
+        if (index == choiceNumber1) {
+            AbilityCatalog.powerWordKill = true;
+            choiceBackplate.SetActive(false);
+        } else if (index == choiceNumber2){
+            AbilityCatalog.crescendo = true;
+            choiceBackplate.SetActive(false);
+        } else if (index == choiceNumber3){
+            AbilityCatalog.layOnHands = true;
+            choiceBackplate.SetActive(false);
+        }
     }
-    public void choice2(){
-        option2 = true;
-        choiceBackplate.SetActive(false);
+    public void Choice2(){
+        if (index == choiceNumber1){
+            AbilityCatalog.lightning = true;
+            AbilityCatalog.endingPoints++;
+            choiceBackplate.SetActive(false);
+        }
+        else if (index == choiceNumber2){
+            AbilityCatalog.arpeggioPocoAPoco = true;
+            AbilityCatalog.endingPoints++;
+            choiceBackplate.SetActive(false);
+        }
+        else if (index == choiceNumber3){
+            AbilityCatalog.shieldBash = true;
+            AbilityCatalog.endingPoints++;
+            choiceBackplate.SetActive(false);
+        }
     }
 
     public void NextSentence(){
@@ -83,18 +102,10 @@ public class Dialog : MonoBehaviour {
         continueButton.SetActive(false);
         choiceButton1.SetActive(false);
         choiceButton2.SetActive(false);
+        choiceBackplate.SetActive(false);
         //index < sentences.Length - 1
-        if (index < conversationNumberChoice){
-            if (option2 == true){
-                index += 2;
-            } else if (option1 == true && skip == true){
-                index += 2;
-            } else if (option1 == true){
-                skip = true;
-                index++;
-            } else {
-                index++;
-            }
+        if (index < sentences.Length){
+            index++;
             textDisplay.text = "";
             StartCoroutine(Type());
         } else {
@@ -102,10 +113,24 @@ public class Dialog : MonoBehaviour {
             continueButton.SetActive(false);
             dialogueBackplate.SetActive(false);
         }
-        if (index == choiceNumber){
-            choiceButton1.SetActive(true);
-            choiceButton2.SetActive(true);
-            choiceBackplate.SetActive(true);
+        if (index == choiceNumber1){
+            //choiceButton1.SetActive(true);
+            choiceButton1.GetComponent<UnityEngine.UI.Text>().text = "(Point out the obvious.)";
+            //choiceButton2.SetActive(true);
+            choiceButton2.GetComponent<UnityEngine.UI.Text>().text = "(Explain your thoughts.)";
+            //choiceBackplate.SetActive(true);
+        } else if (index == choiceNumber2){
+            //choiceButton1.SetActive(true);
+            choiceButton1.GetComponent<UnityEngine.UI.Text>().text = "(Wing it.)";
+            //choiceButton2.SetActive(true);
+            choiceButton2.GetComponent<UnityEngine.UI.Text>().text = "(Get emotional.)";
+            //choiceBackplate.SetActive(true);
+        } else if (index == choiceNumber3){
+            //choiceButton1.SetActive(true);
+            choiceButton1.GetComponent<UnityEngine.UI.Text>().text = "(Appeal to them with logic.)";
+            //choiceButton2.SetActive(true);
+            choiceButton2.GetComponent<UnityEngine.UI.Text>().text = "(Tell them how you really feel.)";
+            //choiceBackplate.SetActive(true);
         }
         Debug.Log(index);
     }
