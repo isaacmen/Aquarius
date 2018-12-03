@@ -307,13 +307,13 @@ Prefab:
         type: 2}
       propertyPath: tileRegularSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 97d88bbb42d044322a1e7a1455643196,
+      objectReference: {fileID: 21300000, guid: 85e9027f956383d48a31918f8e2e0c4e,
         type: 3}
     - target: {fileID: 114820808428215652, guid: 64d268c2a26f8f54680b5fcb2f7ff68f,
         type: 2}
       propertyPath: tileClickableSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 1a3a456fea65c485eab25fd5a47af916,
+      objectReference: {fileID: 21300000, guid: ddb3c3981f3e0e64f8e64e88da137a98,
         type: 3}
     - target: {fileID: 114820808428215652, guid: 64d268c2a26f8f54680b5fcb2f7ff68f,
         type: 2}
@@ -1137,7 +1137,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7f3a842f0b51b2741adce99f354bb13c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a481a9912625d234a898e7596699b29f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1155,8 +1155,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1303141568}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.9093378, y: -1.313064, z: -0.06428242}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalPosition: {x: -2.9093378, y: -0.77, z: -0.06428242}
+  m_LocalScale: {x: 9, y: 9, z: 9}
   m_Children: []
   m_Father: {fileID: 1057398939}
   m_RootOrder: 1
@@ -2243,20 +2243,19 @@ Prefab:
         type: 2}
       propertyPath: tileRegularSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 97d88bbb42d044322a1e7a1455643196,
+      objectReference: {fileID: 21300000, guid: 85e9027f956383d48a31918f8e2e0c4e,
         type: 3}
     - target: {fileID: 114999377057791432, guid: 59ebd6f6915872046af9e9e11c010966,
         type: 2}
       propertyPath: tileClickableSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 1a3a456fea65c485eab25fd5a47af916,
+      objectReference: {fileID: 21300000, guid: ddb3c3981f3e0e64f8e64e88da137a98,
         type: 3}
     - target: {fileID: 114999377057791432, guid: 59ebd6f6915872046af9e9e11c010966,
         type: 2}
       propertyPath: tileSecondarySprite
       value: 
-      objectReference: {fileID: 21300000, guid: 238898372a1bf4274acf1ddefa60e2b3,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 114999377057791432, guid: 59ebd6f6915872046af9e9e11c010966,
         type: 2}
       propertyPath: isRight
@@ -2541,11 +2540,11 @@ Prefab:
         type: 3}
     - target: {fileID: 4560935972281468, guid: 5b1f98fc9391df148b883cdde1f5837c, type: 2}
       propertyPath: m_LocalScale.x
-      value: 3.5
+      value: 3.75
       objectReference: {fileID: 0}
     - target: {fileID: 4560935972281468, guid: 5b1f98fc9391df148b883cdde1f5837c, type: 2}
       propertyPath: m_LocalScale.y
-      value: 3.5
+      value: 3.75
       objectReference: {fileID: 0}
     - target: {fileID: 4560935972281468, guid: 5b1f98fc9391df148b883cdde1f5837c, type: 2}
       propertyPath: m_LocalPosition.y
