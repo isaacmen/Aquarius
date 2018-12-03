@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,6 +14,7 @@ public class GameLoop : MonoBehaviour {
 	private List<ActionType> actionTypesPerTurn = null;
 
 	public StatusEffectManager statusManager;
+	public DelayedActionManager delayedActionManager;
 
 	private Field yourField;
 	private Field enemyField;
@@ -44,6 +45,7 @@ public class GameLoop : MonoBehaviour {
 
 		turnOrder = new List<Character>();
 		statusManager = new StatusEffectManager();
+		delayedActionManager = new DelayedActionManager();
 	}
 
 	public Field getAllyField() {
@@ -93,6 +95,11 @@ public class GameLoop : MonoBehaviour {
 	}
 
 	void Update() {
+		if(delayedActionManager.inProgress()) {
+			print("IP");
+			return;
+		}
+
         switch (state) {
 			case GameState.INIT:
 				// can randomize turn order
@@ -117,20 +124,8 @@ public class GameLoop : MonoBehaviour {
 
 				break;
 			case GameState.ALLY_WAIT_INPUT:
-                bool moveActive = false;
-                bool actionsActive = false;
-                for (int i = 1; i < turnActions.Count + 1; i++)
-                {
-                    if (turnActions[i - 1].GetType() == typeof(Move))
-                        moveActive = true;
-                    else if (turnActions[i - 1].GetType() != typeof(Pass))
-                        actionsActive = true;
-                }
-                Debug.Log(moveActive + " " + actionsActive);
-                GetComponent<UI_Manager>().resetAvailableActions(moveActive, actionsActive);
-
-				// keeps checking for keyboard input; eventually to be overwritten with ui
-				for(int i = 1; i < turnActions.Count + 1; i++) {
+                // keeps checking for keyboard input; eventually to be overwritten with ui
+                for (int i = 1; i < turnActions.Count + 1; i++) {
 					if(Input.GetKeyDown(GameLoop.keyCodeFromInt(i)) && !turnActions[i - 1].isActive()) {
 						activeAction = turnActions[i-1];
 						if(turnActions[i-1].GetType() == typeof(Pass))
@@ -192,18 +187,22 @@ public class GameLoop : MonoBehaviour {
 					}
 					activeAction = null;
 				}
-				break;
+                break;
 			case GameState.ENEMY_STATE:
 				Debug.Log("GameLoop Update() in ENEMY_STATE for " + turn);
-				nextTurn();
+                Debug.Log("Chosen Action: " + activeAction);
+                //if (turnOver())
+				    nextTurn();
 				break;
 		}
 	}
 
 	private bool turnOver() {
-		return  actionTypesPerTurn.Count == 0 ||
-				(turnActions.Count == 0) ||
-				(turnActions.Count == 1 && turnActions[0].getActionType() == ActionType.PASS);
+        return actionTypesPerTurn.Count == 0 ||
+                (turnActions.Count == 0) ||
+                (turnActions.Count == 2) ||
+                activeAction.GetType() == typeof(Pass);
+				//(turnActions.Count == 1 && turnActions[0].getActionType() == ActionType.PASS);
 	}
 
     public void setState(string newState)
@@ -253,7 +252,6 @@ public class GameLoop : MonoBehaviour {
                     setState(GameState.ENEMY_STATE);
                 }
                 GetComponent<UI_Manager>().resetMenus();
-
                 break;
             case GameState.ALLY_WAIT_INPUT:
                 // prints possible actions then waits for the user to select one
@@ -275,8 +273,20 @@ public class GameLoop : MonoBehaviour {
                     Debug.Log("ActionType's left: " + s);
                 }
 
+                //bool moveActive = false;
+                //bool actionsActive = false;
+                //for (int i = 1; i < turnActions.Count + 1; i++)
+                //{
+                //    if (turnActions[i - 1].GetType() == typeof(Move))
+                //        moveActive = true;
+                //    else if (turnActions[i - 1].GetType() != typeof(Pass))
+                //        actionsActive = true;
+                //}
+                //GetComponent<UI_Manager>().resetAvailableActions(moveActive, actionsActive);
+
                 break;
             case GameState.ALLY_ACTION_ACTIVE:
+                //GetComponent<UI_Manager>().noMenus();
                 break;
             case GameState.ENEMY_STATE:
                 Debug.Log("GameLoop entered ENEMY_STATE for " + turn);
@@ -285,7 +295,7 @@ public class GameLoop : MonoBehaviour {
     }
 
 	public void setState(GameState newState) {
-		// things to be done when exiting a state (nothing so far; maybe won't be needed)
+		// things to be done when exiting a state
 		switch(state) {
 			case GameState.START_TURN:			break;
 			case GameState.ALLY_WAIT_INPUT:		break;
@@ -303,12 +313,15 @@ public class GameLoop : MonoBehaviour {
 				do {
 					turn = getCharacterTurn();
 					Debug.Log(turn.name + "'s Turn!");
+					statusManager.onTurn(turn);
 					if(turn.statusEffects.Contains(StatusEffect.STUNNED)) {
 						Debug.Log(turn.name + " is stunned!");
-						nextTurn();
+						Character turnDone = turnOrder[0];
+						turnOrder.Remove(turnDone);
+						turnOrder.Add(turnDone);
 					}
 				} while(turn.statusEffects.Contains(StatusEffect.STUNNED));
-				statusManager.onTurn(turn);
+				delayedActionManager.onTurn(turn);
 
 				if(turn.GetType() == typeof(AllyCharacter)) {
 					turnActions = ((AllyCharacter)turn).getActions();
@@ -328,9 +341,9 @@ public class GameLoop : MonoBehaviour {
 
 				break;
 			case GameState.ALLY_WAIT_INPUT:
-				// prints possible actions then waits for the user to select one
-				// to be partially overridden by implemention with ui
-				string turnMoveStr = "What should " + turn + " do? (press # to act)\n";
+                // prints possible actions then waits for the user to select one
+                // to be partially overridden by implemention with ui
+                string turnMoveStr = "What should " + turn + " do? (press # to act)\n";
 				for(int i = 0; i < turnActions.Count; i++) {
 					turnMoveStr += (i + 1) + ": " + turnActions[i].GetType() + ((turnActions[i].usesLeft() > 999999) ? "" : " (" + turnActions[i].usesLeft() + ")") + ((i < turnActions.Count - 1) ? " / " : "");
 				}
@@ -344,9 +357,21 @@ public class GameLoop : MonoBehaviour {
 					Debug.Log("ActionType's left: " + s);
 				}
 
-				break;
+                bool moveActive = false;
+                bool actionsActive = false;
+                for (int i = 1; i < turnActions.Count + 1; i++)
+                {
+                    if (turnActions[i - 1].GetType() == typeof(Move))
+                        moveActive = true;
+                    else if (turnActions[i - 1].GetType() != typeof(Pass))
+                        actionsActive = true;
+                }
+                GetComponent<UI_Manager>().resetAvailableActions(moveActive, actionsActive);
+
+                break;
 			case GameState.ALLY_ACTION_ACTIVE:
-				break;
+                //GetComponent<UI_Manager>().noMenus();
+                break;
 			case GameState.ENEMY_STATE:
 				Debug.Log("GameLoop entered ENEMY_STATE for " + turn);
                 //GameObject.Find("Libra").GetComponent<Character>().takeDamage(50);
@@ -402,7 +427,7 @@ public class GameLoop : MonoBehaviour {
             
             activeAction = turnActions[i - 1];
             Debug.Log(turn + " used BasicAttack!");
-            GetComponent<UI_Manager>().updateActionText(turnActions[i - 1].GetType().ToString());
+            //GetComponent<UI_Manager>().updateActionText(turnActions[i - 1].GetType().ToString());
             activeAction.setActive();
             setState(GameState.ALLY_ACTION_ACTIVE);
         }
@@ -419,7 +444,7 @@ public class GameLoop : MonoBehaviour {
 
             activeAction = turnActions[i - 1];
             Debug.Log(turn + " used " + turnActions[i - 1].GetType() + "!");
-            GetComponent<UI_Manager>().updateActionText(turnActions[i - 1].GetType().ToString());
+            //GetComponent<UI_Manager>().updateActionText(turnActions[i - 1].GetType().ToString());
             activeAction.setActive();
             setState(GameState.ALLY_ACTION_ACTIVE);
         }
@@ -434,12 +459,12 @@ public class GameLoop : MonoBehaviour {
 
         activeAction = potentialSkills[grabIndex];
         Debug.Log(turn + " used " + potentialSkills[grabIndex].GetType() + "!");
-        GetComponent<UI_Manager>().updateActionText(potentialSkills[grabIndex].GetType().ToString());
+        //GetComponent<UI_Manager>().updateActionText(potentialSkills[grabIndex].GetType().ToString());
         activeAction.setActive();
         setState(GameState.ALLY_ACTION_ACTIVE);
     }
 
-    private List<Action> getActiveSkills()
+    public List<Action> getActiveSkills()
     {
         List<Action> skills = new List<Action>();
         for (int i = 1; i < turnActions.Count + 1; i++)
@@ -454,6 +479,20 @@ public class GameLoop : MonoBehaviour {
         return skills;
     }
 
+    public List<Action> getActiveActions()
+    {
+        List<Action> actions = new List<Action>();
+        for (int i = 1; i < turnActions.Count + 1; i++)
+        {
+            if (turnActions[i - 1].GetType() == typeof(Move) ||
+                turnActions[i - 1].GetType() == typeof(Pass))
+                continue;
+
+            actions.Add(turnActions[i - 1]);
+        }
+        return actions;
+    }
+
     public void move()
     {
         Debug.Log("Moving");
@@ -463,7 +502,7 @@ public class GameLoop : MonoBehaviour {
                 continue;
 
             activeAction = turnActions[i - 1];
-            GetComponent<UI_Manager>().updateActionText(turnActions[i - 1].GetType().ToString());
+            //GetComponent<UI_Manager>().updateActionText(turnActions[i - 1].GetType().ToString());
             activeAction.setActive();
             setState(GameState.ALLY_ACTION_ACTIVE);
             Debug.Log(turn + " beginning move.");
@@ -489,22 +528,5 @@ public class GameLoop : MonoBehaviour {
 
     }
 
-    /*
-    public void moveInDirection(string direction)
-    {
-        for (int i = 1; i < turnActions.Count + 1; i++)
-        {
-            activeAction = turnActions[i - 1];
-            if (turnActions[i - 1].GetType() != typeof(Move))
-                continue;
-
-            //Debug.Log("Moving " + direction);
-            GetComponent<UI_Manager>().updateActionText(turnActions[i - 1].GetType().ToString());
-            activeAction.setActive();
-            Move moveAction = (Move)activeAction;
-            moveAction.moveDirection(direction);
-            setState(GameState.ALLY_ACTION_ACTIVE);
-        }
-    }*/
     #endregion
 }

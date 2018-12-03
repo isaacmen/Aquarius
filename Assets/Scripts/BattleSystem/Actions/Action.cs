@@ -57,8 +57,18 @@ public abstract class Action : MonoBehaviour {
 	protected virtual void Update() {
 		if(active) innerLoop();
 	}
+
+    public virtual string getName()
+    {
+        return GetType().ToString();
+    }
+
+    public virtual string getDescription()
+    {
+        return "Description";
+    }
 }
 
 public enum ActionType {
-	PASS, MOVE, ABILITY
+	PASS, MOVE, ABILITY, NA
 }

@@ -10,7 +10,7 @@ public class TurnOrderUI : MonoBehaviour {
     public GameObject indicator; // the little thing that shows which turn it is on the bar
 
     //private List<Image> turnOrderImages;
-    private List<Transform> positions;
+    public List<Transform> positions;
     //private Vector3[] scales;
 
     [Header("Current Turn Panel")]
@@ -68,7 +68,7 @@ public class TurnOrderUI : MonoBehaviour {
 
     private void updateTurnBar()
     {
-        if (order.Count == positions.Count)
+        if (gameLoop.turnOrder.Count == 0 && order.Count == positions.Count)
             return;
 
         positions.Clear();
@@ -83,6 +83,8 @@ public class TurnOrderUI : MonoBehaviour {
         for (int i=0; i<potentialPics.Count; i++)
         {
             GameObject kid = potentialPics[i];
+            //Debug.Log("Kid name: " + kid.name);
+            //Debug.Log("At index: " + i + " of " + order.Count);
             if (i >= order.Count)
             {
                 kid.SetActive(false);
@@ -91,13 +93,12 @@ public class TurnOrderUI : MonoBehaviour {
             {
                 kid.SetActive(true);
                 positions.Add(kid.transform);
-                Debug.Log("Kid name: " + kid.name);
                 Transform[] kidsKids = kid.GetComponentsInChildren<Transform>();
                 
                 foreach (Transform kidsKid in kidsKids)
                 {
-                    if (kidsKid.name.Contains("Mask"))
-                        Debug.Log("Found mask");
+                    //if (kidsKid.name.Contains("Mask"))
+                    //    Debug.Log("Found mask");
                     if (kidsKid.name.Contains("Image"))
                     {
                         kidsKid.gameObject.GetComponent<Image>().sprite = order[i].portrait;
@@ -113,8 +114,11 @@ public class TurnOrderUI : MonoBehaviour {
     {
 
         Vector3 newPosition = indicator.transform.position;
-        Transform nextPic = positions[currentTurn % positions.Count];
-        newPosition.x = nextPic.position.x;//gameLoop.getCharacterTurn().transform.position.x;
+        if (positions.Count != 0)
+        {
+            Transform nextPic = positions[currentTurn % positions.Count];
+            newPosition.x = nextPic.position.x;//gameLoop.getCharacterTurn().transform.position.x;
+        }
 
         //Vector3.MoveTowards(indicator.transform.position, 
         //    newPosition, 10);
@@ -123,6 +127,8 @@ public class TurnOrderUI : MonoBehaviour {
 
     private void updateCurrentInfo()
     {
+        if (!gameLoop.getCharacterTurn())
+            return;
         updateCurrentText();
         updateCurrentPic();
         updateCurrentCharacterHealth();
@@ -145,5 +151,7 @@ public class TurnOrderUI : MonoBehaviour {
     {
         currentCharacterHealth.character = gameLoop.getCharacterTurn().gameObject;
         currentCharacterHealth.updateHealthBar();
+
+        currentCharacterHealth.gameObject.SetActive(gameLoop.getCharacterTurn().GetType() == typeof(AllyCharacter));
     }
 }
