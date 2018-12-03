@@ -24,6 +24,9 @@ public class Dialog : MonoBehaviour {
     public GameObject choiceButton2;
     public GameObject dialogueBackplate;
     public GameObject choiceBackplate;
+    public GameObject Speaker1;
+    public GameObject Speaker2;
+    public GameObject Speaker3;
     public int choiceNumber;
 
     void Start()
@@ -34,7 +37,21 @@ public class Dialog : MonoBehaviour {
 
     private void Update()
     {
-        if(textDisplay.text == sentences[index] && index != choiceNumber){
+        if (sentences[index].Contains(Speaker1.name)){
+            Speaker1.SetActive(true);
+            Speaker2.SetActive(false);
+            Speaker3.SetActive(false);
+        } else if (sentences[index].Contains(Speaker2.name)){
+            Speaker2.SetActive(true);
+            Speaker1.SetActive(false);
+            Speaker3.SetActive(false);
+        } else if (sentences[index].Contains(Speaker3.name)){
+            Speaker3.SetActive(true);
+            Speaker2.SetActive(false);
+            Speaker1.SetActive(false);
+        }
+
+        if (textDisplay.text == sentences[index] && index != choiceNumber){
             continueButton.SetActive(true);
         }
         if (option1 == true){

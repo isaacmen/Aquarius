@@ -14,6 +14,6 @@ public class AbilityCatalog : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.Log(lightning);
+        //Debug.Log(lightning);
 	}
 }
