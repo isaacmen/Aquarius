@@ -12,7 +12,7 @@ public class Dialog : MonoBehaviour {
     private int index;
     public float typingSpeed;
     //int textIndex = 0;
-
+    public bool choices;
     public GameObject continueButton;
     public GameObject choiceButton1;
     public GameObject choiceButton2;
@@ -24,6 +24,9 @@ public class Dialog : MonoBehaviour {
     public int choiceNumber1;
     public int choiceNumber2;
     public int choiceNumber3;
+    private bool divergeText;
+
+
 
     void Start()
     {
@@ -31,8 +34,10 @@ public class Dialog : MonoBehaviour {
     }
 
 
+
     private void Update()
     {
+        //Update the portrait depending on who is speaking.
         if (sentences[index].Contains(Speaker1.name)){
             Speaker1.SetActive(true);
             Speaker2.SetActive(false);
@@ -45,21 +50,30 @@ public class Dialog : MonoBehaviour {
             Speaker3.SetActive(true);
             Speaker2.SetActive(false);
             Speaker1.SetActive(false);
-        }
-        else{
-            //Do nothing
+        } else {
+
         }
 
-        if (textDisplay.text == sentences[index] && index != choiceNumber1 && index != choiceNumber2 && index != choiceNumber3){
-            continueButton.SetActive(true);
-        } else if (textDisplay.text == sentences[index] && (index == choiceNumber1 || index == choiceNumber2 || index == choiceNumber3)){
-            choiceButton1.SetActive(true);
-            choiceButton2.SetActive(true);
-            choiceBackplate.SetActive(true);
+        //Activate buttons
+        if (choices == true){
+            if (textDisplay.text == sentences[index] && index != choiceNumber1 && index != choiceNumber2 && index != choiceNumber3){
+                continueButton.SetActive(true);
+            } else if (divergeText == false && textDisplay.text == sentences[index] && (index == choiceNumber1 || index == choiceNumber2 || index == choiceNumber3)){
+                choiceButton1.SetActive(true);
+                choiceButton2.SetActive(true);
+                choiceBackplate.SetActive(true);
+            }
+        } else {
+            if (textDisplay.text == sentences[index])
+            {
+                continueButton.SetActive(true);
+            }
         }
+
     }
 
 
+    //Scroll text
     IEnumerator Type(){
         foreach(char letter in sentences[index].ToCharArray()){
             textDisplay.text += letter;
@@ -67,70 +81,81 @@ public class Dialog : MonoBehaviour {
         }
     }
 
+
+    //Choice 1 operations
     public void Choice1() {
         if (index == choiceNumber1) {
             AbilityCatalog.powerWordKill = true;
-            choiceBackplate.SetActive(false);
+            divergeText = true;
         } else if (index == choiceNumber2){
             AbilityCatalog.crescendo = true;
-            choiceBackplate.SetActive(false);
+
         } else if (index == choiceNumber3){
             AbilityCatalog.layOnHands = true;
-            choiceBackplate.SetActive(false);
+
         }
     }
+
+
+    //Choice 2 operations
     public void Choice2(){
         if (index == choiceNumber1){
             AbilityCatalog.lightning = true;
             AbilityCatalog.endingPoints++;
-            choiceBackplate.SetActive(false);
+
         }
         else if (index == choiceNumber2){
             AbilityCatalog.arpeggioPocoAPoco = true;
             AbilityCatalog.endingPoints++;
-            choiceBackplate.SetActive(false);
+
         }
         else if (index == choiceNumber3){
             AbilityCatalog.shieldBash = true;
             AbilityCatalog.endingPoints++;
-            choiceBackplate.SetActive(false);
+
         }
     }
 
-    public void NextSentence(){
 
+
+    public void NextSentence(){
+        //Clear UI
         continueButton.SetActive(false);
         choiceButton1.SetActive(false);
         choiceButton2.SetActive(false);
         choiceBackplate.SetActive(false);
-        //index < sentences.Length - 1
-        if (index < sentences.Length){
-            index++;
+
+
+        //Sentence progression
+        if (divergeText == false){
+            if (index < sentences.Length - 1){
+                index++;
+                textDisplay.text = "";
+                StartCoroutine(Type());
+            } else {
+                textDisplay.text = "";
+                continueButton.SetActive(false);
+                dialogueBackplate.SetActive(false);
+            }
+        } else {
+            sentences[index] = "Test";
             textDisplay.text = "";
             StartCoroutine(Type());
-        } else {
-            textDisplay.text = "";
-            continueButton.SetActive(false);
-            dialogueBackplate.SetActive(false);
+            divergeText = false;
         }
+
+
+
+        //Change option text
         if (index == choiceNumber1){
-            //choiceButton1.SetActive(true);
             choiceButton1.GetComponent<UnityEngine.UI.Text>().text = "(Point out the obvious.)";
-            //choiceButton2.SetActive(true);
             choiceButton2.GetComponent<UnityEngine.UI.Text>().text = "(Explain your thoughts.)";
-            //choiceBackplate.SetActive(true);
         } else if (index == choiceNumber2){
-            //choiceButton1.SetActive(true);
             choiceButton1.GetComponent<UnityEngine.UI.Text>().text = "(Wing it.)";
-            //choiceButton2.SetActive(true);
             choiceButton2.GetComponent<UnityEngine.UI.Text>().text = "(Get emotional.)";
-            //choiceBackplate.SetActive(true);
         } else if (index == choiceNumber3){
-            //choiceButton1.SetActive(true);
             choiceButton1.GetComponent<UnityEngine.UI.Text>().text = "(Appeal to them with logic.)";
-            //choiceButton2.SetActive(true);
             choiceButton2.GetComponent<UnityEngine.UI.Text>().text = "(Tell them how you really feel.)";
-            //choiceBackplate.SetActive(true);
         }
         Debug.Log(index);
     }

@@ -189,7 +189,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 361214178}
-        m_MethodName: NextSentence
+        m_MethodName: Choice1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -200,7 +200,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 361214178}
-        m_MethodName: choice1
+        m_MethodName: NextSentence
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -864,6 +864,7 @@ MonoBehaviour:
   - "LEO: \u201CCome on, guys!\u201D"
   - "LEO: \u201CWe\u2019re all in this together!\u201D"
   typingSpeed: 0.001
+  choices: 1
   continueButton: {fileID: 1385199823}
   choiceButton1: {fileID: 11707062}
   choiceButton2: {fileID: 1709816709}
@@ -3436,7 +3437,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 361214178}
-        m_MethodName: choice2
+        m_MethodName: Choice2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
