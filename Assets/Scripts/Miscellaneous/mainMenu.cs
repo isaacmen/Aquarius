@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class mainMenu : MonoBehaviour
 {
+    public Scene 
+
     void Start()
     {
 
@@ -20,6 +22,7 @@ public class mainMenu : MonoBehaviour
     {
         //DisableOptions.toggle = true;
     }
+
     /*public void PlayGameMult() {
         SceneManager.LoadScene("NetworkLobby");
     }

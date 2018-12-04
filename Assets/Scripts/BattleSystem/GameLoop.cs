@@ -278,6 +278,10 @@ public class GameLoop : MonoBehaviour {
 					break;
 			}
 		}
+        else
+        {
+            //Game over, switch scenes
+        }
 	}
 
     private void findActiveAction()
