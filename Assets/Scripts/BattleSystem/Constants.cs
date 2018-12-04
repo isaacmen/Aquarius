@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Constants : MonoBehaviour {
+	[Header("Aquarius")]
+	public int tidalWaveX_damage;
+	public int tidalWaveO_damage;
+	public int tidalWaveRow_damage;
+	public int tidalWaveColumn_damage;
+
 	[Header("Libra")]
 	public int layOnHands_healValue;
 	public int layOnHands_minRange;

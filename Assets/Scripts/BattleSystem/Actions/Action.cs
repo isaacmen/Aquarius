@@ -34,6 +34,11 @@ public abstract class Action : MonoBehaviour {
 			complete = c;
 			if(complete)
 				remainingUses -= 1;
+			print("reset sprites");
+			foreach(Tile t in GameLoop.getInstance().getAllyField().getTiles())
+				t.setRegularSprite();
+			foreach(Tile t in GameLoop.getInstance().getEnemyField().getTiles())
+				t.setRegularSprite();
 			innerEnd();
 		} else {
 			Debug.Log(this.GetType() + " set inactive when already inactive.");

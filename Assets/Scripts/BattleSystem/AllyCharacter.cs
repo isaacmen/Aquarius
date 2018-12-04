@@ -18,7 +18,24 @@ public class AllyCharacter : Character {
 	override protected void Start() {
 		base.Start();
 
-		GameLoop.getInstance().addAllyCharacter(this);
+		if(onField) {
+			this.gameObject.SetActive(true);
+			GameLoop.getInstance().addAllyCharacter(this);
+		} else {
+			this.gameObject.SetActive(false);
+			GameLoop.getInstance().addAllyCharacterDisabled(this);
+		}
+	}
+
+	public void setOnField(bool to) {
+		if(to) {
+			this.gameObject.SetActive(true);
+			GameLoop.getInstance().addAllyCharacter(this);
+			health = maxHealth;
+		} else {
+			this.gameObject.SetActive(false);
+			GameLoop.getInstance().addAllyCharacterDisabled(this);
+		}
 	}
 
 	public List<Action> getActions() {

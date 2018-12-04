@@ -10,6 +10,7 @@ public class Character : MonoBehaviour {
 	public List<StatusEffect> statusEffects;
 
 	[Header("Attributes")]
+	public bool onField;
 	public int maxHealth;
 	public int health;
 	public int basicAttackDamage;
@@ -45,6 +46,8 @@ public class Character : MonoBehaviour {
 		
 	}
 
+	
+
 	public void addStatus(StatusEffect status) {
 		statusEffects.Add(status);
 	}
@@ -55,6 +58,13 @@ public class Character : MonoBehaviour {
 
 	public void takeDamage(int d) {
 		if(d < 0 || !statusEffects.Contains(StatusEffect.INVULNERABLE))
-			health = Mathf.Max(Mathf.Min(health - d, maxHealth), 0);
+			health = Mathf.Min(health - d, maxHealth);
+		if(health <= 0) {
+			Debug.Log(this.name + " died");
+			// REMOVE HEALTH BAR
+			this.gameObject.SetActive(false);
+			field.removeCharacter(this);
+			GameLoop.getInstance().turnOrder.Remove(this);
+		}
 	}
 }
