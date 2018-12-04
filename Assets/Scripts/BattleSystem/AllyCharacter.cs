@@ -55,34 +55,45 @@ public class AllyCharacter : Character {
 		actionList.Add(GameObject.Find(this.name).AddComponent<Pass>());
 
 		actionTypesPerTurn = new List<ActionType>() { ActionType.ABILITY, ActionType.MOVE };
+		
+		print(AbilityCatalog.powerWordKill);
+		print(AbilityCatalog.lightning);
+		print(AbilityCatalog.crescendo);
+		print(AbilityCatalog.arpeggioPocoAPoco);
+		print(AbilityCatalog.layOnHands);
+		print(AbilityCatalog.shieldBash);
+
+		actionList.Add(GameObject.Find(this.name).AddComponent<Move>());
+		actionList.Add(GameObject.Find(this.name).AddComponent<BasicAttack>());
 
 		switch(type) {
 			case AllyCharacterType.Libra:
-				actionList.Add(GameObject.Find(this.name).AddComponent<Move>());
-				actionList.Add(GameObject.Find(this.name).AddComponent<BasicAttack>());
-
 				actionList.Add(GameObject.Find(this.name).AddComponent<Guard>());
-				actionList.Add(GameObject.Find(this.name).AddComponent<LayOnHands>());
-				actionList.Add(GameObject.Find(this.name).AddComponent<ShieldBash>());
+
+				if(AbilityCatalog.layOnHands || !AbilityCatalog.shieldBash)
+					actionList.Add(GameObject.Find(this.name).AddComponent<LayOnHands>());
+				if(AbilityCatalog.shieldBash || !AbilityCatalog.layOnHands)
+					actionList.Add(GameObject.Find(this.name).AddComponent<ShieldBash>());
 
 				break;
 			case AllyCharacterType.Leo:
-				actionList.Add(GameObject.Find(this.name).AddComponent<Move>());
-				actionList.Add(GameObject.Find(this.name).AddComponent<BasicAttack>());
-
-				actionList.Add(GameObject.Find(this.name).AddComponent<Unload>());
 				actionList.Add(GameObject.Find(this.name).AddComponent<Lullaby>());
-				actionList.Add(GameObject.Find(this.name).AddComponent<Crescendo>());
+
+				if(AbilityCatalog.arpeggioPocoAPoco || !AbilityCatalog.crescendo)
+					actionList.Add(GameObject.Find(this.name).AddComponent<Unload>());
+				if(AbilityCatalog.crescendo || !AbilityCatalog.arpeggioPocoAPoco)
+					actionList.Add(GameObject.Find(this.name).AddComponent<Crescendo>());
 
 				break;
 			case AllyCharacterType.Scorpio:
-				actionList.Add(GameObject.Find(this.name).AddComponent<Move>());
-				actionList.Add(GameObject.Find(this.name).AddComponent<BasicAttack>());
-
 				actionList.Add(GameObject.Find(this.name).AddComponent<Fireball>());
-				actionList.Add(GameObject.Find(this.name).AddComponent<PowerWordKill>());
-				GameObject.Find(this.name).AddComponent<PowerWordKill2>(); // the delayed 2ndary part
-				actionList.Add(GameObject.Find(this.name).AddComponent<LightningBolt>());
+
+				if(AbilityCatalog.powerWordKill || !AbilityCatalog.lightning) {
+					actionList.Add(GameObject.Find(this.name).AddComponent<PowerWordKill>());
+					GameObject.Find(this.name).AddComponent<PowerWordKill2>(); // the delayed 2ndary part
+				}
+				if(AbilityCatalog.lightning || !AbilityCatalog.powerWordKill)
+					actionList.Add(GameObject.Find(this.name).AddComponent<LightningBolt>());
 
 				break;
 		}
