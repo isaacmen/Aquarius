@@ -118,18 +118,24 @@ public class GameLoop : MonoBehaviour {
 			ongoing = false;
 		} else {
 			bool foundAquarius = false;
-			Character aquarius = GameObject.Find("Aquarius").GetComponent<Character>();
-			foreach(Tile t in GameLoop.getInstance().getEnemyField().gridPositions)
-				if(t.getCharacter() == aquarius) {
-					foundAquarius = true;
-					break;
-				}
-			if(!foundAquarius) {
-				// stuff for winning
-				Debug.Log("You win.");
-				ongoing = false;
-			}
-		}
+            GameObject aqObj = GameObject.Find("Aquarius");
+            if (aqObj)
+            {
+                Character aquarius = GameObject.Find("Aquarius").GetComponent<Character>();
+                foreach (Tile t in GameLoop.getInstance().getEnemyField().gridPositions)
+                    if (t.getCharacter() == aquarius)
+                    {
+                        foundAquarius = true;
+                        break;
+                    }
+            }
+            if (!foundAquarius)
+            {
+                // stuff for winning
+                Debug.Log("You win.");
+                ongoing = false;
+            }
+        }
 	}
 
 	public List<EnemyCharacter> getInactiveEnemies() {

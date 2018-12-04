@@ -118,6 +118,12 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 224538877619103416, guid: 82cf9fe7a274e444bbce22a910e25b9e,
     type: 2}
   m_PrefabInternal: {fileID: 1423856878}
+--- !u!114 &47947489 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114182045866608020, guid: a013fc6590226654ca3c25e2f8ccd742,
+    type: 2}
+  m_PrefabInternal: {fileID: 1208747077}
+  m_Script: {fileID: 11500000, guid: d5d4cecdbc94e0c458d68f8ecb6e5cf8, type: 3}
 --- !u!1 &57074350 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1898647204963850, guid: 82cf9fe7a274e444bbce22a910e25b9e,
@@ -544,6 +550,12 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &789587189 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114182045866608020, guid: a013fc6590226654ca3c25e2f8ccd742,
+    type: 2}
+  m_PrefabInternal: {fileID: 1232458669}
+  m_Script: {fileID: 11500000, guid: d5d4cecdbc94e0c458d68f8ecb6e5cf8, type: 3}
 --- !u!4 &814220724 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4532493734544974, guid: 82cf9fe7a274e444bbce22a910e25b9e,
@@ -1882,6 +1894,7 @@ GameObject:
   - component: {fileID: 1400511937}
   - component: {fileID: 1400511934}
   - component: {fileID: 1400511938}
+  - component: {fileID: 1400511939}
   m_Layer: 0
   m_Name: GameLoop
   m_TagString: Untagged
@@ -1981,6 +1994,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  ongoing: 0
   activeAction: {fileID: 0}
   turnOrder: []
   randomizeTurnOrder: 0
@@ -2080,6 +2094,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1400511939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1400511933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 489e7ea604790414cb528fe2cebaf432, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toKill:
+  - {fileID: 1801873934}
+  - {fileID: 47947489}
+  - {fileID: 789587189}
 --- !u!1001 &1423856878
 Prefab:
   m_ObjectHideFlags: 0
@@ -3037,18 +3066,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4560935972281468, guid: 5b1f98fc9391df148b883cdde1f5837c,
     type: 2}
   m_PrefabInternal: {fileID: 1801873931}
---- !u!114 &1801873936
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1801873932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 489e7ea604790414cb528fe2cebaf432, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameLoop: {fileID: 1400511937}
 --- !u!1 &2023683585 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1672493976314662, guid: 82cf9fe7a274e444bbce22a910e25b9e,
