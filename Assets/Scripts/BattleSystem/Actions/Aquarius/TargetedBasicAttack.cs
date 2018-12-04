@@ -9,8 +9,9 @@ public class TargetedBasicAttack : TargetedAction {
 		return ActionType.ABILITY;
 	}
 
-	override public int minRange() { return GetComponentInParent<Character>().basicAttackMinRange; }
-	override public int maxRange() { return GetComponentInParent<Character>().basicAttackMaxRange; }
+	override protected int minRange() { return GetComponentInParent<Character>().basicAttackMinRange; }
+	override protected int maxRange() { return GetComponentInParent<Character>().basicAttackMaxRange; }
+	override protected bool targetYourField() { return true; }
 
 	override public int maxUses() {
 		return 9999999;
@@ -49,5 +50,27 @@ public class TargetedBasicAttack : TargetedAction {
 
 
 		return value;
+	}
+
+	override public List<Tile> getOptimalTiles() {
+		List<Tile> tiles = Field.tilesInCharacterRange(this.GetComponentInParent<Character>(), minRange(), maxRange(), false);
+		List<Tile> optimalTiles = new List<Tile>();
+		int highestValue = 0;
+
+		foreach(Tile t in tiles)
+			if(t.getCharacter() != null) {
+				int thisValue = GetComponentInParent<Character>().basicAttackDamage;
+				if(thisValue > t.getCharacter().health)
+					thisValue = Mathf.Max(2 * thisValue, thisValue + 15);
+				if(thisValue > highestValue) {
+					highestValue = thisValue;
+					optimalTiles = new List<Tile>() { t };
+				} else if(thisValue == highestValue) {
+					optimalTiles.Add(t);
+				}
+			}
+
+
+		return optimalTiles;
 	}
 }

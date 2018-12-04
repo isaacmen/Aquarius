@@ -1969,9 +1969,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  ongoing: 0
   activeAction: {fileID: 0}
   turnOrder: []
-  randomizeTurnOrder: 0
+  randomizeTurnOrder: 1
   DEBUG_LOG: 0
 --- !u!82 &1400511938
 AudioSource:

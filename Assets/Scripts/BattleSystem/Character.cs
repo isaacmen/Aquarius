@@ -65,11 +65,10 @@ public class Character : MonoBehaviour {
             HealthBar health = UI_Manager.getInstance().getHealthBar(this);
             if (health)
                 Destroy(health.gameObject);
+			GameLoop.getInstance().updateGameStatus();
 			this.gameObject.SetActive(false);
 			field.removeCharacter(this);
 			GameLoop.getInstance().turnOrder.Remove(this);
-
-			// some notification to GameLoop for it to check if win/lose
 		}
 	}
 }

@@ -15,8 +15,9 @@ public class TargetedMove : TargetedAction {
 		return ActionType.MOVE;
 	}
 
-	override public int minRange() { return 1; }
-	override public int maxRange() { return 1; }
+	override protected int minRange() { return 1; }
+	override protected int maxRange() { return 1; }
+	override protected bool targetYourField() { return true; }
 
 	override public int maxUses() {
 		return 9999999;
@@ -45,5 +46,16 @@ public class TargetedMove : TargetedAction {
 
 	override public int getValue() {
 		return 1;
+	}
+
+	override public List<Tile> getOptimalTiles() {
+		List<Tile> possTiles = Field.tilesInCharacterRange(this.GetComponentInParent<Character>(), 1, 1, true);
+		for(int i = 0; i < possTiles.Count; i++)
+			if(possTiles[i].getCharacter() != null) {
+				possTiles.Remove(possTiles[i]);
+				i--;
+			}
+	
+		return possTiles;
 	}
 }

@@ -143,9 +143,6 @@ public class Field : MonoBehaviour {
         
         cellObject.AddComponent<SpriteRenderer>().sprite = tileRegularSprite;
 
-		print(tileRegularSprite + ".");
-		print(tileRegularSprite.bounds+".");
-		print(tileRegularSprite.bounds.size + ".");
 		cellSize = tileRegularSprite.bounds.size;
 
         
