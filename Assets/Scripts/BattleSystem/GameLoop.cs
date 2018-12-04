@@ -1,16 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameLoop : MonoBehaviour {
 	// DO NOT CHANGE state WITH "state = GameState.X"
 	// INSTEAD, CHANGE state WITH "setState(GameState.X)"
 	// OTHERWISE THINGS AREN'T UPDATED AND STUFF BREAKS
 	public GameState state = GameState.INIT;
+	public bool ongoing;
 
 	private Character turn = null;
 	private List<Action> turnActions = null;
-	private Action activeAction = null;
+
+	[Header("Why is this null")]
+	public Action activeAction = null;
 	private List<ActionType> actionTypesPerTurn = null;
 
 	public StatusEffectManager statusManager;
@@ -18,6 +22,8 @@ public class GameLoop : MonoBehaviour {
 
 	private Field yourField;
 	private Field enemyField;
+	private List<EnemyCharacter> inactiveEnemies;
+	private List<AllyCharacter> inactiveAllies;
 
 	[Header("Turn")]
     public List<Character> turnOrder;
@@ -32,6 +38,7 @@ public class GameLoop : MonoBehaviour {
 
 	void Awake() {
 		if(DEBUG_LOG) Debug.Log("GameLoop awake");
+		ongoing = true;
 
 		Field[] grids = GameObject.FindObjectsOfType<Field>();
 
@@ -42,6 +49,8 @@ public class GameLoop : MonoBehaviour {
 			yourField = grids[1];
 			enemyField = grids[0];
 		}
+		inactiveEnemies = new List<EnemyCharacter>();
+		inactiveAllies = new List<AllyCharacter>();
 
 		turnOrder = new List<Character>();
 		statusManager = new StatusEffectManager();
@@ -77,17 +86,65 @@ public class GameLoop : MonoBehaviour {
 		}
 		Debug.Log(toPrint);
 	}
-
-	// to be implemented with real fields
+	
 	public void addAllyCharacter(AllyCharacter c) {
 		turnOrder.Add(c);
-		yourField.initAddCharacter(c);
+
+		yourField.addCharacter(c);
+	}
+	
+	public void addEnemyCharacter(EnemyCharacter c) {
+		if(enemyField.getNumCharacters() == 0)
+			turnOrder.Add(c);
+		else if(enemyField.getNumCharacters() == 1)
+			turnOrder.Insert(2, c);
+		else
+			turnOrder.Insert(Mathf.Min(4, turnOrder.Count - 1), c);
+
+		enemyField.addCharacter(c);
 	}
 
-	// to be implemented with real fields
-	public void addEnemyCharacter(EnemyCharacter c) {
-		turnOrder.Add(c);
-		enemyField.initAddCharacter(c);
+	public void addEnemyCharacterDisabled(EnemyCharacter c) {
+		inactiveEnemies.Add(c);
+	}
+
+	public void addAllyCharacterDisabled(AllyCharacter c) {
+		inactiveAllies.Add(c);
+	}
+
+	public void updateGameStatus() {
+		if(GameLoop.getInstance().getAllyField().getNumCharacters() == 0) {
+			// stuff for losing
+			Debug.Log("You lose.");
+			ongoing = false;
+		} else {
+			bool foundAquarius = false;
+            GameObject aqObj = GameObject.Find("Aquarius");
+            if (aqObj)
+            {
+                Character aquarius = GameObject.Find("Aquarius").GetComponent<Character>();
+                foreach (Tile t in GameLoop.getInstance().getEnemyField().gridPositions)
+                    if (t.getCharacter() == aquarius)
+                    {
+                        foundAquarius = true;
+                        break;
+                    }
+            }
+            if (!foundAquarius)
+            {
+                // stuff for winning
+                Debug.Log("You win.");
+                ongoing = false;
+            }
+        }
+	}
+
+	public List<EnemyCharacter> getInactiveEnemies() {
+		return inactiveEnemies;
+	}
+
+	public List<AllyCharacter> getInactiveAllies() {
+		return inactiveAllies;
 	}
 
 	void Start() {
@@ -95,109 +152,150 @@ public class GameLoop : MonoBehaviour {
 	}
 
 	void Update() {
-		if(delayedActionManager.inProgress()) {
-			print("IP");
-			return;
-		}
+		if(ongoing) {
+			if(delayedActionManager.inProgress()) {
+				print("IP");
+				return;
+			}
 
-        switch (state) {
-			case GameState.INIT:
-				// can randomize turn order
-				if(randomizeTurnOrder) {
-					List<Character> newTurnOrder = new List<Character>();
-					List<float> randList = new List<float>();
-					for(int i = 0; i < turnOrder.Count; i++)
-						randList.Add(Random.Range(0.0f, 1.0f));
+			switch(state) {
+				case GameState.INIT:
+					// can randomize turn order
+					if(randomizeTurnOrder) {
+						List<Character> allies = new List<Character>();
+						List<Character> enemies = new List<Character>();
+						foreach(Character c in turnOrder)
+							if(c.GetType() == typeof(AllyCharacter))
+								allies.Add(c);
+							else if(c.GetType() == typeof(EnemyCharacter))
+								enemies.Add(c);
 
-					for(int i = 0; i < turnOrder.Count; i++) {
-						int maxIdx = randList.IndexOf(Mathf.Max(randList.ToArray()));
-						newTurnOrder.Add(turnOrder[maxIdx]);
-						randList[maxIdx] = 0;
+						List<Character> newAllies = new List<Character>();
+						List<float> randList = new List<float>();
+						for(int i = 0; i < allies.Count; i++)
+							randList.Add(Random.Range(0.0f, 1.0f));
+
+						for(int i = 0; i < allies.Count; i++) {
+							int maxIdx = randList.IndexOf(Mathf.Max(randList.ToArray()));
+							newAllies.Add(turnOrder[maxIdx]);
+							randList[maxIdx] = 0;
+						}
+
+						turnOrder = new List<Character>();
+						foreach(Character c in newAllies)
+							turnOrder.Add(c);
+						foreach(Character c in enemies)
+							turnOrder.Add(c);
+					}
+					GetComponent<UI_Manager>().updateTurn();
+					setState(GameState.START_TURN);
+					break;
+				case GameState.START_TURN:
+
+					break;
+				case GameState.ALLY_WAIT_INPUT:
+					// keeps checking for keyboard input; eventually to be overwritten with ui
+					for(int i = 1; i < turnActions.Count + 1; i++) {
+						if(Input.GetKeyDown(GameLoop.keyCodeFromInt(i)) && !turnActions[i - 1].isActive()) {
+							activeAction = turnActions[i - 1];
+							if(turnActions[i - 1].GetType() == typeof(Pass))
+								Debug.Log(turn + " passed.");
+							else if(turnActions[i - 1].GetType() == typeof(Move))
+								Debug.Log(turn + " beginning move.");
+							else
+								Debug.Log(turn + " used " + turnActions[i - 1].GetType() + "!");
+							activeAction.setActive();
+							setState(GameState.ALLY_ACTION_ACTIVE);
+						}
 					}
 
-					turnOrder = newTurnOrder;
-				}
-                GetComponent<UI_Manager>().updateTurn();
-                setState(GameState.START_TURN);
-				break;
-			case GameState.START_TURN:
+					break;
+				case GameState.ALLY_ACTION_ACTIVE:
+					// keeps checking for action to not be active
+					if(!activeAction.isActive()) {
+						if(DEBUG_LOG) Debug.Log("GameLoop detects action inactive");
 
-				break;
-			case GameState.ALLY_WAIT_INPUT:
-                // keeps checking for keyboard input; eventually to be overwritten with ui
-                for (int i = 1; i < turnActions.Count + 1; i++) {
-					if(Input.GetKeyDown(GameLoop.keyCodeFromInt(i)) && !turnActions[i - 1].isActive()) {
-						activeAction = turnActions[i-1];
-						if(turnActions[i-1].GetType() == typeof(Pass))
-							Debug.Log(turn + " passed.");
-						else if(turnActions[i-1].GetType() == typeof(Move))
-							Debug.Log(turn + " beginning move.");
-						else
-							Debug.Log(turn + " used " + turnActions[i-1].GetType() + "!");
-						activeAction.setActive();
-						setState(GameState.ALLY_ACTION_ACTIVE);
-					}
-				}
-                
-				break;
-			case GameState.ALLY_ACTION_ACTIVE:
-				// keeps checking for action to not be active
-				if(!activeAction.isActive()) {
-					if(DEBUG_LOG) Debug.Log("GameLoop detects action inactive");
+						// updates actionTypesPerTurn if the previously
+						// active action was fully completed and executed
+						if(activeAction.getCompletion())
+							if(activeAction.getActionType() == ActionType.MOVE) {
+								actionTypesPerTurn.Remove(ActionType.MOVE);
+							} else if(activeAction.getActionType() == ActionType.PASS) {
+								actionTypesPerTurn.Clear();
+							} else {
+								actionTypesPerTurn.Remove(ActionType.ABILITY);
+							}
 
-					// updates actionTypesPerTurn if the previously
-					// active action was fully completed and executed
-					if(activeAction.getCompletion())
-						if(activeAction.getActionType() == ActionType.MOVE) {
-							actionTypesPerTurn.Remove(ActionType.MOVE);
-						} else if(activeAction.getActionType() == ActionType.PASS) {
-							actionTypesPerTurn.Clear();
+						// if there are no more moves in the turn, remove
+						// all actions with ActionType.MOVE from turnActions
+						if(actionTypesPerTurn.IndexOf(ActionType.MOVE) == -1) {
+							for(int i = 0; i < turnActions.Count; i++) {
+								if(turnActions[i].getActionType() == ActionType.MOVE) {
+									turnActions.Remove(turnActions[i]);
+									i--;
+								}
+							}
+						}
+						//GetComponent<UI_Manager>().resetMenus(actionTypesPerTurn.IndexOf(ActionType.MOVE) != -1);
+
+						// if there are no more abilities in the turn, remove
+						// all actions with ActionType.ABILITY from turnActions
+						if(actionTypesPerTurn.IndexOf(ActionType.ABILITY) == -1) {
+							for(int i = 0; i < turnActions.Count; i++) {
+								if(turnActions[i].getActionType() == ActionType.ABILITY) {
+									turnActions.Remove(turnActions[i]);
+									i--;
+								}
+							}
+						}
+
+						// checks if turn is over to move to the appropriate next state
+						if(allyTurnOver()) {
+							nextTurn();
 						} else {
-							actionTypesPerTurn.Remove(ActionType.ABILITY);
+							setState(GameState.ALLY_WAIT_INPUT);
 						}
-
-					// if there are no more moves in the turn, remove
-					// all actions with ActionType.MOVE from turnActions
-					if(actionTypesPerTurn.IndexOf(ActionType.MOVE) == -1) {
-						for(int i = 0; i < turnActions.Count; i++) {
-							if(turnActions[i].getActionType() == ActionType.MOVE) {
-								turnActions.Remove(turnActions[i]);
-								i--;
-							}
-						}
-                    }
-                    //GetComponent<UI_Manager>().resetMenus(actionTypesPerTurn.IndexOf(ActionType.MOVE) != -1);
-
-                    // if there are no more abilities in the turn, remove
-                    // all actions with ActionType.ABILITY from turnActions
-                    if (actionTypesPerTurn.IndexOf(ActionType.ABILITY) == -1) {
-						for(int i = 0; i < turnActions.Count; i++) {
-							if(turnActions[i].getActionType() == ActionType.ABILITY) {
-								turnActions.Remove(turnActions[i]);
-								i--;
-							}
-						}
+						activeAction = null;
 					}
+					break;
 
-					// checks if turn is over to move to the appropriate next state
-					if(turnOver()) {
+				case GameState.ENEMY_MOVE:
+					GetComponent<UI_Manager>().noMenus();
+					if(!activeAction)
+						findActiveAction();
+					if(!activeAction.isActive()) {
+						setState(GameState.ENEMY_ACT);
+						print("set act");
+					}
+					break;
+				case GameState.ENEMY_ACT:
+//					Debug.Log("GameLoop Update() in ENEMY_STATE for " + turn);
+//					Debug.Log("Chosen Action: " + activeAction + ".");
+					GetComponent<UI_Manager>().noMenus();
+					if(!activeAction)
+						findActiveAction();
+					if(!activeAction.isActive())
 						nextTurn();
-					} else {
-						setState(GameState.ALLY_WAIT_INPUT);
-					}
-					activeAction = null;
-				}
-                break;
-			case GameState.ENEMY_STATE:
-				Debug.Log("GameLoop Update() in ENEMY_STATE for " + turn);
-                Debug.Log("Chosen Action: " + activeAction);
-                //if (turnOver())
-				    nextTurn();
-				break;
+					break;
+			}
 		}
+        else
+        {
+            SceneManager.LoadScene("Epilogue");
+        }
 	}
 
-	private bool turnOver() {
+    private void findActiveAction()
+    {
+        List<Action> potentialActions = ((EnemyCharacter)turn).getActions();
+        foreach (Action potentialAction in potentialActions)
+        {
+            if (potentialAction.isActive())
+                activeAction = potentialAction;
+        }
+    }
+
+	private bool allyTurnOver() {
         return actionTypesPerTurn.Count == 0 ||
                 (turnActions.Count == 0) ||
                 (turnActions.Count == 2) ||
@@ -207,91 +305,27 @@ public class GameLoop : MonoBehaviour {
 
     public void setState(string newState)
     {
+		GameState strToState = GameState.START_TURN;
         if (newState.ToLower() == "start turn")
-            state = GameState.START_TURN;
+			strToState = GameState.START_TURN;
 
         switch (newState.ToLower())
         {
             case "start turn":
-                state = GameState.START_TURN;
+				strToState = GameState.START_TURN;
                 break;
             case "ally wait input":
-                state = GameState.ALLY_WAIT_INPUT;
+				strToState = GameState.ALLY_WAIT_INPUT;
                 break;
             case "ally action active":
-                state = GameState.ALLY_ACTION_ACTIVE;
+				strToState = GameState.ALLY_ACTION_ACTIVE;
                 break;
             case "enemy state":
-                state = GameState.ENEMY_STATE;
+				strToState = GameState.ENEMY_MOVE;
                 break;
         }
 
-        switch (state)
-        {
-            case GameState.START_TURN:
-				// resets variables for each turn
-				turn = getCharacterTurn();
-				Debug.Log(turn.name + "'s Turn!");
-
-				if (turn.GetType() == typeof(AllyCharacter))
-                {
-                    turnActions = ((AllyCharacter)turn).getActions();
-                    actionTypesPerTurn = ((AllyCharacter)turn).getActionTypesPerTurn();
-
-                    // enemy stuff null
-
-                    setState(GameState.ALLY_WAIT_INPUT);
-                }
-                else
-                {
-                    // init enemy stuff
-
-                    turnActions = null;
-                    actionTypesPerTurn = null;
-
-                    setState(GameState.ENEMY_STATE);
-                }
-                GetComponent<UI_Manager>().resetMenus();
-                break;
-            case GameState.ALLY_WAIT_INPUT:
-                // prints possible actions then waits for the user to select one
-                // to be partially overridden by implemention with ui
-                string turnMoveStr = "What should " + turn + " do? (press # to act)\n";
-                for (int i = 0; i < turnActions.Count; i++)
-                {
-                    turnMoveStr += (i + 1) + ": " + turnActions[i].GetType() + ((turnActions[i].usesLeft() > 999999) ? "" : " (" + turnActions[i].usesLeft()+")") + ((i < turnActions.Count - 1) ? " / " : "");
-                }
-                Debug.Log(turnMoveStr);
-
-                if (DEBUG_LOG)
-                {
-                    string s = "";
-                    foreach (ActionType at in actionTypesPerTurn)
-                    {
-                        s += at + " ";
-                    }
-                    Debug.Log("ActionType's left: " + s);
-                }
-
-                //bool moveActive = false;
-                //bool actionsActive = false;
-                //for (int i = 1; i < turnActions.Count + 1; i++)
-                //{
-                //    if (turnActions[i - 1].GetType() == typeof(Move))
-                //        moveActive = true;
-                //    else if (turnActions[i - 1].GetType() != typeof(Pass))
-                //        actionsActive = true;
-                //}
-                //GetComponent<UI_Manager>().resetAvailableActions(moveActive, actionsActive);
-
-                break;
-            case GameState.ALLY_ACTION_ACTIVE:
-                //GetComponent<UI_Manager>().noMenus();
-                break;
-            case GameState.ENEMY_STATE:
-                Debug.Log("GameLoop entered ENEMY_STATE for " + turn);
-                break;
-        }
+		setState(strToState);
     }
 
 	public void setState(GameState newState) {
@@ -300,7 +334,7 @@ public class GameLoop : MonoBehaviour {
 			case GameState.START_TURN:			break;
 			case GameState.ALLY_WAIT_INPUT:		break;
 			case GameState.ALLY_ACTION_ACTIVE:	break;
-			case GameState.ENEMY_STATE:			break;
+			case GameState.ENEMY_MOVE:			break;
 		}
 
 		// update state
@@ -327,17 +361,14 @@ public class GameLoop : MonoBehaviour {
 					turnActions = ((AllyCharacter)turn).getActions();
 					actionTypesPerTurn = ((AllyCharacter)turn).getActionTypesPerTurn();
 
-					// enemy stuff null
-
 					setState(GameState.ALLY_WAIT_INPUT);
 				} else {
-					// init enemy stuff
+					turnActions = ((EnemyCharacter)turn).getActions();
+					actionTypesPerTurn = ((EnemyCharacter)turn).getActionTypesPerTurn();
 
-					turnActions = null;
-					actionTypesPerTurn = null;
-					
-					setState(GameState.ENEMY_STATE);
+					setState(GameState.ENEMY_MOVE);
 				}
+				GetComponent<UI_Manager>().resetMenus();
 
 				break;
 			case GameState.ALLY_WAIT_INPUT:
@@ -372,10 +403,46 @@ public class GameLoop : MonoBehaviour {
 			case GameState.ALLY_ACTION_ACTIVE:
                 //GetComponent<UI_Manager>().noMenus();
                 break;
-			case GameState.ENEMY_STATE:
+			case GameState.ENEMY_MOVE:
+				if(((EnemyCharacter)turn).getEnemyCharacterType() == EnemyCharacterType.AQUARIUS) {
+					TargetedMove move = turn.GetComponentInChildren<TargetedMove>();
+					List<Tile> optimalTiles = move.getOptimalTiles();
+					activeAction = move;
+					move.setActiveTargeting(optimalTiles[Random.Range(0, optimalTiles.Count)]);
+				} else {
+					// minions have everything in act
+					setState(GameState.ENEMY_ACT);
+				}
+				break;
+			case GameState.ENEMY_ACT:
 				Debug.Log("GameLoop entered ENEMY_STATE for " + turn);
-                //GameObject.Find("Libra").GetComponent<Character>().takeDamage(50);
-                break;
+				if(((EnemyCharacter)turn).getEnemyCharacterType() == EnemyCharacterType.AQUARIUS) {
+					Action maxValued = ((EnemyCharacter)turn).getActions()[0];
+					foreach(Action a in ((EnemyCharacter)turn).getActions()) {
+						print(a + ": " + a.getValue());
+						if(a.getValue() > maxValued.getValue())
+							maxValued = a;
+					}
+
+//					for max value
+					activeAction = maxValued;
+//					for random	
+					//activeAction = ((EnemyCharacter)turn).getActions()[Random.Range(0, ((EnemyCharacter)turn).getActions().Count)];
+					
+					print(activeAction.GetType());
+					print(activeAction);
+					activeAction.setActive();
+				} else {
+//					print("try basicattack");
+					TargetedAction atk = turn.GetComponentInParent<TargetedBasicAttack>();
+					activeAction = (atk.getValue() == 0)
+										? turn.GetComponentInParent<TargetedMove>()
+										: atk
+										;
+
+					((TargetedAction)activeAction).setActiveTargeting(((TargetedAction)activeAction).getOptimalTiles()[0]);
+				}
+				break;
 		}
 	}
 
@@ -400,7 +467,7 @@ public class GameLoop : MonoBehaviour {
 	public enum GameState {
 		INIT, START_TURN,                       // general states
 		ALLY_WAIT_INPUT, ALLY_ACTION_ACTIVE,    // ally turn states
-		ENEMY_STATE                             // enemy turn states
+		ENEMY_MOVE, ENEMY_ACT                   // enemy turn states
 	}
 
     #region Public versions of input-based actions (for UI accessibility)
@@ -413,8 +480,10 @@ public class GameLoop : MonoBehaviour {
                 continue;
             GetComponent<UI_Manager>().updateActionText(turnActions[i - 1].GetType().ToString());
             Debug.Log(turn + " passed.");
+			print("activeAction " + activeAction);
             activeAction.setActive();
             setState(GameState.ALLY_ACTION_ACTIVE);
+			break;
         }
     }
 
@@ -452,6 +521,7 @@ public class GameLoop : MonoBehaviour {
 
     public void skill(int index)
     {
+		print("skill idx");
         List<Action> potentialSkills = getActiveSkills();
         int grabIndex = index;
         if (index >= potentialSkills.Count)
@@ -459,7 +529,7 @@ public class GameLoop : MonoBehaviour {
 
         activeAction = potentialSkills[grabIndex];
         Debug.Log(turn + " used " + potentialSkills[grabIndex].GetType() + "!");
-        //GetComponent<UI_Manager>().updateActionText(potentialSkills[grabIndex].GetType().ToString());
+        GetComponent<UI_Manager>().updateActionText(potentialSkills[grabIndex].GetType().ToString());
         activeAction.setActive();
         setState(GameState.ALLY_ACTION_ACTIVE);
     }

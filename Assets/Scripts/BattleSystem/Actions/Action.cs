@@ -8,16 +8,17 @@ public abstract class Action : MonoBehaviour {
 	protected abstract void innerEnd();
 	public abstract int maxUses();
 	public abstract ActionType getActionType();
+	public abstract int getValue();
 
-	private bool active;
+	protected bool active;
 	private bool complete;
-	private int remainingUses;
+	protected int remainingUses;
 
 	public bool isActive() {
 		return active;
 	}
 	
-	public void setActive() {
+	public virtual void setActive() {
 		if(!active) {
 			active = true;
 			innerStart();
@@ -34,6 +35,11 @@ public abstract class Action : MonoBehaviour {
 			complete = c;
 			if(complete)
 				remainingUses -= 1;
+			print("reset sprites");
+			foreach(Tile t in GameLoop.getInstance().getAllyField().getTiles())
+				t.setRegularSprite();
+			foreach(Tile t in GameLoop.getInstance().getEnemyField().getTiles())
+				t.setRegularSprite();
 			innerEnd();
 		} else {
 			Debug.Log(this.GetType() + " set inactive when already inactive.");

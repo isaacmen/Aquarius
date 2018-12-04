@@ -40,32 +40,16 @@ public class Move : PromptingAction {
 	}
 
 	override protected void postPromptStart() {
-		start = transform.position;
+        GetComponentInChildren<Animator>().Play("Jump");
+        start = transform.position;
 		end = target.transform.position - new Vector3(0, 0, 3);
 		dir = (end - start) / (end-start).magnitude;
-	}
+    }
 
 	override protected void postPromptLoop() {
 		Vector3 pos = transform.position;
 		Vector3 ds = SPEED * Time.deltaTime * dir;
-        //if (dir.magnitude > 0)
-        //{
-        //    if ((pos - start + ds).magnitude < GRID)
-        //    {
-        //        transform.Translate(ds);
-        //    }
-        //    else
-        //    {
-        //        transform.Translate(start + GRID * dir - pos);
-        //        GetComponentInParent<Character>().moveGrid(start, end);
-        //        setInactiveWithCompletion(true);
-        //    }
-        //}
-        //else
-        //{
-        //    Debug.Log("Movement cancelled but still got to moving - FIX");
-        //    setInactiveWithCompletion(false);
-        //}
+        
         if (pos != end)
             transform.position = Vector3.MoveTowards(pos, end, SPEED * Time.deltaTime);
         else
@@ -75,6 +59,10 @@ public class Move : PromptingAction {
             setInactiveWithCompletion(true);
         }
     }
+
+	override public int getValue() {
+		return 0;
+	}
 
 	override protected void innerEnd() {}
 }

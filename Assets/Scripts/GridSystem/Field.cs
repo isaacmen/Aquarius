@@ -14,13 +14,14 @@ public class Field : MonoBehaviour {
 
 	[Header("Side")]
 	public bool isRight;
-    
-    [Header("Sprites")]
-    public Sprite tileRegularSprite;
+
+	[SerializeField]
+	public Sprite tileRegularSprite;
 	public Sprite tileClickableSprite;
 	public Sprite tileSecondarySprite;
+	public Sprite tileTertiarySprite;
 
-    private Vector2 cellSize;
+	private Vector2 cellSize;
     private Vector2 cellScale;
 
 	public Tile[,] gridPositions;
@@ -30,7 +31,8 @@ public class Field : MonoBehaviour {
 		InitCells(); //Initialize all cells
 	}
 	
-	public bool initAddCharacter(Character c) {
+	// you will kick the previous character out of the tile so don't use it if theres a char on
+	public bool addCharacter(Character c) {
 		c.setField(this);
 		foreach(Tile t in gridPositions) {
 			if(t.transform.position.x == c.transform.position.x && t.transform.position.y == c.transform.position.y) {
@@ -43,6 +45,20 @@ public class Field : MonoBehaviour {
 
 	public Tile[,] getTiles() {
 		return gridPositions;
+	}
+
+	public void removeCharacter(Character c) {
+		foreach(Tile t in gridPositions)
+			if(t.getCharacter() == c)
+				t.removeCharacter();
+	}
+
+	public int getNumCharacters() {
+		int n = 0;
+		foreach(Tile t in gridPositions)
+			if(t.getCharacter() != null)
+				n++;
+		return n;
 	}
 
 	public Tile getTileAtYX(int y, int x) {
@@ -127,8 +143,7 @@ public class Field : MonoBehaviour {
         
         cellObject.AddComponent<SpriteRenderer>().sprite = tileRegularSprite;
 
-        
-        cellSize = tileRegularSprite.bounds.size;
+		cellSize = tileRegularSprite.bounds.size;
 
         
         Vector2 newCellSize = new Vector2(gridSize.x / (float)cols, gridSize.y / (float)rows);

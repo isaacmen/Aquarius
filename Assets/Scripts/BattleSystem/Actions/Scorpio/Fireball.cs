@@ -64,13 +64,17 @@ public class Fireball : PromptingAction {
 		}
 	}
 
+	override public int getValue() {
+		return 0;
+	}
+
 	override protected void innerEnd() { }
 
     public override string getDescription()
     {
         return "AoE Cross\n" +
             "Damage: " + Constants.getInstance().fireball_damage + "\n" +
-            "Uses: " + maxUses() + "\n" +
+            "Uses: " + usesLeft() + "\n" +
             "Range: " + minRange() + "-" + maxRange() + " for center";
     }
 }

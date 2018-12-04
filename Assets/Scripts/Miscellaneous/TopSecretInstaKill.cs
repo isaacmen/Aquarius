@@ -8,7 +8,8 @@ public class TopSecretInstaKill : MonoBehaviour {
      * without much hassle
      */
 
-    public GameLoop gameLoop; //So we can actually access the state of the game
+    //public GameLoop gameLoop; //So we can actually access the state of the game
+    public List<Character> toKill;
     private EnemyCharacter enemyScript;
     private List<KeyCode> code;
 
@@ -28,16 +29,21 @@ public class TopSecretInstaKill : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         if (codeInputed())
-            enemyScript.health = 0;
+            foreach (Character character in toKill)
+                if (character.isActiveAndEnabled && character.gameObject.activeSelf)
+                    character.GetComponent<EnemyCharacter>().takeDamage(character.GetComponent<EnemyCharacter>().maxHealth);
+        GetComponent<GameLoop>().updateGameStatus();
 	}
 
     bool codeInputed()
     {
-        foreach (KeyCode key in code)
-        {
-            if (!Input.GetKey(key))
-                return false;
-        }
+        //foreach (KeyCode key in code)
+        //{
+        //    if (!Input.GetKey(key))
+        //        return false;
+        //}
+        if (!Input.GetKey(KeyCode.Backslash))
+            return false;
         return true;
     }
 }

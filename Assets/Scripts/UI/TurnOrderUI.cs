@@ -54,18 +54,6 @@ public class TurnOrderUI : MonoBehaviour {
         currentTurn++;
     }
 
-    public void addNewTurn()
-    {
-        /* Ideas for messing w/ turn order:
-         *   - have each character script have a "public image portrait;"
-         *   - (assuming only 6 characters allowed at a time) have positions/scales
-         *     of all character portraits ready
-         *     only show the first few and have them go onto those
-         *   - basically, we'll rewrite, but save this for later 
-         *     when we can better test
-         */
-    }
-
     private void updateTurnBar()
     {
         if (gameLoop.turnOrder.Count == 0 && order.Count == positions.Count)
@@ -136,15 +124,14 @@ public class TurnOrderUI : MonoBehaviour {
 
     private void updateCurrentText()
     {
-        currentTurnText.text = gameLoop.getCharacterTurn().ToString(); // + "'s turn";
+        currentTurnText.text = gameLoop.getCharacterTurn().name; // + "'s turn";
     }
 
     private void updateCurrentPic()
     {
         // Updating the portrait of the current player
         Character currentCharacter = gameLoop.getCharacterTurn();
-        if (currentCharacter.GetType() == typeof(AllyCharacter))
-            characterPic.sprite = currentCharacter.portrait;
+        characterPic.sprite = currentCharacter.portrait;
     }
 
     private void updateCurrentCharacterHealth()

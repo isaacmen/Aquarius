@@ -38,7 +38,11 @@ public class LayOnHands : PromptingAction {
 
 	override protected void innerEnd() { }
 
-    public override string getName()
+	override public int getValue() {
+		return 0;
+	}
+
+	public override string getName()
     {
         return "Lay On Hands";
     }
@@ -47,7 +51,7 @@ public class LayOnHands : PromptingAction {
     {
         return "Single Target\n" +
             "Heals: " + Constants.getInstance().layOnHands_healValue + "\n" +
-            "Uses: " + maxUses() + "\n" +
+            "Uses: " + usesLeft() + "\n" +
             "Range: 1";
     }
 }

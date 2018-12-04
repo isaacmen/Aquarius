@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class mainMenu : MonoBehaviour
 {
+
     void Start()
     {
-
     }
     public void PlayGameSing()
     {
@@ -20,6 +20,7 @@ public class mainMenu : MonoBehaviour
     {
         //DisableOptions.toggle = true;
     }
+
     /*public void PlayGameMult() {
         SceneManager.LoadScene("NetworkLobby");
     }
@@ -40,7 +41,7 @@ public class mainMenu : MonoBehaviour
     }*/
 
     public void playGame(){
-        SceneManager.LoadScene("Prototype");
+        SceneManager.LoadScene("Andrew_Intro_Scene");
     }
 
     public void QuitGame() {

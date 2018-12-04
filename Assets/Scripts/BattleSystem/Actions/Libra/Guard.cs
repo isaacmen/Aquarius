@@ -70,11 +70,15 @@ public class Guard : PromptingAction {
 
 	override protected void innerEnd() {}
 
-    public override string getDescription()
+	override public int getValue() {
+		return 0;
+	}
+
+	public override string getDescription()
     {
         return "Single Target, Defense\n" +
             "Damage: 0\n" +
-            "Uses: " + maxUses() + "\n" +
+            "Uses: " + usesLeft() + "\n" +
             "Range: All spaces to the right, including current";
     }
 }

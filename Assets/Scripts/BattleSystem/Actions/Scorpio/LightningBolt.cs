@@ -70,7 +70,11 @@ public class LightningBolt : PromptingAction {
 
 	override protected void innerEnd() { }
 
-    public override string getName()
+	override public int getValue() {
+		return 0;
+	}
+
+	public override string getName()
     {
         return "Lightning Bolt";
     }
@@ -79,7 +83,7 @@ public class LightningBolt : PromptingAction {
     {
         return "AoE Line\n" +
             "Damage: " + Constants.getInstance().lightningBolt_damage + "\n" +
-            "Uses: " + maxUses() + "\n" +
+            "Uses: " + usesLeft() + "\n" +
             "Range: Whole row (no friendly fire)";
     }
 }

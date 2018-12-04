@@ -32,6 +32,10 @@ public class Tile : MonoBehaviour {
 		GetComponent<SpriteRenderer>().sprite = field.tileSecondarySprite;
 	}
 
+	public void setTertiarySprite() {
+		GetComponent<SpriteRenderer>().sprite = field.tileTertiarySprite;
+	}
+
 	public int[] getTileArrayCoordsYX() {
 		return field.getTileArrayCoordsYX(this);
 	}

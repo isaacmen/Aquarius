@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyCharacter : Character {
+public class EnemyCharacter : Character {	
 	[Header("Attributes")]
 	public EnemyCharacterType type;
 
@@ -18,30 +18,55 @@ public class EnemyCharacter : Character {
 	override protected void Start() {
         base.Start();
 
-		GameLoop.getInstance().addEnemyCharacter(this);
-	}
-	
-	void Update() {
-		
+		if(onField) {
+			this.gameObject.SetActive(true);
+			GameLoop.getInstance().addEnemyCharacter(this);
+		} else {
+			this.gameObject.SetActive(false);
+			GameLoop.getInstance().addEnemyCharacterDisabled(this);
+		}
 	}
 
-    private void instantiateActionsFor(EnemyCharacterType type)
-    {
+	public void setOnField(bool to) {
+		if(to) {
+			this.gameObject.SetActive(true);
+			GameLoop.getInstance().addEnemyCharacter(this);
+			health = maxHealth;
+		} else {
+			this.gameObject.SetActive(false);
+			GameLoop.getInstance().addEnemyCharacterDisabled(this);
+		}
+	}
+
+	public List<Action> getActions() {
+		return new List<Action>(actionList);
+	}
+
+	public List<ActionType> getActionTypesPerTurn() {
+		return new List<ActionType>(actionTypesPerTurn);
+	}
+
+	private void instantiateActionsFor(EnemyCharacterType type) {
         actionList = new List<Action>();
-        actionList.Add(GameObject.Find(this.name).AddComponent<Pass>()); //for when they are forced to wait for their turn;
-        actionList.Add(GameObject.Find(this.name).AddComponent<Move>());
-        actionList.Add(GameObject.Find(this.name).AddComponent<BasicAttack>());
+		//below is unnecessary as statuseffects handle that
+//      actionList.Add(GameObject.Find(this.name).AddComponent<Pass>()); //for when they are forced to wait for their turn;
+        actionList.Add(GameObject.Find(this.name).AddComponent<TargetedMove>());
+        actionList.Add(GameObject.Find(this.name).AddComponent<TargetedBasicAttack>());
 
         actionTypesPerTurn = new List<ActionType>() { ActionType.ABILITY, ActionType.MOVE};
 
-        if (type == EnemyCharacterType.AQUARIUS)
-        {
-            /*
-             * Insert Aquarius major skills here.
-             * These will be what is called from the AI.
-             */ 
-        }
+        if(type == EnemyCharacterType.AQUARIUS) {
+			actionList.Add(GameObject.Find(this.name).AddComponent<SummonWaterElementals>());
+			actionList.Add(GameObject.Find(this.name).AddComponent<TidalWaveX>());
+			actionList.Add(GameObject.Find(this.name).AddComponent<TidalWaveO>());
+			actionList.Add(GameObject.Find(this.name).AddComponent<TidalWaveRow>());
+			actionList.Add(GameObject.Find(this.name).AddComponent<TidalWaveColumn>());
+		}
     }
+
+	public EnemyCharacterType getEnemyCharacterType() {
+		return type;
+	}
 }
 
 public enum EnemyCharacterType {

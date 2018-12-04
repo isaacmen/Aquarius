@@ -19,8 +19,12 @@ public class Aquarius_animations : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             m_Animator.Play("Attacking");
-        } else if (Input.GetKey(KeyCode.DownArrow)){
+        }
+        else if (Input.GetKey(KeyCode.DownArrow))
+        {
             m_Animator.Play("Hat");
         }
+        else if (Input.GetKey(KeyCode.UpArrow))
+            m_Animator.Play("Jump");
     }
 }

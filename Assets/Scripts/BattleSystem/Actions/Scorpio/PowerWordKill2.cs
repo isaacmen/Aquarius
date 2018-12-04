@@ -34,4 +34,8 @@ public class PowerWordKill2 : Action {
 	}
 
 	override protected void innerEnd() { }
+
+	override public int getValue() {
+		return 0;
+	}
 }
