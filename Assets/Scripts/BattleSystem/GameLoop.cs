@@ -221,11 +221,23 @@ public class GameLoop : MonoBehaviour {
 				Debug.Log("GameLoop Update() in ENEMY_STATE for " + turn);
                 Debug.Log("Chosen Action: " + activeAction + ".");
                 GetComponent<UI_Manager>().noMenus();
+                if (!activeAction)
+                    findActiveAction();
                 if (enemyTurnOver())
 				    nextTurn();
 				break;
 		}
 	}
+
+    private void findActiveAction()
+    {
+        List<Action> potentialActions = ((EnemyCharacter)turn).getActions();
+        foreach (Action potentialAction in potentialActions)
+        {
+            if (potentialAction.isActive())
+                activeAction = potentialAction;
+        }
+    }
 
 	private bool allyTurnOver() {
         return actionTypesPerTurn.Count == 0 ||

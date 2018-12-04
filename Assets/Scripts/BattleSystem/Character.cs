@@ -61,7 +61,10 @@ public class Character : MonoBehaviour {
 			health = Mathf.Min(health - d, maxHealth);
 		if(health <= 0) {
 			Debug.Log(this.name + " died");
-			// REMOVE HEALTH BAR
+            // REMOVE HEALTH BAR
+            HealthBar health = UI_Manager.getInstance().getHealthBar(this);
+            if (health)
+                Destroy(health.gameObject);
 			this.gameObject.SetActive(false);
 			field.removeCharacter(this);
 			GameLoop.getInstance().turnOrder.Remove(this);

@@ -22,6 +22,11 @@ public class UI_Manager : MonoBehaviour {
     [Header("Feedback")]
     public Text actionText;
 
+    public static UI_Manager getInstance()
+    {
+        return GameObject.Find("GameLoop").GetComponent<UI_Manager>();
+    }
+
     private void Start()
     {
         healthBars = healthBarParent.GetComponentsInChildren<HealthBar>();
@@ -30,9 +35,6 @@ public class UI_Manager : MonoBehaviour {
     private void Update()
     {
         updateHealthBars();
-        if (Input.GetKeyDown(KeyCode.I))
-            enableInfoMenu(!skillInfo.activeSelf);
-
         if (actions.activeSelf)
             updateActionButtons();
     }
@@ -107,17 +109,24 @@ public class UI_Manager : MonoBehaviour {
         Transform[] actionKids = actions.GetComponentsInChildren<Transform>();
         foreach (Transform kid in actionKids)
         {
+            kid.gameObject.SetActive(true);
             if (kid.name.Contains("Skill"))
             {
                 string newText = "Skill";
                 List<Action> activeSkills = GetComponent<GameLoop>().getActiveSkills();
                 if (kid.name.Contains("1"))
                 {
-                    newText = activeSkills[1].getName();
+                    if (activeSkills.Count > 1)
+                        newText = activeSkills[1].getName();
+                    else
+                        kid.gameObject.SetActive(false);
                 }
                 else
                 {
-                    newText = activeSkills[0].getName();
+                    if (activeSkills.Count > 0)
+                        newText = activeSkills[0].getName();
+                    else
+                        kid.gameObject.SetActive(false);
                 }
                 kid.GetComponentInChildren<Text>().text = newText;
             }
@@ -146,5 +155,15 @@ public class UI_Manager : MonoBehaviour {
     public void hideInfoBox()
     {
         skillInfo.SetActive(false);
+    }
+
+    public HealthBar getHealthBar(Character c)
+    {
+        foreach (HealthBar bar in healthBars)
+        {
+            if (bar.character.GetComponent<Character>() == c)
+                return bar;
+        }
+        return null;
     }
 }
