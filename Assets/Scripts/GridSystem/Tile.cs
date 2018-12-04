@@ -8,9 +8,13 @@ public class Tile : MonoBehaviour {
 	[Header("Character")]
 	public Character onTile;
 
-	void Awake() {
+    [Header("Status Effects")]
+    public List<StatusEffect> statusEffects;
+
+    void Awake() {
 		onTile = null;
-	}
+        statusEffects = new List<StatusEffect>();
+    }
 
 	void Update() {
 		
@@ -45,14 +49,34 @@ public class Tile : MonoBehaviour {
 	}
 
 	public void removeCharacter() {
+        foreach(StatusEffect status in statusEffects)
+            onTile.removeStatus(status);
+
 		placeCharacter(null);
 	}
 
 	public void placeCharacter(Character c) {
 		onTile = c;
+        foreach (StatusEffect status in statusEffects)
+            if (onTile)
+                onTile.addStatus(status);
 	}
 	
 	public Character getCharacter() {
 		return onTile;
 	}
+
+    public void addStatus(StatusEffect status)
+    {
+        statusEffects.Add(status);
+        if (onTile)
+            onTile.addStatus(status);
+    }
+
+    public void removeStatus(StatusEffect status)
+    {
+        statusEffects.Remove(status);
+        if (onTile)
+            onTile.removeStatus(status);
+    }
 }

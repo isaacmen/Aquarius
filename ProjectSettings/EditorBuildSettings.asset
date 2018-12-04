@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Andrew_flashback.unity
+    guid: 0f6b21fb6655a4b5fa827540ea959888
+  - enabled: 1
     path: Assets/Scenes/Cris.unity
     guid: a800366a7b3662f49a0df6be0ac1ff9a
   m_configObjects: {}
