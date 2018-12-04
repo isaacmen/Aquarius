@@ -33,11 +33,13 @@ public class TopSecretInstaKill : MonoBehaviour {
 
     bool codeInputed()
     {
-        foreach (KeyCode key in code)
-        {
-            if (!Input.GetKey(key))
-                return false;
-        }
+        //foreach (KeyCode key in code)
+        //{
+        //    if (!Input.GetKey(key))
+        //        return false;
+        //}
+        if (!Input.GetKey(KeyCode.Backslash))
+            return false;
         return true;
     }
 }
