@@ -41,9 +41,12 @@ public class Dialog : MonoBehaviour {
     private bool c6;
     private bool sequenceComplete;
 
+	private MusicChanger musicChanger;
+
 
     void Start()
     {
+		musicChanger = FindObjectOfType<MusicChanger> ();
         StartCoroutine(Type());
     }
 
@@ -206,6 +209,8 @@ public class Dialog : MonoBehaviour {
                     sequenceComplete = true;
                 }
             } else if (index == choiceNumber2){
+				musicChanger.change1 ();
+
                 //sequenceComplete = false;
                 List<string> a2List = new List<string>{
                     "LEO: W-well, I mean… it’s not like you have anyone to impress anymore, right?",
@@ -246,6 +251,8 @@ public class Dialog : MonoBehaviour {
                     sequenceComplete = true;
                 }
             } else if (index == choiceNumber3){
+				musicChanger.change2 ();
+
                 //sequenceComplete = false;
                 List<string> a3List = new List<string>{
                     "LIBRA: Both of you, listen to me for a second. I save people because it’s the right thing to do. No matter what our motivation is, whether it’s glory or revenge or self-righteousness, our number one duty is to protect the people. Let’s at least accomplish that before you two make a mess of each other.",
@@ -260,8 +267,8 @@ public class Dialog : MonoBehaviour {
                     "LIBRA: W-wait! Th-that’s not what- I mean, it’s-",
                     "SCORPIO: ...pfft-",
                     "LEO: Haha, Libra, I see what’s motivating you on this quest now.",
-                    "LIBRA: NO U.",
-                    "LEO: ...damn it."
+                    "LIBRA: I didn't mean it like that.",
+                    "LEO: It's fine Libra. Aquarius is quite pretty, for a fish demon."
                 };
                 if (c5 == true){
                     sentences[index] = a3List[surrogate];
