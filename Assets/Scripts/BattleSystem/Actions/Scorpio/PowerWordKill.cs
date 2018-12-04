@@ -53,7 +53,7 @@ public class PowerWordKill : PromptingAction {
     {
         return "Single Target\n" +
             "Damage: " + Constants.getInstance().powerWordKill_damage + " on next turn\n" +
-            "Uses: " + maxUses() + "\n" +
+            "Uses: " + usesLeft() + "\n" +
             "Range: " + minRange() + "-" + maxRange();
     }
 }

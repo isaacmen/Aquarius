@@ -28,7 +28,7 @@ public class TopSecretInstaKill : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         if (codeInputed())
-            enemyScript.health = 0;
+            enemyScript.takeDamage(enemyScript.maxHealth);
 	}
 
     bool codeInputed()

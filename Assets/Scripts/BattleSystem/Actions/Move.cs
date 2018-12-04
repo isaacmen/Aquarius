@@ -40,10 +40,11 @@ public class Move : PromptingAction {
 	}
 
 	override protected void postPromptStart() {
-		start = transform.position;
+        GetComponentInChildren<Animator>().Play("Jump");
+        start = transform.position;
 		end = target.transform.position - new Vector3(0, 0, 3);
 		dir = (end - start) / (end-start).magnitude;
-	}
+    }
 
 	override protected void postPromptLoop() {
 		Vector3 pos = transform.position;

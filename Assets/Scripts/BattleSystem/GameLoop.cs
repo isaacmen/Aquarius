@@ -218,11 +218,24 @@ public class GameLoop : MonoBehaviour {
 			case GameState.ENEMY_STATE:
 				Debug.Log("GameLoop Update() in ENEMY_STATE for " + turn);
                 Debug.Log("Chosen Action: " + activeAction + ".");
+                GetComponent<UI_Manager>().noMenus();
+                if (!activeAction)
+                    findActiveAction();
                 if (enemyTurnOver())
 				    nextTurn();
 				break;
 		}
 	}
+
+    private void findActiveAction()
+    {
+        List<Action> potentialActions = ((EnemyCharacter)turn).getActions();
+        foreach (Action potentialAction in potentialActions)
+        {
+            if (potentialAction.isActive())
+                activeAction = potentialAction;
+        }
+    }
 
 	private bool allyTurnOver() {
         return actionTypesPerTurn.Count == 0 ||
@@ -321,20 +334,20 @@ public class GameLoop : MonoBehaviour {
 					Debug.Log("ActionType's left: " + s);
 				}
 
-//                bool moveActive = false;
-//                bool actionsActive = false;
-//                for (int i = 1; i < turnActions.Count + 1; i++)
-//                {
-//                    if (turnActions[i - 1].GetType() == typeof(Move))
-//                        moveActive = true;
-//                    else if (turnActions[i - 1].GetType() != typeof(Pass))
-//                        actionsActive = true;
-//                }
-//                GetComponent<UI_Manager>().resetAvailableActions(moveActive, actionsActive);
+                bool moveActive = false;
+                bool actionsActive = false;
+                for (int i = 1; i < turnActions.Count + 1; i++)
+                {
+                    if (turnActions[i - 1].GetType() == typeof(Move))
+                        moveActive = true;
+                    else if (turnActions[i - 1].GetType() != typeof(Pass))
+                        actionsActive = true;
+                }
+                GetComponent<UI_Manager>().resetAvailableActions(moveActive, actionsActive);
 
                 break;
 			case GameState.ALLY_ACTION_ACTIVE:
-                GetComponent<UI_Manager>().noMenus();
+                //GetComponent<UI_Manager>().noMenus();
                 break;
 			case GameState.ENEMY_STATE:
 				Debug.Log("GameLoop entered ENEMY_STATE for " + turn);
@@ -350,7 +363,7 @@ public class GameLoop : MonoBehaviour {
 					activeAction = maxValued;
 //					for random	
 					//activeAction = ((EnemyCharacter)turn).getActions()[Random.Range(0, ((EnemyCharacter)turn).getActions().Count)];
-
+					
 					print(activeAction.GetType());
 					print(activeAction);
 					activeAction.setActive();

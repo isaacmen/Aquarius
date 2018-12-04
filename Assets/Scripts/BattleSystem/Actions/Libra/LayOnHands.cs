@@ -51,7 +51,7 @@ public class LayOnHands : PromptingAction {
     {
         return "Single Target\n" +
             "Heals: " + Constants.getInstance().layOnHands_healValue + "\n" +
-            "Uses: " + maxUses() + "\n" +
+            "Uses: " + usesLeft() + "\n" +
             "Range: 1";
     }
 }
