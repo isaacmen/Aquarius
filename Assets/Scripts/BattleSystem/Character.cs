@@ -68,6 +68,8 @@ public class Character : MonoBehaviour {
 			this.gameObject.SetActive(false);
 			field.removeCharacter(this);
 			GameLoop.getInstance().turnOrder.Remove(this);
+
+			// some notification to GameLoop for it to check if win/lose
 		}
 	}
 }
