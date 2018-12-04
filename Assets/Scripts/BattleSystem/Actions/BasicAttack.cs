@@ -38,7 +38,24 @@ public class BasicAttack : PromptingAction {
 
 	override protected void innerEnd() { }
 
-    public override string getName()
+	override public int getValue() {
+		List<Tile> tiles = Field.tilesInCharacterRange(this.GetComponentInParent<Character>(), minRange(), maxRange(), targetYourField());
+		int value = 0;
+
+		foreach(Tile t in tiles)
+			if(t.getCharacter() != null) {
+				int thisValue = GetComponentInParent<Character>().basicAttackDamage;
+				if(thisValue > t.getCharacter().health)
+					thisValue = Mathf.Max(2*thisValue, thisValue+15);
+				if(thisValue > value)
+					value = thisValue;
+			}
+				
+
+		return value;
+	}
+
+	public override string getName()
     {
         return "Attack";
     }

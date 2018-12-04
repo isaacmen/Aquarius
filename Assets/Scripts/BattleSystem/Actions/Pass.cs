@@ -17,4 +17,8 @@ public class Pass : Action {
 
 	override protected void innerLoop() {}
 	override protected void innerEnd() {}
+
+	override public int getValue() {
+		return -1;
+	}
 }

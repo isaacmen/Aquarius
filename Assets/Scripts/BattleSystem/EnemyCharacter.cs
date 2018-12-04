@@ -50,8 +50,8 @@ public class EnemyCharacter : Character {
         actionList = new List<Action>();
 		//below is unnecessary as statuseffects handle that
 //      actionList.Add(GameObject.Find(this.name).AddComponent<Pass>()); //for when they are forced to wait for their turn;
-        actionList.Add(GameObject.Find(this.name).AddComponent<Move>());
-        actionList.Add(GameObject.Find(this.name).AddComponent<BasicAttack>());
+        actionList.Add(GameObject.Find(this.name).AddComponent<TargetedMove>());
+        actionList.Add(GameObject.Find(this.name).AddComponent<TargetedBasicAttack>());
 
         actionTypesPerTurn = new List<ActionType>() { ActionType.ABILITY, ActionType.MOVE};
 

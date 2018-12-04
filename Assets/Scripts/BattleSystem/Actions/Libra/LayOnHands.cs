@@ -38,7 +38,11 @@ public class LayOnHands : PromptingAction {
 
 	override protected void innerEnd() { }
 
-    public override string getName()
+	override public int getValue() {
+		return 0;
+	}
+
+	public override string getName()
     {
         return "Lay On Hands";
     }

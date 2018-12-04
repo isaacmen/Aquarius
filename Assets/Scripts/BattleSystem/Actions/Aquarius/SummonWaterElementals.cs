@@ -57,6 +57,10 @@ public class SummonWaterElementals : Action {
 
 	override protected void innerEnd() { }
 
+	override public int getValue() {
+		return (GameLoop.getInstance().getEnemyField().getNumCharacters() <= 1) ? 9999999 : 0;
+	}
+
 	public override string getDescription() {
 		return "Summons 1 Melee and 1 Ranged Water Elemental\n" +
 			"Uses: Infinite\n" +

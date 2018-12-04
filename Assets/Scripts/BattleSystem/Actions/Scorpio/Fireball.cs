@@ -64,6 +64,10 @@ public class Fireball : PromptingAction {
 		}
 	}
 
+	override public int getValue() {
+		return 0;
+	}
+
 	override protected void innerEnd() { }
 
     public override string getDescription()

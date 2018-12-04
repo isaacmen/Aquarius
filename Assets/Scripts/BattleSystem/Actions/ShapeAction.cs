@@ -50,5 +50,26 @@ public abstract class ShapeAction : Action {
 		}
 	}
 
+	override public int getValue() {
+		bool[,] targets = getTargets();
+		Field targetField = (GetComponentInParent<Character>().getField() == GameLoop.getInstance().getEnemyField())
+								? GameLoop.getInstance().getAllyField()
+								: GameLoop.getInstance().getEnemyField()
+								;
+		int damage = getDamage();
+
+		int value = 0;
+
+		for(int y = 0; y < 3; y++)
+			for(int x = 0; x < 3; x++)
+				if(targets[y, x] && targetField.isCharacterAtYX(y, x))
+					value += (damage > targetField.getTileAtYX(y, x).getCharacter().health)
+								? Mathf.Max(damage * 2, damage + 15)
+								: damage
+								;
+
+		return value;
+	}
+
 	override protected void innerEnd() { }
 }

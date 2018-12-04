@@ -40,7 +40,11 @@ public class PowerWordKill : PromptingAction {
 
 	override protected void innerEnd() { }
 
-    public override string getName()
+	override public int getValue() {
+		return 0;
+	}
+
+	public override string getName()
     {
         return "Power Word Kill";
     }

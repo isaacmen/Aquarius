@@ -38,7 +38,11 @@ public class Unload : PromptingAction {
 
 	override protected void innerEnd() { }
 
-    public override string getDescription()
+	override public int getValue() {
+		return 0;
+	}
+
+	public override string getDescription()
     {
         return "Single Target\n" +
             "Damage: " + Constants.getInstance().unload_damage + "\n" +

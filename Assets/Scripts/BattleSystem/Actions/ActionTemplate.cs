@@ -21,6 +21,10 @@ public class ActionTemplate : Action {
 
 	override protected void innerEnd() {}
 
+	override public int getValue() {
+		return 0;
+	}
+
 	private enum MyState {
 
 	}

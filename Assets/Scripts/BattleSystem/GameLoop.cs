@@ -27,8 +27,6 @@ public class GameLoop : MonoBehaviour {
     public List<Character> turnOrder;
     public bool randomizeTurnOrder;
 
-	private int tsm = 0;
-
 	[Header("Constants")]
 	public bool DEBUG_LOG;
 
@@ -341,14 +339,30 @@ public class GameLoop : MonoBehaviour {
 			case GameState.ENEMY_STATE:
 				Debug.Log("GameLoop entered ENEMY_STATE for " + turn);
 				if(((EnemyCharacter)turn).getEnemyCharacterType() == EnemyCharacterType.AQUARIUS) {
-					activeAction = ((EnemyCharacter)turn).getActions()[Random.Range(0, ((EnemyCharacter)turn).getActions().Count)];
+					Action maxValued = ((EnemyCharacter)turn).getActions()[0];
+					foreach(Action a in ((EnemyCharacter)turn).getActions()) {
+						print(a + ": " + a.getValue());
+						if(a.getValue() > maxValued.getValue())
+							maxValued = a;
+					}
+
+//					for max value
+					activeAction = maxValued;
+//					for random	
+					//activeAction = ((EnemyCharacter)turn).getActions()[Random.Range(0, ((EnemyCharacter)turn).getActions().Count)];
+
 					print(activeAction.GetType());
 					print(activeAction);
 					activeAction.setActive();
 				} else {
 					print("try basicattack");
-					activeAction = turn.GetComponentInParent<BasicAttack>();
-					activeAction.setActive();
+					TargetedAction atk = turn.GetComponentInParent<TargetedBasicAttack>();
+					activeAction = (atk.getValue() == 0)
+										? turn.GetComponentInParent<TargetedMove>()
+										: atk
+										;
+
+					((TargetedAction)activeAction).setActiveTargeting(((TargetedAction)activeAction).getOptimalTile());
 				}
 				break;
 		}
