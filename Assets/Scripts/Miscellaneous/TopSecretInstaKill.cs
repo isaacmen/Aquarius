@@ -32,7 +32,7 @@ public class TopSecretInstaKill : MonoBehaviour {
             foreach (Character character in toKill)
                 if (character.isActiveAndEnabled && character.gameObject.activeSelf)
                     character.GetComponent<EnemyCharacter>().takeDamage(character.GetComponent<EnemyCharacter>().maxHealth);
-        GetComponent<GameLoop>().updateGameStatus();
+//        GetComponent<GameLoop>().updateGameStatus();
 	}
 
     bool codeInputed()

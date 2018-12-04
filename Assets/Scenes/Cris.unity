@@ -213,10 +213,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a8c3a0781bf37b40b14803bd4037172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tidalWaveX_damage: 10
-  tidalWaveO_damage: 10
-  tidalWaveRow_damage: 10
-  tidalWaveColumn_damage: 10
+  tidalWaveX_damage: 20
+  tidalWaveO_damage: 20
+  tidalWaveRow_damage: 20
+  tidalWaveColumn_damage: 20
   layOnHands_healValue: 15
   layOnHands_minRange: 0
   layOnHands_maxRange: 1
@@ -1216,6 +1216,11 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 5b034c407748549c89f1136c195bb18a,
         type: 3}
+    - target: {fileID: 114182045866608020, guid: a013fc6590226654ca3c25e2f8ccd742,
+        type: 2}
+      propertyPath: basicAttackDamage
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a013fc6590226654ca3c25e2f8ccd742, type: 2}
   m_IsPrefabAsset: 0
