@@ -831,8 +831,8 @@ MonoBehaviour:
   - '???: Get your head in the game, Leo! After all, you said it yourself.'
   - 'LEO: Huh?'
   typingSpeed: 0.01
-  conversationNumberChoice1: 7
-  conversationNumberChoice2: 7
+  choices: 0
+  nextScene: Andrew_flashback
   continueButton: {fileID: 1385199823}
   choiceButton1: {fileID: 11707062}
   choiceButton2: {fileID: 1709816709}
@@ -841,7 +841,15 @@ MonoBehaviour:
   Speaker1: {fileID: 801738019}
   Speaker2: {fileID: 1865592947}
   Speaker3: {fileID: 280966941}
-  choiceNumber: 8
+  choiceNumber1: 0
+  choiceNumber2: 0
+  choiceNumber3: 0
+  divergeTextLength1: 3
+  divergeTextLength2: 3
+  divergeTextLength3: 8
+  divergeTextLength4: 5
+  divergeTextLength5: 4
+  divergeTextLength6: 8
 --- !u!4 &361214179
 Transform:
   m_ObjectHideFlags: 0
@@ -3670,14 +3678,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 5b034c407748549c89f1136c195bb18a, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

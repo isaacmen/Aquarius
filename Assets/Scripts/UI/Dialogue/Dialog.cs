@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
+using UnityEngine.SceneManagement;
 
 public class Dialog : MonoBehaviour {
 
@@ -13,6 +13,7 @@ public class Dialog : MonoBehaviour {
     public float typingSpeed;
     //int textIndex = 0;
     public bool choices;
+    public string nextScene;
     public GameObject continueButton;
     public GameObject choiceButton1;
     public GameObject choiceButton2;
@@ -165,6 +166,7 @@ public class Dialog : MonoBehaviour {
                 textDisplay.text = "";
                 continueButton.SetActive(false);
                 dialogueBackplate.SetActive(false);
+                SceneManager.LoadScene(sceneName: nextScene);
             }
         } else {
             if (index == choiceNumber1){

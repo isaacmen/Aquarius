@@ -865,6 +865,7 @@ MonoBehaviour:
   - "LEO: \u201CWe\u2019re all in this together!\u201D"
   typingSpeed: 0.001
   choices: 1
+  nextScene: Cris
   continueButton: {fileID: 1385199823}
   choiceButton1: {fileID: 11707062}
   choiceButton2: {fileID: 1709816709}
@@ -876,6 +877,12 @@ MonoBehaviour:
   choiceNumber1: 4
   choiceNumber2: 9
   choiceNumber3: 13
+  divergeTextLength1: 3
+  divergeTextLength2: 3
+  divergeTextLength3: 8
+  divergeTextLength4: 5
+  divergeTextLength5: 4
+  divergeTextLength6: 8
 --- !u!4 &361214179
 Transform:
   m_ObjectHideFlags: 0
@@ -1243,11 +1250,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4993223427334514, guid: 5b22836d553f846ee80d4066169c11c1, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -948.34
+      value: -963.43
       objectReference: {fileID: 0}
     - target: {fileID: 4993223427334514, guid: 5b22836d553f846ee80d4066169c11c1, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -536.74
+      value: -541.42
       objectReference: {fileID: 0}
     - target: {fileID: 4993223427334514, guid: 5b22836d553f846ee80d4066169c11c1, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1259,7 +1266,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4993223427334514, guid: 5b22836d553f846ee80d4066169c11c1, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4993223427334514, guid: 5b22836d553f846ee80d4066169c11c1, type: 2}
       propertyPath: m_LocalRotation.z
@@ -1267,7 +1274,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4993223427334514, guid: 5b22836d553f846ee80d4066169c11c1, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4993223427334514, guid: 5b22836d553f846ee80d4066169c11c1, type: 2}
       propertyPath: m_RootOrder
@@ -1284,6 +1291,10 @@ Prefab:
     - target: {fileID: 4993223427334514, guid: 5b22836d553f846ee80d4066169c11c1, type: 2}
       propertyPath: m_LocalScale.z
       value: 3.751798
+      objectReference: {fileID: 0}
+    - target: {fileID: 4993223427334514, guid: 5b22836d553f846ee80d4066169c11c1, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b22836d553f846ee80d4066169c11c1, type: 2}
@@ -2791,11 +2802,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4993380774199950, guid: 4cdf293b117aa49eaaf033bbf884bb5b, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -947.73
+      value: -958.71
       objectReference: {fileID: 0}
     - target: {fileID: 4993380774199950, guid: 4cdf293b117aa49eaaf033bbf884bb5b, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -540.11
+      value: -540.45
       objectReference: {fileID: 0}
     - target: {fileID: 4993380774199950, guid: 4cdf293b117aa49eaaf033bbf884bb5b, type: 2}
       propertyPath: m_LocalPosition.z
@@ -3243,6 +3254,10 @@ Prefab:
     - target: {fileID: 4568928978255098, guid: ff550ebe11c82473b90bca2378919568, type: 2}
       propertyPath: m_LocalScale.z
       value: 4.7549667
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951016431238262, guid: ff550ebe11c82473b90bca2378919568, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff550ebe11c82473b90bca2378919568, type: 2}
