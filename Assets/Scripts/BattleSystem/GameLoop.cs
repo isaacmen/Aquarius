@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameLoop : MonoBehaviour {
 	// DO NOT CHANGE state WITH "state = GameState.X"
@@ -280,7 +281,7 @@ public class GameLoop : MonoBehaviour {
 		}
         else
         {
-            //Game over, switch scenes
+            SceneManager.LoadScene("Epilogue");
         }
 	}
 
