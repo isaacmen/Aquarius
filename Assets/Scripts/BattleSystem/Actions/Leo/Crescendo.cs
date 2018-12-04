@@ -98,7 +98,7 @@ public class Crescendo : PromptingAction {
     {
         return "AoE Cone\n" +
             "Damage: " + Constants.getInstance().crescendo_damage + "\n" +
-            "Uses: " + maxUses() + "\n" +
+            "Uses: " + usesLeft() + "\n" +
             "Range: Area directly to left of caster";
     }
 }

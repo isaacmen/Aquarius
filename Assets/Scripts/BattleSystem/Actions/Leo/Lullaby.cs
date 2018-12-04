@@ -41,7 +41,7 @@ public class Lullaby : PromptingAction {
     {
         return "Single Target, Stuns\n" +
             "Damage: 0\n" +
-            "Uses: " + maxUses() + "\n" +
+            "Uses: " + usesLeft() + "\n" +
             "Range: " + minRange() + "-" + maxRange();
     }
 }

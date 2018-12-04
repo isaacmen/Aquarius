@@ -79,7 +79,7 @@ public class LightningBolt : PromptingAction {
     {
         return "AoE Line\n" +
             "Damage: " + Constants.getInstance().lightningBolt_damage + "\n" +
-            "Uses: " + maxUses() + "\n" +
+            "Uses: " + usesLeft() + "\n" +
             "Range: Whole row (no friendly fire)";
     }
 }

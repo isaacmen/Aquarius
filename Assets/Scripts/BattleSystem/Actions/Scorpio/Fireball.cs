@@ -70,7 +70,7 @@ public class Fireball : PromptingAction {
     {
         return "AoE Cross\n" +
             "Damage: " + Constants.getInstance().fireball_damage + "\n" +
-            "Uses: " + maxUses() + "\n" +
+            "Uses: " + usesLeft() + "\n" +
             "Range: " + minRange() + "-" + maxRange() + " for center";
     }
 }

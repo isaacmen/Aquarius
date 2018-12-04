@@ -74,7 +74,7 @@ public class Guard : PromptingAction {
     {
         return "Single Target, Defense\n" +
             "Damage: 0\n" +
-            "Uses: " + maxUses() + "\n" +
+            "Uses: " + usesLeft() + "\n" +
             "Range: All spaces to the right, including current";
     }
 }

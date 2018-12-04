@@ -48,7 +48,7 @@ public class ShieldBash : PromptingAction {
     {
         return "Single Target, Stuns\n" +
             "Damage: " + Constants.getInstance().shieldBash_damage + "\n" +
-            "Uses: " + maxUses() + "\n" +
+            "Uses: " + usesLeft() + "\n" +
             "Range: " + minRange() + "-" + maxRange();
     }
 }

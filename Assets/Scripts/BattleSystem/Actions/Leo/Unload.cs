@@ -42,7 +42,7 @@ public class Unload : PromptingAction {
     {
         return "Single Target\n" +
             "Damage: " + Constants.getInstance().unload_damage + "\n" +
-            "Uses: " + maxUses() + "\n" +
+            "Uses: " + usesLeft() + "\n" +
             "Range: " + minRange() + "-" + maxRange();
     }
 }
