@@ -21,19 +21,19 @@ public class Tile : MonoBehaviour {
 	}
 
 	public void setClickableSprite() {
-		GetComponent<SpriteRenderer>().sprite = Field.tileClickableSprite;
+		GetComponent<SpriteRenderer>().sprite = field.tileClickableSprite;
 	}
 
 	public void setRegularSprite() {
-		GetComponent<SpriteRenderer>().sprite = Field.tileRegularSprite;
+		GetComponent<SpriteRenderer>().sprite = field.tileRegularSprite;
 	}
 
 	public void setSecondarySprite() {
-		GetComponent<SpriteRenderer>().sprite = Field.tileSecondarySprite;
+		GetComponent<SpriteRenderer>().sprite = field.tileSecondarySprite;
 	}
 
 	public void setTertiarySprite() {
-		GetComponent<SpriteRenderer>().sprite = Field.tileTertiarySprite;
+		GetComponent<SpriteRenderer>().sprite = field.tileTertiarySprite;
 	}
 
 	public int[] getTileArrayCoordsYX() {

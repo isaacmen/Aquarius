@@ -14,11 +14,12 @@ public class Field : MonoBehaviour {
 
 	[Header("Side")]
 	public bool isRight;
-    
-    public static Sprite tileRegularSprite;
-	public static Sprite tileClickableSprite;
-	public static Sprite tileSecondarySprite;
-	public static Sprite tileTertiarySprite;
+
+	[SerializeField]
+	public Sprite tileRegularSprite;
+	public Sprite tileClickableSprite;
+	public Sprite tileSecondarySprite;
+	public Sprite tileTertiarySprite;
 
 	private Vector2 cellSize;
     private Vector2 cellScale;
@@ -142,8 +143,10 @@ public class Field : MonoBehaviour {
         
         cellObject.AddComponent<SpriteRenderer>().sprite = tileRegularSprite;
 
-        
-        cellSize = tileRegularSprite.bounds.size;
+		print(tileRegularSprite + ".");
+		print(tileRegularSprite.bounds+".");
+		print(tileRegularSprite.bounds.size + ".");
+		cellSize = tileRegularSprite.bounds.size;
 
         
         Vector2 newCellSize = new Vector2(gridSize.x / (float)cols, gridSize.y / (float)rows);

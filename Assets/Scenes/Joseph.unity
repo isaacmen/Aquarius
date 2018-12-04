@@ -411,19 +411,19 @@ Prefab:
         type: 2}
       propertyPath: tileClickableSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 1a3a456fea65c485eab25fd5a47af916,
+      objectReference: {fileID: 21300000, guid: 238898372a1bf4274acf1ddefa60e2b3,
         type: 3}
     - target: {fileID: 114820808428215652, guid: 64d268c2a26f8f54680b5fcb2f7ff68f,
         type: 2}
       propertyPath: tileSecondarySprite
       value: 
-      objectReference: {fileID: 21300000, guid: 238898372a1bf4274acf1ddefa60e2b3,
+      objectReference: {fileID: 21300000, guid: 1a3a456fea65c485eab25fd5a47af916,
         type: 3}
     - target: {fileID: 114820808428215652, guid: 64d268c2a26f8f54680b5fcb2f7ff68f,
         type: 2}
       propertyPath: tileTertiarySprite
       value: 
-      objectReference: {fileID: 21300000, guid: 97d88bbb42d044322a1e7a1455643196,
+      objectReference: {fileID: 21300000, guid: 77db2aa6c06c4410d9d571a556e0c408,
         type: 3}
     m_RemovedComponents:
     - {fileID: 114031591541258250, guid: 64d268c2a26f8f54680b5fcb2f7ff68f, type: 2}
@@ -2616,13 +2616,13 @@ Prefab:
         type: 2}
       propertyPath: tileClickableSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 1a3a456fea65c485eab25fd5a47af916,
+      objectReference: {fileID: 21300000, guid: 238898372a1bf4274acf1ddefa60e2b3,
         type: 3}
     - target: {fileID: 114999377057791432, guid: 59ebd6f6915872046af9e9e11c010966,
         type: 2}
       propertyPath: tileSecondarySprite
       value: 
-      objectReference: {fileID: 21300000, guid: 238898372a1bf4274acf1ddefa60e2b3,
+      objectReference: {fileID: 21300000, guid: 1a3a456fea65c485eab25fd5a47af916,
         type: 3}
     - target: {fileID: 114999377057791432, guid: 59ebd6f6915872046af9e9e11c010966,
         type: 2}
@@ -2633,7 +2633,7 @@ Prefab:
         type: 2}
       propertyPath: tileTertiarySprite
       value: 
-      objectReference: {fileID: 21300000, guid: 97d88bbb42d044322a1e7a1455643196,
+      objectReference: {fileID: 21300000, guid: 77db2aa6c06c4410d9d571a556e0c408,
         type: 3}
     m_RemovedComponents:
     - {fileID: 114789364531044780, guid: 59ebd6f6915872046af9e9e11c010966, type: 2}
