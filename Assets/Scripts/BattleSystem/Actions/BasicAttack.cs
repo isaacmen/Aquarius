@@ -27,7 +27,13 @@ public class BasicAttack : PromptingAction {
 
 	override protected void postPromptStart() {
 		GetComponentInChildren<Animator>().Play("Attacking");
-	}
+        if (gameObject.name.Contains("Leo"))
+            GameObject.Find("SFX").GetComponent<SFXPlayer>().PlaySound("LeoAttack");
+        else if (gameObject.name.Contains("Libra"))
+            GameObject.Find("SFX").GetComponent<SFXPlayer>().PlaySound("LibraAttack");
+        else if (gameObject.name.Contains("Scorpio"))
+            GameObject.Find("SFX").GetComponent<SFXPlayer>().PlaySound("ScorpioAttack");
+    }
 
 	override protected void postPromptLoop() {
 		if(GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle")) {

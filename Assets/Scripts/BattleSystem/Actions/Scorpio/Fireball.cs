@@ -27,7 +27,8 @@ public class Fireball : PromptingAction {
 
 	override protected void postPromptStart() {
 		GetComponentInChildren<Animator>().Play("Attacking");
-	}
+        GameObject.Find("SFX").GetComponent<SFXPlayer>().PlaySound("ScorpioFireball");
+    }
 
 	override protected void postPromptLoop() {
 		if(GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle")) {

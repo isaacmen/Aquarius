@@ -21,7 +21,8 @@ public class PowerWordKill2 : Action {
 	override protected void innerStart() {
 		Debug.Log("Power Word: Kill!");
 		GetComponentInChildren<Animator>().Play("Attacking");
-	}
+        GameObject.Find("SFX").GetComponent<SFXPlayer>().PlaySound("ScorpioPWKHit");
+    }
 
 	override protected void innerLoop() {
 		if(GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle")) {

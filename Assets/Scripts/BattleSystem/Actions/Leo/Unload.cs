@@ -27,7 +27,8 @@ public class Unload : PromptingAction {
 
 	override protected void postPromptStart() {
 		GetComponentInChildren<Animator>().Play("Attacking");
-	}
+        GameObject.Find("SFX").GetComponent<SFXPlayer>().PlaySound("LeoUnload");
+    }
 
 	override protected void postPromptLoop() {
 		if(GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle")) {

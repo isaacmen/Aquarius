@@ -27,7 +27,8 @@ public class LayOnHands : PromptingAction {
 
 	override protected void postPromptStart() {
 		GetComponentInChildren<Animator>().Play("Attacking");
-	}
+        GameObject.Find("SFX").GetComponent<SFXPlayer>().PlaySound("LibraLOH");
+    }
 
 	override protected void postPromptLoop() {
 		if(GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle")) {

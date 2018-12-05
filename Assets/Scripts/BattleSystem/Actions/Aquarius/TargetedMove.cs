@@ -27,7 +27,9 @@ public class TargetedMove : TargetedAction {
 		start = transform.position;
 		end = target.transform.position - new Vector3(0, 0, 3);
 		dir = (end - start) / (end - start).magnitude;
-	}
+        GetComponentInChildren<Animator>().Play("Jump");
+        GameObject.Find("SFX").GetComponent<SFXPlayer>().PlaySound("jump");
+    }
 
 	override protected void innerLoop() {
 		Vector3 pos = transform.position;

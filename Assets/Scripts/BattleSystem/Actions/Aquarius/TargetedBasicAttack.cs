@@ -20,7 +20,8 @@ public class TargetedBasicAttack : TargetedAction {
 	override protected void innerStart() {
 		firstCheck = true;
 		GetComponentInChildren<Animator>().Play("Attacking");
-	}
+        GameObject.Find("SFX").GetComponent<SFXPlayer>().PlaySound("AquaAttack");
+    }
 
 	override protected void innerLoop() {
 		if(GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle")) {

@@ -32,7 +32,7 @@ public class SFXPlayer : MonoBehaviour {
 		src = this.GetComponent<AudioSource> ();
 	}
 	
-	public void Jump (string skill) {
+	public void PlaySound (string skill) {
 		if (skill == "jump") {
 			src.clip = jump;
 		} else if (skill == "AquaAttack") {

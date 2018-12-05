@@ -10,7 +10,8 @@ public class TidalWaveX : ShapeAction {
 
 	override public void playAnimation() {
 		GetComponentInChildren<Animator>().Play("Attacking");
-	}
+        GameObject.Find("SFX").GetComponent<SFXPlayer>().PlaySound("AquaTidalHit");
+    }
 
 	override public bool animationComplete() {
 		return GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle");

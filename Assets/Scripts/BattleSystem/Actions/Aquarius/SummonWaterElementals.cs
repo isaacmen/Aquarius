@@ -18,7 +18,8 @@ public class SummonWaterElementals : Action {
 		firstCheck = true;
 		if(GameLoop.getInstance().getEnemyField().getNumCharacters() <= 1) {
 			GetComponentInChildren<Animator>().Play("Hat");
-		} else {
+            GameObject.Find("SFX").GetComponent<SFXPlayer>().PlaySound("AquaSummon");
+        } else {
 			print("already too many");
 			setInactiveWithCompletion(false);
 		}

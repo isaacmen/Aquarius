@@ -41,6 +41,7 @@ public class Move : PromptingAction {
 
 	override protected void postPromptStart() {
         GetComponentInChildren<Animator>().Play("Jump");
+        GameObject.Find("SFX").GetComponent<SFXPlayer>().PlaySound("jump");
         start = transform.position;
 		end = target.transform.position - new Vector3(0, 0, 3);
 		dir = (end - start) / (end-start).magnitude;
