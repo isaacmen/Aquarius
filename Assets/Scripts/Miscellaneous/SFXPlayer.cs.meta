@@ -1,0 +1,29 @@
+fileFormatVersion: 2
+guid: 446409fc22066db459a5cf85eea0a086
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - jump: {fileID: 8300000, guid: bd5e6802854482e48bfabdc1f6b1f1d6, type: 3}
+  - AquaAttack: {instanceID: 0}
+  - AquaTidalCharge: {instanceID: 0}
+  - AquaTidalHit: {instanceID: 0}
+  - AquaSummon: {instanceID: 0}
+  - LeoAttack: {instanceID: 0}
+  - LeoUnload: {instanceID: 0}
+  - LeoLullaby: {instanceID: 0}
+  - LeoCrescendo: {instanceID: 0}
+  - ScorpioAttack: {instanceID: 0}
+  - ScorpioFireball: {instanceID: 0}
+  - ScorpioLightning: {instanceID: 0}
+  - ScorpioPWKCharge: {instanceID: 0}
+  - ScorpioPWKHit: {instanceID: 0}
+  - LibraAttack: {instanceID: 0}
+  - LibraGuard: {instanceID: 0}
+  - LibraLOH: {instanceID: 0}
+  - LibraShieldbash: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

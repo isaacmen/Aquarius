@@ -1263,7 +1263,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 38, y: -16.899994}
+  m_AnchoredPosition: {x: 38, y: -16.900024}
   m_SizeDelta: {x: 67.7, y: 33.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1212517467
@@ -3071,6 +3071,64 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4560935972281468, guid: 5b1f98fc9391df148b883cdde1f5837c,
     type: 2}
   m_PrefabInternal: {fileID: 1801873931}
+--- !u!1 &2014895604
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2014895606}
+  - component: {fileID: 2014895605}
+  m_Layer: 0
+  m_Name: SFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2014895605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2014895604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 446409fc22066db459a5cf85eea0a086, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jump: {fileID: 8300000, guid: bd5e6802854482e48bfabdc1f6b1f1d6, type: 3}
+  AquaAttack: {fileID: 8300000, guid: 7de195225d7be99469965379df3a47f0, type: 3}
+  AquaTidalCharge: {fileID: 8300000, guid: af6196d603077e749936e15f74693df5, type: 3}
+  AquaTidalHit: {fileID: 8300000, guid: e3a949f1fa9800440a7d0831fa947357, type: 3}
+  AquaSummon: {fileID: 8300000, guid: 22d23e187ac17924f8acb9768c5d41e5, type: 3}
+  LeoAttack: {fileID: 8300000, guid: d44e1b165beec824a8fd9d5a9df50a39, type: 3}
+  LeoUnload: {fileID: 8300000, guid: eae395878d87e0a4d9342c81fe0ae265, type: 3}
+  LeoLullaby: {fileID: 8300000, guid: 3c7cdb892ae7b26438be01e94c0eb5bb, type: 3}
+  LeoCrescendo: {fileID: 8300000, guid: a3b0406586bfbe34c8624869de2baaee, type: 3}
+  ScorpioAttack: {fileID: 8300000, guid: a89f3635991f1944dbacc27f751114e1, type: 3}
+  ScorpioFireball: {fileID: 8300000, guid: 63cfc67fac45d3148a22c56d4d9ae0e6, type: 3}
+  ScorpioLightning: {fileID: 8300000, guid: 8e16ce814f7a0c246af118a9fa64bbe0, type: 3}
+  ScorpioPWKCharge: {fileID: 8300000, guid: 53f0b0a5d04f8904680a938c1ac35118, type: 3}
+  ScorpioPWKHit: {fileID: 8300000, guid: 695bc8727368c4f43a3dd5e667f1e93a, type: 3}
+  LibraAttack: {fileID: 8300000, guid: 8835821cb68a14242a51ac50ccf8a43a, type: 3}
+  LibraGuard: {fileID: 8300000, guid: ac93c5a18c1d0af4b983f6e27a7b69cb, type: 3}
+  LibraLOH: {fileID: 8300000, guid: aa5171b73c46ed840afb7ef8e07ea8d6, type: 3}
+  LibraShieldbash: {fileID: 8300000, guid: 8835821cb68a14242a51ac50ccf8a43a, type: 3}
+--- !u!4 &2014895606
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2014895604}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.7175703, y: -2.9124207, z: -0.3670875}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2023683585 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1672493976314662, guid: 82cf9fe7a274e444bbce22a910e25b9e,
