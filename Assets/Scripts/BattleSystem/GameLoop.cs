@@ -32,11 +32,12 @@ public class GameLoop : MonoBehaviour {
 	[Header("Constants")]
 	public bool DEBUG_LOG;
 
-	public static GameLoop getInstance() {
-		return GameObject.Find("GameLoop").GetComponent<GameLoop>();
-	}
+    public static GameLoop getInstance()
+    {
+        return GameObject.Find("GameLoop").GetComponent<GameLoop>();
+    }
 
-	void Awake() {
+    void Awake() {
 		if(DEBUG_LOG) Debug.Log("GameLoop awake");
 		ongoing = true;
 
@@ -375,7 +376,7 @@ public class GameLoop : MonoBehaviour {
                 // prints possible actions then waits for the user to select one
                 // to be partially overridden by implemention with ui
                 string turnMoveStr = "What should " + turn + " do? (press # to act)\n";
-				for(int i = 0; i < turnActions.Count; i++) {
+                for (int i = 0; i < turnActions.Count; i++) {
 					turnMoveStr += (i + 1) + ": " + turnActions[i].GetType() + ((turnActions[i].usesLeft() > 999999) ? "" : " (" + turnActions[i].usesLeft() + ")") + ((i < turnActions.Count - 1) ? " / " : "");
 				}
 				Debug.Log(turnMoveStr);
