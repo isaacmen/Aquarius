@@ -46,7 +46,8 @@ public class Dialog : MonoBehaviour {
 
     void Start()
     {
-		musicChanger = FindObjectOfType<MusicChanger> ();
+        typingSpeed = GameObject.Find("Options").GetComponent<Options>().getTextSpeed();
+		musicChanger = FindObjectOfType<MusicChanger>();
         StartCoroutine(Type());
     }
 
@@ -54,7 +55,7 @@ public class Dialog : MonoBehaviour {
 
     private void Update()
     {
-
+        typingSpeed = GameObject.Find("Options").GetComponent<Options>().getTextSpeed();
         //Debug.Log(index);
         //Update the portrait depending on who is speaking.
         if (sentences[index].Contains(Speaker1.name)){

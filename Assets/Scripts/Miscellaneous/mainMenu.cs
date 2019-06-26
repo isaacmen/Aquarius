@@ -21,25 +21,6 @@ public class mainMenu : MonoBehaviour
         //DisableOptions.toggle = true;
     }
 
-    /*public void PlayGameMult() {
-        SceneManager.LoadScene("NetworkLobby");
-    }
-    public void LevelSelectIsland(){
-        SceneManager.LoadScene("Mediterranean");
-    }
-    public void LevelSelectCave(){
-        SceneManager.LoadScene("Cave");
-    }
-    public void LevelSelectDesert(){
-        SceneManager.LoadScene("Desert");
-    }
-    public void LevelSelectDemo(){
-        SceneManager.LoadScene("Shooting_Scene");
-    }
-    public void LevelSelectSandbox(){
-        SceneManager.LoadScene("Model Junkyard");
-    }*/
-
     public void playGame(){
         SceneManager.LoadScene("Andrew_Intro_Scene");
     }

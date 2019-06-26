@@ -580,7 +580,7 @@ MonoBehaviour:
     I shall lend my aid as well.\u201D"
   - "LEO: \u201CCome on, guys!\u201D"
   - "LEO: \u201CWe\u2019re all in this together!\u201D"
-  typingSpeed: 0.001
+  typingSpeed: 0.01
   choices: 1
   nextScene: Cris
   continueButton: {fileID: 1385199823}
@@ -717,7 +717,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4993223427334514, guid: 5b22836d553f846ee80d4066169c11c1, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4993223427334514, guid: 5b22836d553f846ee80d4066169c11c1, type: 2}
       propertyPath: m_LocalScale.x
@@ -981,7 +981,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4509419129503532, guid: 0d0509672bb8841f59d1d26300bbc70c, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4509419129503532, guid: 0d0509672bb8841f59d1d26300bbc70c, type: 2}
       propertyPath: m_LocalScale.x
@@ -1661,7 +1661,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4993380774199950, guid: 4cdf293b117aa49eaaf033bbf884bb5b, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4993380774199950, guid: 4cdf293b117aa49eaaf033bbf884bb5b, type: 2}
       propertyPath: m_LocalScale.x
