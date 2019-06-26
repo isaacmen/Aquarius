@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System;
 
 public class Dialog : MonoBehaviour {
 
@@ -11,7 +12,8 @@ public class Dialog : MonoBehaviour {
     public string[] sentences;
     private int index;
     public float typingSpeed;
-    //int textIndex = 0;
+    private bool skip;
+    private bool textScrolling;
     public bool choices;
     public string nextScene;
     public GameObject continueButton;
@@ -49,6 +51,8 @@ public class Dialog : MonoBehaviour {
         typingSpeed = GameObject.Find("Options").GetComponent<Options>().getTextSpeed();
 		musicChanger = FindObjectOfType<MusicChanger>();
         StartCoroutine(Type());
+        skip = false;
+        textScrolling = true;
     }
 
 
@@ -56,6 +60,7 @@ public class Dialog : MonoBehaviour {
     private void Update()
     {
         typingSpeed = GameObject.Find("Options").GetComponent<Options>().getTextSpeed();
+        
         //Debug.Log(index);
         //Update the portrait depending on who is speaking.
         if (sentences[index].Contains(Speaker1.name)){
@@ -97,16 +102,31 @@ public class Dialog : MonoBehaviour {
                 continueButton.SetActive(true);
             }
         }
+        if (textScrolling && Input.GetKey(KeyCode.Mouse0))
+            skip = true;
 
     }
 
 
     //Scroll text
     IEnumerator Type(){
-        foreach(char letter in sentences[index].ToCharArray()){
+        string charsLeft = sentences[index];
+        textScrolling = true;
+        foreach (char letter in sentences[index])
+        {
+            if (skip)
+                break;
+
             textDisplay.text += letter;
+            charsLeft = charsLeft.Substring(1, charsLeft.Length - 1);
+            Debug.Log(charsLeft);
+
             yield return new WaitForSeconds(typingSpeed);
         }
+
+        textDisplay.text += charsLeft;
+        textScrolling = false;
+        yield return null;
     }
 
 
@@ -165,6 +185,7 @@ public class Dialog : MonoBehaviour {
             if (index < sentences.Length - 1){
                 index++;
                 textDisplay.text = "";
+                skip = false;
                 StartCoroutine(Type());
             } else {
                 textDisplay.text = "";
@@ -195,6 +216,7 @@ public class Dialog : MonoBehaviour {
                 textDisplay.text = "";
                 surrogate++;
                 Debug.Log(surrogate);
+                skip = false;
                 StartCoroutine(Type());
                 Debug.Log(divergeText);
                 if (c1 == true && surrogate == divergeTextLength1)
@@ -238,6 +260,7 @@ public class Dialog : MonoBehaviour {
                 }
                 textDisplay.text = "";
                 surrogate++;
+                skip = false;
                 StartCoroutine(Type());
                 if (c3 == true && surrogate == divergeTextLength3)
                 {
@@ -279,6 +302,7 @@ public class Dialog : MonoBehaviour {
                 }
                 textDisplay.text = "";
                 surrogate++;
+                skip = false;
                 StartCoroutine(Type());
                 if (c5 == true && surrogate == divergeTextLength5){
                     divergeText = false;

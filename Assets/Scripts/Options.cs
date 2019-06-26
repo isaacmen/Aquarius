@@ -35,7 +35,7 @@ public class Options : MonoBehaviour {
     {
         Dropdown speedTextDrop = GameObject.Find("textSpeed").GetComponent<Dropdown>();
         int textSpeedIndex = speedTextDrop.value;
-        Debug.Log(textSpeedIndex);
+
         switch (textSpeedIndex)
         {
             case 0:
