@@ -16,14 +16,6 @@ public class TopSecretInstaKill : MonoBehaviour {
     private void Start()
     {
         enemyScript = GetComponent<EnemyCharacter>();
-        code = new List<KeyCode> {
-            KeyCode.A,
-            KeyCode.Q,
-            KeyCode.U,
-            KeyCode.R,
-            KeyCode.I,
-            KeyCode.S
-        };
     }
 
     // Update is called once per frame
@@ -37,11 +29,6 @@ public class TopSecretInstaKill : MonoBehaviour {
 
     bool codeInputed()
     {
-        //foreach (KeyCode key in code)
-        //{
-        //    if (!Input.GetKey(key))
-        //        return false;
-        //}
         if (!Input.GetKey(KeyCode.Backslash))
             return false;
         return true;

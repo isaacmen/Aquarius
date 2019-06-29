@@ -31,6 +31,7 @@ public class HealthBar : MonoBehaviour
 
     private void updatePosition()
     {
+        this.gameObject.SetActive(character.activeSelf);
         position = character.transform.position;
         Vector3 charaScreenPosition = cam.WorldToScreenPoint(position);
         transform.position = charaScreenPosition + offset;

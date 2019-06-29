@@ -5,20 +5,20 @@ using UnityEngine;
 public class EnemyCharacter : Character {	
 	[Header("Attributes")]
 	public EnemyCharacterType type;
+    public GameObject healthbar;
 
     private List<Action> actionList;
     private List<ActionType> actionTypesPerTurn;
 
 	override protected void Awake() {
         base.Awake();
-
         instantiateActionsFor(type);
 	}
 
 	override protected void Start() {
         base.Start();
 
-		if(onField) {
+        if (onField) {
 			this.gameObject.SetActive(true);
 			GameLoop.getInstance().addEnemyCharacter(this);
 		} else {
@@ -27,7 +27,12 @@ public class EnemyCharacter : Character {
 		}
 	}
 
-	public void setOnField(bool to) {
+    private void OnEnable()
+    {
+        healthbar.SetActive(true);
+    }
+
+    public void setOnField(bool to) {
 		if(to) {
 			this.gameObject.SetActive(true);
 			GameLoop.getInstance().addEnemyCharacter(this);
