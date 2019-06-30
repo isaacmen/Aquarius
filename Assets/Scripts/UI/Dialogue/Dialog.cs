@@ -119,7 +119,6 @@ public class Dialog : MonoBehaviour {
 
             textDisplay.text += letter;
             charsLeft = charsLeft.Substring(1, charsLeft.Length - 1);
-            Debug.Log(charsLeft);
 
             yield return new WaitForSeconds(typingSpeed);
         }

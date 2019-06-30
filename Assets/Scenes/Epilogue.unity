@@ -234,25 +234,49 @@ MonoBehaviour:
     as per the contract brokered by Leo and his companions, agreed to end all conflict
     between them. Having united to defeat their common enemy, the Three Kingdoms experienced
     an era of peace that would last for decades."
-  leoEnding: "\tLeo became renowned across the Three Kingdoms for his unique musical
+  leoEnding1: "\tLeo became renowned across the Three Kingdoms for his unique musical
     fighting style. He took on many apprentices over the years, passing his skills
     from student to student across many generations. The art of Gunbonery still lives
     on today."
-  libraEnding: "\tLibra returned to her order, the Sapphics of Caidoz, and was honored
+  libraEnding1: "\tLibra returned to her order, the Sapphics of Caidoz, and was honored
     for her achievements with the position of Magnum Solum. She worked to improve
     the order, shifting its focus to helping those adversely affected by the Great
     Floods. After decades of service, Libra eventually settled down with her lovely
-    wife. "
-  scorpioEnding: "\tScorpio returned to the Elven Kingdom and was held in high esteem
+    wife."
+  scorpioEnding1: "\tScorpio returned to the Elven Kingdom and was held in high esteem
     among their peers for their achievements. Much to everyone\u2019s surprise, they
     founded an orphanage to house the children whose families were lost in the floods.
     Scorpio cared for the children in their own way, and the children returned their
     love, in spite of their strict upbringing."
-  groupEnding: "\tFollowing their victory, the three heroes come together to form
-    a guild to continue their adventures together. The guild attracted outcasts and
+  leoEnding2: "\tLeo roamed throughout the Beastlands for years on end. His name would
+    be heard only in remote towns, until it ceased being heard at all. Once in a while,
+    however, rumors would be heard of villains being bested, accompanied by the sound
+    of a distant trombone."
+  libraEnding2: "\tLibra returned to her order, and devoted her life to the worship
+    of her chosen deity, Caidoz. Although her achievements attracted many suitors,
+    she chose to remain unmarried throughout her life. Libra occupied herself with
+    missionary work and wandered throughout the Three Kingdoms, helping those in need."
+  scorpioEnding2: "\tScorpio was welcomed among their peers in the Elven Kingdom,
+    and honored for their achievements. However, they eventually chose to wander the
+    Three Kingdoms, partly in their thirst for knowledge and partly to escape the
+    reminders of their lost loved ones. The research that resulted from these travels
+    still serves as a basis for modern magic to this day."
+  groupEndingA: Following their victory, the three heroes come together to form a
+    guild to continue their adventures together. The guild attracted outcasts and
     misfits from all over the Three Kingdoms, and grew to represent the potential
     of cooperation between the three races. Leo, Libra, and Scorpio were close companions
-    to the end of their days. "
+    to the end of their days.
+  groupEndingB: "With Aquarius vanquished, the three heroes return triumphant to their
+    respective kingdoms. Each is elected to serve as their kingdom\u2019s ambassador,
+    representing their race and ensuring harmony between the Three Kingdoms. The peace
+    they forged lasts to this day."
+  groupEndingC: 'With their common enemy defeated, our three heroes return to their
+    homelands and are welcomed back with open arms. Though the three went their separate
+    ways, their bond, forged through the many hardships they faced together, lasted
+    throughout their lifetimes. '
+  groupEndingD: Having accomplished their joint duty, our three heroes continue on
+    their respective paths. Their fates, once intertwined, now move in different directions,
+    and tales of their deeds are still told to this day.
   Portrait: {fileID: 841069308}
   Sprite: {fileID: 2125931762}
   Frame: {fileID: 1401713433}
@@ -263,6 +287,76 @@ MonoBehaviour:
   LibraSprite: {fileID: 21300000, guid: 7af1651bf893f47669f97ac2fb1f18d5, type: 3}
   ScorpioPortrait: {fileID: 21300000, guid: a4bd587af6213ca43a421d00dc3383ef, type: 3}
   ScorpioSprite: {fileID: 21300000, guid: 631bdc4994c5040b2a37cdddfaacdbf1, type: 3}
+  fadeOut: {fileID: 273276213}
+--- !u!1 &273276212
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 273276215}
+  - component: {fileID: 273276214}
+  - component: {fileID: 273276213}
+  m_Layer: 5
+  m_Name: FadeOut
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &273276213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 273276212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.019607844}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 7f3a842f0b51b2741adce99f354bb13c, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &273276214
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 273276212}
+  m_CullTransparentMesh: 0
+--- !u!224 &273276215
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 273276212}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1689814333}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -5.5, y: -8.4}
+  m_SizeDelta: {x: 1813.6, y: 1052.4}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &437234166
 GameObject:
   m_ObjectHideFlags: 0
@@ -1125,6 +1219,7 @@ RectTransform:
   - {fileID: 1846605039}
   - {fileID: 595290979}
   - {fileID: 2090837827}
+  - {fileID: 273276215}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
