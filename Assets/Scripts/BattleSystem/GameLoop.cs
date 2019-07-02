@@ -432,7 +432,18 @@ public class GameLoop : MonoBehaviour {
 					
 					print(activeAction.GetType());
 					print(activeAction);
-					activeAction.setActive();
+                    if (activeAction.GetType() == typeof(TargetedBasicAttack))
+                    {
+                        TargetedAction atk = turn.GetComponentInParent<TargetedBasicAttack>();
+                        activeAction = (atk.getValue() == 0)
+                                            ? turn.GetComponentInParent<TargetedMove>()
+                                            : atk
+                                            ;
+
+                        ((TargetedAction)activeAction).setActiveTargeting(((TargetedAction)activeAction).getOptimalTiles()[0]);
+                    }
+                    else
+                        activeAction.setActive();
 				} else {
 //					print("try basicattack");
 					TargetedAction atk = turn.GetComponentInParent<TargetedBasicAttack>();

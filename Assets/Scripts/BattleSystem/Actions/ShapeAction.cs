@@ -8,68 +8,64 @@ public abstract class ShapeAction : Action {
 	public abstract bool[,] getTargets();
 	public abstract int getDamage();
 
-	private bool firstCheck;
+	private bool alreadySet;
 
 	override public ActionType getActionType() {
 		return ActionType.ABILITY;
 	}
 
 	override protected void innerStart() {
-		firstCheck = true;
-		Field targetField = (GetComponentInParent<Character>().getField() == GameLoop.getInstance().getEnemyField())
-									? GameLoop.getInstance().getAllyField()
-									: GameLoop.getInstance().getEnemyField()
-									;
-		bool[,] targets = getTargets();
-		for(int y = 0; y < 3; y++)
-			for(int x = 0; x < 3; x++)
-				if(targets[y, x])
-					targetField.getTileAtYX(y, x).setTertiarySprite();
 		playAnimation();
 	}
 
 	override protected void innerLoop() {
-		if(animationComplete()) {
-			if(firstCheck) {
-				firstCheck = false;
-			} else {
-				print("animation complete");
-				bool[,] targets = getTargets();
-				Field targetField = (GetComponentInParent<Character>().getField() == GameLoop.getInstance().getEnemyField())
-										? GameLoop.getInstance().getAllyField()
-										: GameLoop.getInstance().getEnemyField()
-										;
+        if (GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+        {
+            GameLoop.getInstance().delayedActionManager.addAction(GetComponentInParent<Character>(), 1, GetComponentInParent<ShapeAction2>());
+            GetComponentInParent<ShapeAction2>().setTargets(getTargets());
+            GetComponentInParent<ShapeAction2>().setDamage(getDamage());
+            Debug.Log("Tidal Wave: Charging");
+            setInactiveWithCompletion(true);
+        }
 
-				for(int y = 0; y < 3; y++)
-					for(int x = 0; x < 3; x++)
-						if(targets[y, x] && targetField.isCharacterAtYX(y, x))
-							targetField.getTileAtYX(y, x).getCharacter().takeDamage(getDamage());
-
-				setInactiveWithCompletion(true);
-			}
-		}
-	}
-
-	override public int getValue() {
-		bool[,] targets = getTargets();
-		Field targetField = (GetComponentInParent<Character>().getField() == GameLoop.getInstance().getEnemyField())
-								? GameLoop.getInstance().getAllyField()
-								: GameLoop.getInstance().getEnemyField()
-								;
-		int damage = getDamage();
-
-		int value = 0;
-
-		for(int y = 0; y < 3; y++)
-			for(int x = 0; x < 3; x++)
-				if(targets[y, x] && targetField.isCharacterAtYX(y, x))
-					value += (damage > targetField.getTileAtYX(y, x).getCharacter().health)
-								? Mathf.Max(damage * 2, damage + 15)
-								: damage
-								;
-
-		return value;
-	}
+        markTiles();
+    }
 
 	override protected void innerEnd() { }
+
+    override public int getValue()
+    {
+        Field targetField = (GetComponentInParent<Character>().getField() == GameLoop.getInstance().getEnemyField())
+                                ? GameLoop.getInstance().getAllyField()
+                                : GameLoop.getInstance().getEnemyField()
+                                ;
+
+        int value = 0;
+
+        for (int y = 0; y < 3; y++)
+            for (int x = 0; x < 3; x++)
+                if (getTargets()[y, x] && targetField.isCharacterAtYX(y, x))
+                    value += (getDamage() > targetField.getTileAtYX(y, x).getCharacter().health)
+                                ? Mathf.Max(getDamage() * 2, getDamage() + 15)
+                                : getDamage()
+                                ;
+
+        return value;
+    }
+
+    private void markTiles()
+    {
+        Field targetField = (GetComponentInParent<Character>().getField() == GameLoop.getInstance().getEnemyField())
+                                        ? GameLoop.getInstance().getAllyField()
+                                        : GameLoop.getInstance().getEnemyField()
+                                        ;
+
+        bool[,] targets = getTargets();
+
+        for (int y = 0; y < 3; y++)
+            for (int x = 0; x < 3; x++)
+                if (targets[x, y])
+                    targetField.getTileAtYX(y, x).setTertiarySprite();
+    }
+
 }

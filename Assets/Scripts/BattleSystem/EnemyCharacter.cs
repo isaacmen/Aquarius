@@ -66,7 +66,9 @@ public class EnemyCharacter : Character {
 			actionList.Add(GameObject.Find(this.name).AddComponent<TidalWaveO>());
 			actionList.Add(GameObject.Find(this.name).AddComponent<TidalWaveRow>());
 			actionList.Add(GameObject.Find(this.name).AddComponent<TidalWaveColumn>());
-		}
+            GameObject.Find(this.name).AddComponent<ShapeAction2>(); // the delayed 2ndary part
+        }
+
     }
 
 	public EnemyCharacterType getEnemyCharacterType() {
