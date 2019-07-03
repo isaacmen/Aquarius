@@ -65,7 +65,7 @@ public abstract class ShapeAction : Action {
         for (int y = 0; y < 3; y++)
             for (int x = 0; x < 3; x++)
                 if (targets[x, y])
-                    targetField.getTileAtYX(y, x).setTertiarySprite();
+                    targetField.getTileAtYX(x, y).setTertiarySprite();
     }
 
 }

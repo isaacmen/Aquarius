@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,8 +28,7 @@ public abstract class PromptingAction : Action {
 					if(obj.name.Contains("Tile") && inRange.Contains(obj.GetComponent<Tile>())) {
 						target = obj.GetComponent<Tile>();
 						if(validTileToClick(target)) {
-							foreach(Tile t in inRange[0].getField().getTiles())
-								t.setRegularSprite();
+                            resetSprites();
 
 							postPromptStart();
 							innerStarted = true;
@@ -43,8 +42,7 @@ public abstract class PromptingAction : Action {
 				}
 			}
 			if(Input.GetKey(KeyCode.C)) {
-				foreach(Tile t in inRange[0].getField().getTiles())
-					t.setRegularSprite();
+                resetSprites();
 				setInactiveWithCompletion(false);
 			}
 		} else {
@@ -63,8 +61,7 @@ public abstract class PromptingAction : Action {
 
     public void cancelAction()
     {
-        foreach (Tile t in inRange)
-            t.setRegularSprite();
+        resetSprites();
         Debug.Log("Cancelling Action");
         setInactiveWithCompletion(false);
     }

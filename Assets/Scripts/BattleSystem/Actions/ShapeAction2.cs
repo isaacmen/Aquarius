@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ShapeAction2 : Action
 {
-
     private bool[,] targets;
     private int damage;
     private bool attacked;
@@ -55,13 +54,13 @@ public class ShapeAction2 : Action
                     attacked = true;
                     Debug.Log("Attacking");
                     GetComponentInChildren<Animator>().Play("Attacking");
-                    GameObject.Find("SFX").GetComponent<SFXPlayer>().PlaySound("AquaTidalHit");
                 }
             }
             else
             {
                 attacked = false;
                 print("animation complete");
+                GameObject.Find("SFX").GetComponent<SFXPlayer>().PlaySound("AquaTidalHit");
                 Field targetField = (GetComponentInParent<Character>().getField() == GameLoop.getInstance().getEnemyField())
                                         ? GameLoop.getInstance().getAllyField()
                                         : GameLoop.getInstance().getEnemyField()
@@ -73,8 +72,9 @@ public class ShapeAction2 : Action
                         {
                             targetField.getTileAtYX(y, x).getCharacter().takeDamage(damage);
                         }
-                            
 
+                resetAllSprites();
+                GameLoop.getInstance().nextTurn(); //skip this turn (taking a rest period)
                 setInactiveWithCompletion(true);
             }
 

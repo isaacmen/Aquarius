@@ -36,10 +36,7 @@ public abstract class Action : MonoBehaviour {
 			if(complete)
 				remainingUses -= 1;
 			print("reset sprites");
-			foreach(Tile t in GameLoop.getInstance().getAllyField().getTiles())
-				t.setRegularSprite();
-			foreach(Tile t in GameLoop.getInstance().getEnemyField().getTiles())
-				t.setRegularSprite();
+            resetSprites();
 			innerEnd();
 		} else {
 			Debug.Log(this.GetType() + " set inactive when already inactive.");
@@ -72,6 +69,28 @@ public abstract class Action : MonoBehaviour {
     public virtual string getDescription()
     {
         return "Description";
+    }
+
+    protected void resetSprites()
+    {
+        ///Resets the tile sprites to the normal sprite, except for if it's
+        ///been affected as a tertiary sprite 
+        ///(ie: Aquarius is going to attack there)
+        foreach (Tile t in GameLoop.getInstance().getAllyField().getTiles())
+            if (!t.isTertiarySprite())
+                t.setRegularSprite();
+        foreach (Tile t in GameLoop.getInstance().getEnemyField().getTiles())
+            if (!t.isTertiarySprite())
+                t.setRegularSprite();
+    }
+
+    protected void resetAllSprites()
+    {
+        ///Resets ALL sprites to the normal sprite
+        foreach (Tile t in GameLoop.getInstance().getAllyField().getTiles())
+            t.setRegularSprite();
+        foreach (Tile t in GameLoop.getInstance().getEnemyField().getTiles())
+            t.setRegularSprite();
     }
 }
 
