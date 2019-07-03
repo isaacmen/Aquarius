@@ -31,7 +31,8 @@ public class Guard : PromptingAction {
 		base.innerStart();
 
 		affectedTiles = new List<Tile>();
-		int[] homeYX = inRange[0].getTileArrayCoordsYX();
+        int[] homeYX = inRange[0].getTileArrayCoordsYX();
+        affectedTiles.Add(inRange[0].getField().getTileAtYX(homeYX[0], 0));
 		if(inRange[0].getField().isRight) {
 			for(int x = homeYX[1]+1; x < 3; x++) {
 				affectedTiles.Add(inRange[0].getField().getTileAtYX(homeYX[0], x));
@@ -57,6 +58,7 @@ public class Guard : PromptingAction {
 				toInvuln.Add(target.getCharacter());
 			foreach(Tile t in affectedTiles)
             {
+                print(t.getTileArrayCoordsYX());
                 t.addStatus(StatusEffect.INVULNERABLE);
                 //if (t.getCharacter() != null)
                 //    toInvuln.Add(t.getCharacter());

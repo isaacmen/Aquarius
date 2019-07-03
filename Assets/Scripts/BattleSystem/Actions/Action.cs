@@ -77,20 +77,9 @@ public abstract class Action : MonoBehaviour {
         ///been affected as a tertiary sprite 
         ///(ie: Aquarius is going to attack there)
         foreach (Tile t in GameLoop.getInstance().getAllyField().getTiles())
-            if (!t.isTertiarySprite())
-                t.setRegularSprite();
+            t.setVisualBasedOnEffect();
         foreach (Tile t in GameLoop.getInstance().getEnemyField().getTiles())
-            if (!t.isTertiarySprite())
-                t.setRegularSprite();
-    }
-
-    protected void resetAllSprites()
-    {
-        ///Resets ALL sprites to the normal sprite
-        foreach (Tile t in GameLoop.getInstance().getAllyField().getTiles())
-            t.setRegularSprite();
-        foreach (Tile t in GameLoop.getInstance().getEnemyField().getTiles())
-            t.setRegularSprite();
+            t.setVisualBasedOnEffect();
     }
 }
 

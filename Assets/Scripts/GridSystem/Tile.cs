@@ -73,7 +73,10 @@ public class Tile : MonoBehaviour {
 
     public void addStatus(StatusEffect status)
     {
+        if (statusEffects.Contains(status))
+            return;
         statusEffects.Add(status);
+        setVisualBasedOnEffect();
         if (onTile)
             onTile.addStatus(status);
     }
@@ -83,5 +86,25 @@ public class Tile : MonoBehaviour {
         statusEffects.Remove(status);
         if (onTile)
             onTile.removeStatus(status);
+        setVisualBasedOnEffect();
+    }
+
+    public void setVisualBasedOnEffect()
+    {
+        ///Changes the sprite and other effects of the tile based on
+        ///what the current status effects are
+        if (statusEffects.Contains(StatusEffect.INVULNERABLE))
+        {
+            setSecondarySprite();
+        }
+        else if (statusEffects.Contains(StatusEffect.TARGET))
+        {
+            setTertiarySprite();
+        }
+        else
+        {
+            setRegularSprite();
+        }
+
     }
 }

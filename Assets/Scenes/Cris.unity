@@ -2490,7 +2490,7 @@ MonoBehaviour:
   activeAction: {fileID: 0}
   turnOrder: []
   randomizeTurnOrder: 0
-  DEBUG_LOG: 0
+  DEBUG_LOG: 1
 --- !u!82 &1400511938
 AudioSource:
   m_ObjectHideFlags: 0

@@ -68,12 +68,16 @@ public class ShapeAction2 : Action
 
                 for (int y = 0; y < 3; y++)
                     for (int x = 0; x < 3; x++)
-                        if (targets[y, x] && targetField.isCharacterAtYX(y, x))
+                        if (targets[y, x])
                         {
-                            targetField.getTileAtYX(y, x).getCharacter().takeDamage(damage);
+                            targetField.getTileAtYX(y, x).removeStatus(StatusEffect.TARGET);
+                            if (targetField.isCharacterAtYX(y, x))
+                            {
+                                targetField.getTileAtYX(y, x).getCharacter().takeDamage(damage);
+                            }
                         }
 
-                resetAllSprites();
+                resetSprites();
                 GameLoop.getInstance().nextTurn(); //skip this turn (taking a rest period)
                 setInactiveWithCompletion(true);
             }

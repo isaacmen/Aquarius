@@ -12,11 +12,14 @@ public class StatusEffectManager {
 	public void onTurn(Character chr) {
 		if(GameLoop.getInstance().DEBUG_LOG) Debug.Log("check status for " + chr.name);
 		if(statusDict.ContainsKey(chr)) {
-			List<ListCharacterStatusEffect> lcseArr = statusDict[chr];
+            List<ListCharacterStatusEffect> lcseArr = statusDict[chr];
 			foreach(ListCharacterStatusEffect lcse in lcseArr)
 				foreach(Character c in lcse.affected)
 					c.removeStatus(lcse.effect);
-		} else {
+            foreach(ListCharacterStatusEffect lcse in lcseArr)
+                foreach (Tile t in GameLoop.getInstance().getAllyField().getTiles())
+                    t.removeStatus(lcse.effect);
+        } else {
 			if(GameLoop.getInstance().DEBUG_LOG) Debug.Log("does not contain");
 		}
 	}
@@ -45,5 +48,5 @@ public class StatusEffectManager {
 
 
 public enum StatusEffect {
-	STUNNED, INVULNERABLE
+	STUNNED, INVULNERABLE, TARGET
 }

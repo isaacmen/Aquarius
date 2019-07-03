@@ -596,9 +596,9 @@ public class GameLoop : MonoBehaviour {
         if (activeAction)
         {
             Debug.Log("Canceling... " + activeAction.name);
-            if (activeAction.GetType() != typeof(PromptingAction))
+            if (activeAction.GetType() == typeof(PromptingAction))
             {
-                PromptingAction activePrompt = (PromptingAction) activeAction;
+                PromptingAction activePrompt = (PromptingAction)activeAction;
                 activePrompt.cancelAction();
             }
             activeAction.setInactiveWithCompletion(false);
